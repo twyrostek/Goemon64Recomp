@@ -1,6 +1,12 @@
 #include "ovl_patches.hpp"
+
+#ifdef GOEMON_REGION_JP
+#include "../../RecompiledPatchesJP/patches_bin.h"
+#include "../../RecompiledPatchesJP/recomp_overlays.inl"
+#else
 #include "../../RecompiledPatches/patches_bin.h"
 #include "../../RecompiledPatches/recomp_overlays.inl"
+#endif
 
 #include "librecomp/overlays.hpp"
 #include "librecomp/game.hpp"

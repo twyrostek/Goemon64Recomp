@@ -11,6 +11,17 @@
 # Output C files
 RecompiledFuncs/
 RecompiledPatches/
+RecompiledFuncsJP/
+RecompiledPatchesJP/
+
+# Local analysis data (RAM dumps and save states made from retail ROMs)
+GoemonRamDumps/
+
+# Generated JP patch binary
+patches_jp/*.bin
+
+# Generated JP symbols (large, undecided whether to track)
+jp/mnsg_jp.syms.toml
 
 # Linux build output
 build*/

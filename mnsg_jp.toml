@@ -1,0 +1,26 @@
+# Config file for Ganbare Goemon: Neo Momoyama Bakufu no Odori (Japan) Recompilation.
+# The symbol file is generated from splat output of the JP ROM, see jp/README.md.
+
+[input]
+entrypoint = 0x80000400
+output_func_path = "RecompiledFuncsJP"
+relocatable_sections_path = "mnsg.overlays.txt"
+symbols_file_path = "jp/mnsg_jp.syms.toml"
+rom_file_path = "jp/mnsg_jp.z64"
+trace_mode = true
+bss_section_suffix = "_bss"
+
+[patches]
+stubs = [
+    "osPfsReSizeFile",
+
+]
+
+ignored = [
+]
+
+# Same osAiGetLength clamp fix as the US config (see mnsg.toml); this is the JP location of the same instruction.
+[[patches.instruction]]
+func = "func_80037E80_38A80"
+vram = 0x80037F00
+value = 0x00E3082A # sltu $at, $a3, $v1 -> slt $at, $a3, $v1

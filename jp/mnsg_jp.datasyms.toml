@@ -1,0 +1,13 @@
+# Data symbols referenced by the JP patches (see patches_jp/). Names follow the decomp convention D_<vram>_<rom offset>.
+[[section]]
+name = ".main"
+rom = 0x00001050
+vram = 0x80000450
+size = 0x833C0
+
+symbols = [
+    { name = "D_80054D4C_5594C", vram = 0x80054D4C },
+    { name = "D_80057658_58258", vram = 0x80057658 },
+    { name = "D_80072E08_73A08", vram = 0x80072E08 },
+    { name = "D_80161DC4_1629C4", vram = 0x80161DC4 },
+]

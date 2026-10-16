@@ -1,5 +1,9 @@
 #include "ovl_patches.hpp"
+#ifdef GOEMON_REGION_JP
+#include "../../RecompiledFuncsJP/recomp_overlays.inl"
+#else
 #include "../../RecompiledFuncs/recomp_overlays.inl"
+#endif
 
 #include "librecomp/overlays.hpp"
 

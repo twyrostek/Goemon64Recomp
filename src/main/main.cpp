@@ -7,6 +7,10 @@
 #include <numeric>
 #include <stdexcept>
 #include <cinttypes>
+#include <csignal>
+#include <thread>
+#include <chrono>
+#include <exception>
 
 #include "nfd.h"
 
@@ -51,6 +55,10 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <timeapi.h>
+#include <io.h>
+#include <fcntl.h>
+#include <share.h>
+#include <sys/stat.h>
 #include "SDL_syswm.h"
 #endif
 
@@ -352,9 +360,15 @@ gpr get_entrypoint_address();
 // array of supported GameEntry objects
 std::vector<recomp::GameEntry> supported_games = {
 	{
+#ifdef GOEMON_REGION_JP
+        .rom_hash = 0xD526A3DB80EB7924ULL,
+        .internal_name = "GOEMON",
+        .game_id = u8"mnsg.jp",
+#else
         .rom_hash = 0xDB1BC7EE0E6BEBA1ULL,
         .internal_name = "MYSTICAL NINJA",
         .game_id = u8"mnsg.us",
+#endif
         .mod_game_id = "mnsg",
         .save_type = recomp::SaveType::AllowAll,
         .is_enabled = true,
@@ -552,11 +566,164 @@ void reorder_texture_pack(recomp::mods::ModContext&) {
     goemon64::renderer::trigger_texture_pack_update();
 }
 
+// Log file support: stdout/stderr go to a file in the app folder so output survives a crash.
+#ifdef _WIN32
+static HANDLE log_handle = INVALID_HANDLE_VALUE;
+
+// Uses only WriteFile so it still works on an exhausted stack.
+static void raw_log(const char* text) {
+    DWORD written;
+    WriteFile(log_handle, text, static_cast<DWORD>(strlen(text)), &written, nullptr);
+}
+
+static void log_frame(unsigned index, DWORD64 pc) {
+    HMODULE module = nullptr;
+    char name[MAX_PATH] = "?";
+    if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, reinterpret_cast<LPCSTR>(pc), &module)) {
+        GetModuleFileNameA(module, name, MAX_PATH);
+    }
+    const char* base_name = strrchr(name, '\\');
+    DWORD64 offset = pc - reinterpret_cast<DWORD64>(module);
+    char line[MAX_PATH + 64];
+    wsprintfA(line, "  #%02u %s+0x%08X%08X\n", index, base_name ? base_name + 1 : name, static_cast<DWORD>(offset >> 32), static_cast<DWORD>(offset));
+    raw_log(line);
+}
+
+// Walks the stack of the faulting thread from a captured context using the unwind tables.
+static void log_backtrace(CONTEXT* context) {
+    CONTEXT ctx = *context;
+    for (unsigned i = 0; i < 48 && ctx.Rip != 0; i++) {
+        log_frame(i, ctx.Rip);
+        DWORD64 image_base;
+        PRUNTIME_FUNCTION entry = RtlLookupFunctionEntry(ctx.Rip, &image_base, nullptr);
+        if (entry == nullptr) {
+            ctx.Rip = *reinterpret_cast<DWORD64*>(ctx.Rsp);
+            ctx.Rsp += 8;
+        }
+        else {
+            PVOID handler_data;
+            DWORD64 establisher;
+            RtlVirtualUnwind(UNW_FLAG_NHANDLER, image_base, ctx.Rip, entry, &ctx, &handler_data, &establisher, nullptr);
+        }
+    }
+}
+
+static void log_backtrace() {
+    CONTEXT ctx;
+    RtlCaptureContext(&ctx);
+    log_backtrace(&ctx);
+}
+
+static LONG WINAPI log_fatal_exception(EXCEPTION_POINTERS* info) {
+    const EXCEPTION_RECORD* rec = info->ExceptionRecord;
+    char line[160];
+    wsprintfA(line, "\n*** Fatal exception 0x%08lX at %p (thread %lu)\n", rec->ExceptionCode, rec->ExceptionAddress, GetCurrentThreadId());
+    raw_log(line);
+    if (rec->ExceptionCode == EXCEPTION_ACCESS_VIOLATION && rec->NumberParameters >= 2) {
+        wsprintfA(line, "Access violation: %s address 0x%p\n", rec->ExceptionInformation[0] == 1 ? "write to" : (rec->ExceptionInformation[0] == 8 ? "execute" : "read from"),
+            reinterpret_cast<void*>(rec->ExceptionInformation[1]));
+        raw_log(line);
+    }
+    if (rec->ExceptionCode != EXCEPTION_STACK_OVERFLOW) {
+        log_backtrace(info->ContextRecord);
+    }
+    FlushFileBuffers(log_handle);
+    return EXCEPTION_CONTINUE_SEARCH;
+}
+
+static LONG WINAPI vectored_exception_logger(EXCEPTION_POINTERS* info) {
+    switch (info->ExceptionRecord->ExceptionCode) {
+    case EXCEPTION_ACCESS_VIOLATION:
+    case EXCEPTION_STACK_OVERFLOW:
+    case EXCEPTION_ILLEGAL_INSTRUCTION:
+    case EXCEPTION_PRIV_INSTRUCTION:
+    case EXCEPTION_INT_DIVIDE_BY_ZERO:
+    case EXCEPTION_IN_PAGE_ERROR:
+    case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
+        // Some of these are handled by the program, so only the unhandled filter's output is final.
+        return log_fatal_exception(info);
+    default:
+        return EXCEPTION_CONTINUE_SEARCH;
+    }
+}
+
+static void log_terminate() {
+    fprintf(stderr, "\n*** std::terminate called (thread %lu)\n", GetCurrentThreadId());
+    if (auto ex = std::current_exception()) {
+        try {
+            std::rethrow_exception(ex);
+        }
+        catch (const std::exception& e) {
+            fprintf(stderr, "Uncaught exception: %s\n", e.what());
+        }
+        catch (...) {
+            fprintf(stderr, "Uncaught exception of unknown type\n");
+        }
+    }
+    log_backtrace();
+    fflush(stderr);
+    std::_Exit(3);
+}
+
+static void log_abort(int) {
+    fprintf(stderr, "\n*** abort() called (thread %lu)\n", GetCurrentThreadId());
+    log_backtrace();
+    fflush(stderr);
+    std::_Exit(3);
+}
+
+static void log_exit() {
+    fprintf(stderr, "\n*** Process exiting (thread %lu)\n", GetCurrentThreadId());
+}
+
+static void setup_log_file(int argc, char** argv) {
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--show-console") == 0) {
+            return;
+        }
+    }
+
+    std::filesystem::path folder = goemon64::get_app_folder_path();
+    std::error_code ec;
+    std::filesystem::create_directories(folder, ec);
+    std::filesystem::path log_path = folder / "goemon64.log";
+    std::filesystem::rename(log_path, folder / "goemon64.prev.log", ec);
+
+    // Every writer opens the file in append mode, so their output interleaves at the end instead of overwriting.
+    if (FILE* truncate = _wfopen(log_path.c_str(), L"w")) {
+        fclose(truncate);
+    }
+    if (_wfreopen(log_path.c_str(), L"a", stdout) == nullptr || _wfreopen(log_path.c_str(), L"a", stderr) == nullptr) {
+        return;
+    }
+    setvbuf(stdout, nullptr, _IONBF, 0);
+    setvbuf(stderr, nullptr, _IONBF, 0);
+    log_handle = CreateFileW(log_path.c_str(), FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+    AddVectoredExceptionHandler(1, vectored_exception_logger);
+    SetUnhandledExceptionFilter(log_fatal_exception);
+    std::set_terminate(log_terminate);
+    signal(SIGABRT, log_abort);
+    _set_abort_behavior(0, _WRITE_ABORT_MSG | _CALL_REPORTFAULT);
+    atexit(log_exit);
+    at_quick_exit(log_exit);
+
+    fprintf(stdout, "Goemon 64: Recompiled %s (%s)\n", version_string.c_str(),
+#ifdef GOEMON_REGION_JP
+        "JP"
+#else
+        "US"
+#endif
+    );
+}
+#else
+static void setup_log_file(int, char**) {}
+#endif
+
 #define REGISTER_FUNC(name) recomp::overlays::register_base_export(#name, name)
 
 int main(int argc, char** argv) {
-    (void)argc;
-    (void)argv;
+    setup_log_file(argc, argv);
     recomp::Version project_version{};
     if (!recomp::Version::from_string(version_string, project_version)) {
         ultramodern::error_handling::message_box(("Invalid version string: " + version_string).c_str());
@@ -716,6 +883,18 @@ int main(int argc, char** argv) {
 
     // Register the .rtz texture pack file format with the previous content type as its only allowed content type.
     recomp::mods::register_mod_container_type("rtz", std::vector{ texture_pack_content_type_id }, false);
+
+    // Debugging aid: start the already-stored ROM without going through the launcher.
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--autostart") == 0) {
+            // Delay so the VI thread has set up its dummy mode first, like it does while the launcher is open.
+            std::thread([]() {
+                std::this_thread::sleep_for(std::chrono::seconds(3));
+                recomp::start_game(supported_games[0].game_id);
+            }).detach();
+            break;
+        }
+    }
 
     recomp::start(
         project_version,

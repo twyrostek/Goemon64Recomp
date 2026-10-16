@@ -1,0 +1,14 @@
+# Config file for recompiling patches for the Ganbare Goemon: Neo Momoyama Bakufu no Odori (Japan) Recompilation.
+# Only the patches required to run the game are included so far.
+
+[input]
+elf_path = "patches_jp/build/patches_jp.elf"
+output_func_path = "RecompiledPatchesJP"
+single_file_output = true
+use_absolute_symbols = true
+func_reference_syms_file = "jp/mnsg_jp.syms.toml"
+data_reference_syms_files = [ "jp/mnsg_jp.datasyms.toml", "patches/custom_syms.toml" ]
+output_binary_path = "patches_jp/patches_jp.bin"
+unpaired_lo16_warnings = false
+allow_exports = true
+strict_patch_mode = true

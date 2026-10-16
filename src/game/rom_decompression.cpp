@@ -132,9 +132,17 @@ size_t lzkn64_decompress_rom(std::span<const uint8_t> input_rom, std::span<uint8
 }
 
 constexpr size_t MAXIMUM_ROM_SIZE = 0x4000000;
+#ifdef GOEMON_REGION_JP
+constexpr size_t FILE_TABLE_OFFSET = 0x58258;
+constexpr uint32_t DECOMPRESSED_ROM_CRC_1 = 0x673A3EDC;
+constexpr uint32_t DECOMPRESSED_ROM_CRC_2 = 0x2491ADFC;
+constexpr char REGION_CODE = 'J';
+#else
 constexpr size_t FILE_TABLE_OFFSET = 0x57FD8;
 constexpr uint32_t DECOMPRESSED_ROM_CRC_1 = 0x9CC11F4B;
 constexpr uint32_t DECOMPRESSED_ROM_CRC_2 = 0xABAA8538;
+constexpr char REGION_CODE = 'E';
+#endif
 
 // Produces a decompressed rom. This is only needed because the game has compressed code.
 // For other recomps using this repo as an example, you can omit the decompression routine and
@@ -148,7 +156,7 @@ std::vector<uint8_t> goemon64::decompress_mnsg(std::span<const uint8_t> compress
         return {};
     }
 
-    if (compressed_rom[0x3B] != 'N' || compressed_rom[0x3C] != 'G' || compressed_rom[0x3D] != '5' || compressed_rom[0x3E] != 'E') {
+    if (compressed_rom[0x3B] != 'N' || compressed_rom[0x3C] != 'G' || compressed_rom[0x3D] != '5' || compressed_rom[0x3E] != REGION_CODE) {
         assert(false);
         return {};
     }

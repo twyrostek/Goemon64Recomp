@@ -12,6 +12,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Game region to build. Each region has its own recompiler output and cannot share one binary.
+set(GOEMON_REGION "US" CACHE STRING "Game region to build (US or JP)")
+set_property(CACHE GOEMON_REGION PROPERTY STRINGS US JP)
+if(GOEMON_REGION STREQUAL "JP")
+    set(RECOMPILED_FUNCS_DIR RecompiledFuncsJP)
+else()
+    set(RECOMPILED_FUNCS_DIR RecompiledFuncs)
+endif()
+
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-everything /W4")
 endif()
@@ -89,10 +98,23 @@ target_include_directories(RecompiledFuncs PRIVATE
     ${CMAKE_SOURCE_DIR}/lib/N64ModernRuntime/N64Recomp/include
 )
 
-file(GLOB FUNC_C_SOURCES ${CMAKE_SOURCE_DIR}/RecompiledFuncs/*.c)
-file(GLOB FUNC_CXX_SOURCES ${CMAKE_SOURCE_DIR}/RecompiledFuncs/*.cpp)
+file(GLOB FUNC_C_SOURCES ${CMAKE_SOURCE_DIR}/${RECOMPILED_FUNCS_DIR}/*.c)
+file(GLOB FUNC_CXX_SOURCES ${CMAKE_SOURCE_DIR}/${RECOMPILED_FUNCS_DIR}/*.cpp)
 
 target_sources(RecompiledFuncs PRIVATE ${FUNC_C_SOURCES} ${FUNC_CXX_SOURCES})
+
+# Each region has its own patch sources, since the patches are written against that region's symbols.
+if(GOEMON_REGION STREQUAL "JP")
+    set(PATCHES_SRC_DIR patches_jp)
+    set(PATCHES_OUT_DIR RecompiledPatchesJP)
+    set(PATCHES_NAME patches_jp)
+    set(PATCHES_TOML patches_jp.toml)
+else()
+    set(PATCHES_SRC_DIR patches)
+    set(PATCHES_OUT_DIR RecompiledPatches)
+    set(PATCHES_NAME patches)
+    set(PATCHES_TOML patches.toml)
+endif()
 
 # PatchesLib - Library containing the recompiled output for any custom function patches
 add_library(PatchesLib STATIC)
@@ -112,11 +134,11 @@ target_include_directories(PatchesLib PRIVATE
 )
 
 target_sources(PatchesLib PRIVATE
-    ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches.c
-    ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches_bin.c
+    ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/${PATCHES_NAME}.c
+    ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/patches_bin.c
 )
 
-set_source_files_properties(${CMAKE_SOURCE_DIR}/RecompiledPatches/patches.c PROPERTIES COMPILE_FLAGS -fno-strict-aliasing)
+set_source_files_properties(${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/${PATCHES_NAME}.c PROPERTIES COMPILE_FLAGS -fno-strict-aliasing)
 
 # Build patches elf
 if(NOT DEFINED PATCHES_C_COMPILER)
@@ -129,30 +151,34 @@ endif()
 
 add_custom_target(PatchesBin
     COMMAND ${CMAKE_COMMAND} -E env CC=${PATCHES_C_COMPILER} LD=${PATCHES_LD} make
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/patches
-    BYPRODUCTS ${CMAKE_SOURCE_DIR}/patches/build/patches.elf
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}
+    BYPRODUCTS ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}/build/${PATCHES_NAME}.elf
 )
 
-# Generate patches_bin.c from patches.bin
-add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches_bin.c
-    COMMAND file_to_c ${CMAKE_SOURCE_DIR}/patches/patches.bin mm_patches_bin ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches_bin.c ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches_bin.h
-    DEPENDS ${CMAKE_SOURCE_DIR}/patches/patches.bin
+# Generate patches_bin.c from the patches binary
+add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/patches_bin.c
+    COMMAND file_to_c ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}/${PATCHES_NAME}.bin mm_patches_bin ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/patches_bin.c ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/patches_bin.h
+    DEPENDS ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}/${PATCHES_NAME}.bin
 )
 
-# Recompile patches elf into patches.c and patches.bin
+# Recompile patches elf into the patches C file and binary
 add_custom_command(OUTPUT
-                       ${CMAKE_SOURCE_DIR}/patches/patches.bin
-                       ${CMAKE_SOURCE_DIR}/RecompiledPatches/patches.c
-                       ${CMAKE_SOURCE_DIR}/RecompiledPatches/recomp_overlays.inl
-                       ${CMAKE_SOURCE_DIR}/RecompiledPatches/funcs.h
+                       ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}/${PATCHES_NAME}.bin
+                       ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/${PATCHES_NAME}.c
+                       ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/recomp_overlays.inl
+                       ${CMAKE_SOURCE_DIR}/${PATCHES_OUT_DIR}/funcs.h
                    # TODO: Look into why modifying patches requires two builds to take
-                   COMMAND ./N64Recomp patches.toml
+                   COMMAND ./N64Recomp ${PATCHES_TOML}
                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                   DEPENDS ${CMAKE_SOURCE_DIR}/patches/build/patches.elf
+                   DEPENDS ${CMAKE_SOURCE_DIR}/${PATCHES_SRC_DIR}/build/${PATCHES_NAME}.elf
 )
 
 # Main executable
 add_executable(Goemon64Recompiled)
+
+if(GOEMON_REGION STREQUAL "JP")
+    target_compile_definitions(Goemon64Recompiled PRIVATE GOEMON_REGION_JP)
+endif()
 
 set (SOURCES
     ${CMAKE_SOURCE_DIR}/src/main/main.cpp
