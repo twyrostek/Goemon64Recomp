@@ -1,5 +1,6 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
+#include "ui_dialogue_overlay.h"
 #include <SDL_video.h>
 #else
 #include <SDL2/SDL_video.h>
@@ -155,6 +156,15 @@ struct ContextDetails {
     Rml::ElementDocument* document;
 };
 
+class RmlLogSystemInterface : public SystemInterface_SDL {
+public:
+    bool LogMessage(Rml::Log::Type type, const Rml::String& message) override {
+        std::printf("[rml] %s\n", message.c_str());
+        std::fflush(stdout);
+        return SystemInterface_SDL::LogMessage(type, message);
+    }
+};
+
 class UIState {
     Rml::Element* prev_focused = nullptr;
     bool mouse_is_active_changed = false;
@@ -184,7 +194,7 @@ public:
         launcher_menu_controller = recompui::create_launcher_menu();
         config_menu_controller = recompui::create_config_menu();
 
-        system_interface = std::make_unique<SystemInterface_SDL>();
+        system_interface = std::make_unique<RmlLogSystemInterface>();
         system_interface->SetWindow(window);
         render_interface.init(interface, device);
 
@@ -222,6 +232,7 @@ public:
                 {"LatoLatin-BoldItalic.ttf", false},
                 {"InterVariable.ttf", false},
                 {"NotoEmoji-Regular.ttf", true},
+                {"NotoSansJP-subset.otf", true},
                 {"promptfont/promptfont.ttf", false},
             };
 
@@ -751,7 +762,9 @@ void draw_hook(plume::RenderCommandList* command_list, plume::RenderFramebuffer*
     ui_state->update_primary_input(mouse_moved, non_mouse_interacted);
     ui_state->update_focus(mouse_moved, non_mouse_interacted);
 
-    if (recompui::is_any_context_shown()) {
+    const bool menu_shown = recompui::is_any_context_shown();
+    const bool dialogue_overlay = !menu_shown && goemon64::dialogue_overlay_wanted();
+    if (menu_shown || dialogue_overlay) {
         ui_state->update_contexts();
 
         int width = swap_chain_framebuffer->getWidth();
@@ -771,6 +784,7 @@ void draw_hook(plume::RenderCommandList* command_list, plume::RenderFramebuffer*
         prev_width = width;
         prev_height = height;
 
+        goemon64::update_dialogue_overlay(ui_state->context, width, height, dialogue_overlay);
         ui_state->context->Update();
         ui_state->context->Render();
         ui_state->render_interface.end(command_list, swap_chain_framebuffer);

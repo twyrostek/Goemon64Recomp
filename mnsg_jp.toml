@@ -24,3 +24,21 @@ ignored = [
 func = "func_80037E80_38A80"
 vram = 0x80037F00
 value = 0x00E3082A # sltu $at, $a3, $v1 -> slt $at, $a3, $v1
+
+# Diagnostic: log every task deletion (monster kills etc.), implemented in src/game/diagnostics.cpp.
+[[patches.hook]]
+func = "func_80034D34_35934"
+before_vram = 0x80034D34
+text = "extern void goemon_diag_task_delete(uint8_t*, recomp_context*); goemon_diag_task_delete(rdram, ctx);"
+
+# Dialogue: report the start of each message to src/game/dialogue.cpp.
+[[patches.hook]]
+func = "func_8003DAF0_3E6F0"
+before_vram = 0x8003DAF0
+text = "extern void goemon_dialogue_print_hook(uint8_t*, recomp_context*); goemon_dialogue_print_hook(rdram, ctx);"
+
+# Dialogue: per-frame window update, keeps the overlay in sync with the window.
+[[patches.hook]]
+func = "func_8000B760_C360"
+before_vram = 0x8000B760
+text = "extern void goemon_dialogue_window_hook(uint8_t*, recomp_context*); goemon_dialogue_window_hook(rdram, ctx);"

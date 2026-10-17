@@ -9,5 +9,8 @@ symbols = [
     { name = "D_80054D4C_5594C", vram = 0x80054D4C },
     { name = "D_80057658_58258", vram = 0x80057658 },
     { name = "D_80072E08_73A08", vram = 0x80072E08 },
+    { name = "D_80072FC0_73BC0", vram = 0x80072FC0 },
+    { name = "D_800924B0_930B0", vram = 0x800924B0 },
+    { name = "D_80161DBC_1629BC", vram = 0x80161DBC },
     { name = "D_80161DC4_1629C4", vram = 0x80161DC4 },
 ]

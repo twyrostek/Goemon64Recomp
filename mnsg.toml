@@ -24,3 +24,9 @@ ignored = [
 func = "func_80038210_38E10"
 vram = 0x80038290
 value = 0x00E3082A # sltu $at, $a3, $v1 -> slt $at, $a3, $v1
+
+# Diagnostic: log every task deletion, implemented in src/game/diagnostics.cpp.
+[[patches.hook]]
+func = "func_800350C4_35CC4"
+before_vram = 0x800350C4
+text = "extern void goemon_diag_task_delete(uint8_t*, recomp_context*); goemon_diag_task_delete(rdram, ctx);"
