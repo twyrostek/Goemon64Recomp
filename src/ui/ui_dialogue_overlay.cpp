@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <cmath>
-#include <cstdio>
 #include <string>
 
 #include "SDL.h"
@@ -19,9 +18,10 @@ namespace {
     constexpr float canvas_pad_y = 1.9f;
 
     Rml::ElementDocument* overlay_doc = nullptr;
-    const goemon64::dialogue::View* shown_view = nullptr;
     std::shared_ptr<const goemon64::dialogue::View> shown_view_ref;
     int hovered_token = -1;
+    bool translation_open = false;
+    bool prev_left_down = false;
 
     std::string escape(const std::string& s) {
         std::string out;
@@ -43,38 +43,98 @@ namespace {
         float dp_ratio;
     };
 
-    // Position of a game-space point in density independent pixels (the game is shown 4:3 and centred).
     float to_dp_x(const Mapping& m, float gx) { return (m.offset_x + gx * m.scale) / m.dp_ratio; }
     float to_dp_y(const Mapping& m, float gy) { return (m.offset_y + gy * m.scale) / m.dp_ratio; }
+    float size_dp(const Mapping& m, float g) { return g * m.scale / m.dp_ratio; }
 
     void style_box(Rml::Element* e, const Mapping& m, float x, float y, float w, float h) {
         e->SetProperty("position", "absolute");
         e->SetProperty("left", std::to_string(to_dp_x(m, x)) + "dp");
         e->SetProperty("top", std::to_string(to_dp_y(m, y)) + "dp");
-        e->SetProperty("width", std::to_string(w * m.scale / m.dp_ratio) + "dp");
-        e->SetProperty("height", std::to_string(h * m.scale / m.dp_ratio) + "dp");
+        e->SetProperty("width", std::to_string(size_dp(m, w)) + "dp");
+        e->SetProperty("height", std::to_string(size_dp(m, h)) + "dp");
+    }
+
+    // The translate button sits under the bottom right corner of the dialogue box.
+    goemon64::dialogue::Rect icon_rect(const goemon64::dialogue::View& view) {
+        return { view.box.x + view.box.w - 20.0f, view.box.y + view.box.h + 3.0f, 20.0f, 12.0f };
+    }
+
+    void apply_panel_visibility() {
+        Rml::Element* panel = overlay_doc->GetElementById("translation");
+        if (panel) {
+            panel->SetProperty("display", translation_open ? "block" : "none");
+        }
+    }
+
+    // Shows the full translation, with the piece that the hovered phrase stands for highlighted.
+    void update_translation_text(const std::string& full, const std::string& piece) {
+        Rml::Element* panel = overlay_doc->GetElementById("translation");
+        if (!panel) {
+            return;
+        }
+        size_t at = piece.empty() ? std::string::npos : full.find(piece);
+        if (at == std::string::npos) {
+            panel->SetInnerRML(escape(full));
+            return;
+        }
+        panel->SetInnerRML(escape(full.substr(0, at)) + "<span style=\"background-color: #e8c040a0; color: #101830\">" + escape(piece) + "</span>" + escape(full.substr(at + piece.size())));
     }
 
     void rebuild(const goemon64::dialogue::View& view, const Mapping& m) {
         overlay_doc->SetInnerRML("");
-        for (size_t i = 0; i < view.tokens.size(); i++) {
-            const auto& vt = view.tokens[i];
-            if (vt.token->reading.empty() || vt.rects.empty()) {
+
+        for (const auto& vr : view.rubies) {
+            if (vr.rects.empty() || vr.ruby->reading.empty()) {
                 continue;
             }
             // Furigana sits on the top edge of the first line the word covers.
-            const auto& r = vt.rects.front();
+            const auto& r = vr.rects.front();
             Rml::ElementPtr ruby = overlay_doc->CreateElement("div");
-            const float h = 7.0f;
-            style_box(ruby.get(), m, r.x, r.y - 4.0f, r.w, h);
+            style_box(ruby.get(), m, r.x, r.y - 4.0f, r.w, 7.0f);
             ruby->SetProperty("font-family", "LatoLatin");
-            ruby->SetProperty("font-size", std::to_string(6.0f * m.scale / m.dp_ratio) + "dp");
+            ruby->SetProperty("font-size", std::to_string(size_dp(m, 6.0f)) + "dp");
             ruby->SetProperty("text-align", "center");
             ruby->SetProperty("white-space", "nowrap");
             ruby->SetProperty("color", "#ffffff");
             ruby->SetProperty("background-color", "#000000a0");
-            ruby->SetInnerRML(escape(vt.token->reading));
+            ruby->SetInnerRML(escape(vr.ruby->reading));
             overlay_doc->AppendChild(std::move(ruby));
+        }
+
+        if (view.page && !view.page->translation.empty()) {
+            const auto ic = icon_rect(view);
+            Rml::ElementPtr icon = overlay_doc->CreateElement("div");
+            icon->SetId("translate_icon");
+            style_box(icon.get(), m, ic.x, ic.y, ic.w, ic.h);
+            icon->SetProperty("font-family", "LatoLatin");
+            icon->SetProperty("font-weight", "bold");
+            icon->SetProperty("font-size", std::to_string(size_dp(m, 8.0f)) + "dp");
+            icon->SetProperty("line-height", std::to_string(size_dp(m, ic.h)) + "dp");
+            icon->SetProperty("text-align", "center");
+            icon->SetProperty("color", "#ffe060");
+            icon->SetProperty("background-color", "#101830f0");
+            icon->SetProperty("border-width", "2dp");
+            icon->SetProperty("border-color", "#e8c040");
+            icon->SetInnerRML("EN");
+            overlay_doc->AppendChild(std::move(icon));
+
+            Rml::ElementPtr panel = overlay_doc->CreateElement("div");
+            panel->SetId("translation");
+            panel->SetProperty("position", "absolute");
+            panel->SetProperty("left", std::to_string(to_dp_x(m, view.box.x)) + "dp");
+            panel->SetProperty("top", std::to_string(to_dp_y(m, ic.y + ic.h + 3.0f)) + "dp");
+            panel->SetProperty("width", std::to_string(size_dp(m, view.box.w - 6.0f)) + "dp");
+            panel->SetProperty("font-family", "LatoLatin");
+            panel->SetProperty("font-size", std::to_string(size_dp(m, 9.0f)) + "dp");
+            panel->SetProperty("color", "#ffffff");
+            panel->SetProperty("background-color", "#101830f0");
+            panel->SetProperty("padding", std::to_string(size_dp(m, 3.0f)) + "dp");
+            panel->SetProperty("border-width", "2dp");
+            panel->SetProperty("border-color", "#e8c040");
+            panel->SetInnerRML(escape(view.page->translation));
+            overlay_doc->AppendChild(std::move(panel));
+            apply_panel_visibility();
         }
     }
 
@@ -90,10 +150,10 @@ namespace {
         tip->SetProperty("left", std::to_string(to_dp_x(m, r.x)) + "dp");
         tip->SetProperty("top", std::to_string(to_dp_y(m, r.y + r.h + 8.0f)) + "dp");
         tip->SetProperty("font-family", "LatoLatin");
-        tip->SetProperty("font-size", std::to_string(9.0f * m.scale / m.dp_ratio) + "dp");
+        tip->SetProperty("font-size", std::to_string(size_dp(m, 9.0f)) + "dp");
         tip->SetProperty("color", "#ffffff");
         tip->SetProperty("background-color", "#101830f0");
-        tip->SetProperty("padding", std::to_string(3.0f * m.scale / m.dp_ratio) + "dp");
+        tip->SetProperty("padding", std::to_string(size_dp(m, 3.0f)) + "dp");
         tip->SetProperty("border-width", "2dp");
         tip->SetProperty("border-color", "#e8c040");
         tip->SetProperty("white-space", "nowrap");
@@ -116,6 +176,34 @@ namespace {
             old->GetParentNode()->RemoveChild(old);
         }
     }
+
+    bool same_layout(const goemon64::dialogue::View& a, const goemon64::dialogue::View& b) {
+        if (a.page != b.page || a.tokens.size() != b.tokens.size() || a.rubies.size() != b.rubies.size()) {
+            return false;
+        }
+        auto same_rects = [](const std::vector<goemon64::dialogue::Rect>& x, const std::vector<goemon64::dialogue::Rect>& y) {
+            if (x.size() != y.size()) {
+                return false;
+            }
+            for (size_t i = 0; i < x.size(); i++) {
+                if (x[i].x != y[i].x || x[i].y != y[i].y || x[i].w != y[i].w) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        for (size_t i = 0; i < a.rubies.size(); i++) {
+            if (a.rubies[i].ruby != b.rubies[i].ruby || !same_rects(a.rubies[i].rects, b.rubies[i].rects)) {
+                return false;
+            }
+        }
+        for (size_t i = 0; i < a.tokens.size(); i++) {
+            if (a.tokens[i].token != b.tokens[i].token || !same_rects(a.tokens[i].rects, b.tokens[i].rects)) {
+                return false;
+            }
+        }
+        return a.box.x == b.box.x && a.box.y == b.box.y && a.box.w == b.box.w && a.box.h == b.box.h;
+    }
 }
 
 bool goemon64::dialogue_overlay_wanted() {
@@ -137,18 +225,11 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
     }
 
     auto view = wanted ? goemon64::dialogue::current_view() : nullptr;
-    static int last_state = -1;
-    int state = wanted ? (view ? 2 : 1) : 0;
-    if (state != last_state) {
-        last_state = state;
-        std::printf("[ovl] wanted=%d view=%d fb=%dx%d dp=%.3f\n", (int)wanted, view ? 1 : 0, fb_width, fb_height, context->GetDensityIndependentPixelRatio());
-        std::fflush(stdout);
-    }
     if (!view) {
         overlay_doc->Hide();
         shown_view_ref = nullptr;
-        shown_view = nullptr;
         hovered_token = -1;
+        prev_left_down = false;
         return;
     }
 
@@ -158,49 +239,54 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
     m.offset_y = (fb_height - canvas_height * m.scale) * 0.5f + canvas_pad_y * m.scale;
     m.dp_ratio = context->GetDensityIndependentPixelRatio();
 
-    // Rebuild the furigana whenever the rectangles change (they are republished every frame, so compare contents).
-    bool changed = !shown_view_ref || shown_view_ref->tokens.size() != view->tokens.size();
-    if (!changed) {
-        for (size_t i = 0; i < view->tokens.size() && !changed; i++) {
-            changed = view->tokens[i].token != shown_view_ref->tokens[i].token || view->tokens[i].rects.size() != shown_view_ref->tokens[i].rects.size();
-            for (size_t j = 0; j < view->tokens[i].rects.size() && !changed; j++) {
-                const auto& a = view->tokens[i].rects[j];
-                const auto& b = shown_view_ref->tokens[i].rects[j];
-                changed = a.x != b.x || a.y != b.y || a.w != b.w;
-            }
-        }
-    }
+    const bool changed = !shown_view_ref || !same_layout(*shown_view_ref, *view);
     if (changed) {
         rebuild(*view, m);
         hovered_token = -1;
     }
     shown_view_ref = view;
 
-    // Hit test the mouse against the word rectangles.
+    // Mouse position and clicks are polled so the overlay does not need to take over input from the game.
     int mx = 0, my = 0;
     SDL_Window* sdl_window = SDL_GetMouseFocus();
     int hit = -1;
+    bool over_icon = false;
+    bool left_down = false;
     if (sdl_window) {
-        SDL_GetMouseState(&mx, &my);
+        left_down = (SDL_GetMouseState(&mx, &my) & SDL_BUTTON_LMASK) != 0;
         int win_w = 1, win_h = 1;
         SDL_GetWindowSize(sdl_window, &win_w, &win_h);
         float gx = ((mx * (float)fb_width / win_w) - m.offset_x) / m.scale;
         float gy = ((my * (float)fb_height / win_h) - m.offset_y) / m.scale;
+        auto inside = [&](const goemon64::dialogue::Rect& r) { return gx >= r.x && gx < r.x + r.w && gy >= r.y && gy < r.y + r.h; };
         for (size_t i = 0; i < view->tokens.size() && hit < 0; i++) {
             for (const auto& r : view->tokens[i].rects) {
-                if (gx >= r.x && gx < r.x + r.w && gy >= r.y && gy < r.y + r.h) {
+                if (inside(r)) {
                     hit = (int)i;
                     break;
                 }
             }
         }
+        if (view->page && !view->page->translation.empty()) {
+            over_icon = inside(icon_rect(*view));
+        }
     }
+
+    if (over_icon && left_down && !prev_left_down) {
+        translation_open = !translation_open;
+        apply_panel_visibility();
+    }
+    prev_left_down = left_down;
+
     if (hit != hovered_token || changed) {
         hovered_token = hit;
         if (hit >= 0) {
             show_tooltip(view->tokens[hit], m);
         } else {
             hide_tooltip();
+        }
+        if (view->page) {
+            update_translation_text(view->page->translation, hit >= 0 ? view->tokens[hit].token->gloss : std::string());
         }
     }
 

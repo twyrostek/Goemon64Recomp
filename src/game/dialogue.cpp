@@ -15,13 +15,21 @@
 #include "goemon_support.h"
 
 namespace {
+    using goemon64::dialogue::Page;
+    using goemon64::dialogue::Ruby;
     using goemon64::dialogue::Segment;
     using goemon64::dialogue::Token;
 
-    std::unordered_map<uint64_t, std::shared_ptr<Segment>> db;
+    std::unordered_map<uint64_t, std::vector<std::shared_ptr<const Page>>> pages_by_first_segment;
+    struct Location {
+        std::shared_ptr<const Page> page;
+        size_t index;
+    };
+    std::unordered_map<uint64_t, std::vector<Location>> segment_locations;
     std::once_flag db_loaded;
     std::mutex current_mutex;
     std::shared_ptr<const goemon64::dialogue::View> current_view_ptr;
+
     // Segments printed into the window since its glyph slots were last cleared.
     struct Entry {
         std::shared_ptr<const Segment> segment;
@@ -29,6 +37,8 @@ namespace {
         std::vector<int> glyph_ordinal; // per code: printed glyph number or -1
     };
     std::vector<Entry> entries;
+    std::shared_ptr<const Page> current_page;
+    size_t next_segment = 0;
     uint32_t active_window = 0;
     std::atomic<int64_t> window_tick_ms{ 0 };
 
@@ -53,7 +63,20 @@ namespace {
             return;
         }
         std::string line;
+        std::shared_ptr<Page> page;
         std::shared_ptr<Segment> seg;
+        size_t page_count = 0;
+        auto finish_page = [&]() {
+            if (page && !page->segment_hashes.empty()) {
+                pages_by_first_segment[page->segment_hashes.front()].push_back(page);
+                for (size_t i = 0; i < page->segment_hashes.size(); i++) {
+                    segment_locations[page->segment_hashes[i]].push_back({ page, i });
+                }
+                page_count++;
+            }
+            page = nullptr;
+            seg = nullptr;
+        };
         while (std::getline(f, line)) {
             if (line.empty() || line[0] == '#') {
                 continue;
@@ -64,10 +87,18 @@ namespace {
             while (std::getline(ss, col, '\t')) {
                 cols.push_back(col);
             }
-            if (cols[0] == "S" && cols.size() >= 3) {
+            if (cols[0] == "P") {
+                finish_page();
+                page = std::make_shared<Page>();
+            } else if (cols[0] == "L" && page) {
+                page->translation = cols.size() > 1 ? cols[1] : "";
+            } else if (cols[0] == "S" && page && cols.size() >= 3) {
                 seg = std::make_shared<Segment>();
                 seg->code_count = (uint32_t)std::stoul(cols[2]);
-                db[std::stoull(cols[1], nullptr, 16)] = seg;
+                page->segment_hashes.push_back(std::stoull(cols[1], nullptr, 16));
+                page->segments.push_back(seg);
+            } else if (cols[0] == "R" && seg && cols.size() >= 4) {
+                seg->ruby.push_back(Ruby{ (uint32_t)std::stoul(cols[1]), (uint32_t)std::stoul(cols[2]), cols[3] });
             } else if (cols[0] == "T" && seg && cols.size() >= 5) {
                 Token t;
                 t.code_start = (uint32_t)std::stoul(cols[1]);
@@ -79,8 +110,13 @@ namespace {
                 seg->tokens.push_back(std::move(t));
             }
         }
-        std::printf("[dlg] loaded %zu dialogue segments\n", db.size());
+        finish_page();
+        std::printf("[dlg] loaded %zu dialogue pages\n", page_count);
     }
+}
+
+bool goemon64::dialogue::is_active() {
+    return now_ms() - window_tick_ms.load() < 200;
 }
 
 std::shared_ptr<const goemon64::dialogue::View> goemon64::dialogue::current_view() {
@@ -88,13 +124,9 @@ std::shared_ptr<const goemon64::dialogue::View> goemon64::dialogue::current_view
     return current_view_ptr;
 }
 
-bool goemon64::dialogue::is_active() {
-    return now_ms() - window_tick_ms.load() < 200;
-}
-
 // Rebuilds the on-screen rectangles of every segment in the window from the live glyph slots.
 static void rebuild_view(uint8_t* rdram) {
-    if (entries.empty()) {
+    if (entries.empty() || !current_page) {
         std::lock_guard lock(current_mutex);
         current_view_ptr = nullptr;
         return;
@@ -106,28 +138,39 @@ static void rebuild_view(uint8_t* rdram) {
     const float win_y = (int16_t)MEM_H(0x34, w);
 
     auto view = std::make_shared<goemon64::dialogue::View>();
+    view->page = current_page;
+    view->box = { win_x, win_y, (float)(int16_t)MEM_H(0x68, w), (float)(int16_t)MEM_H(0x6A, w) };
+
+    // Screen rectangles (one per text line) of a range of glyph codes in a segment.
+    auto rects_for = [&](const Entry& e, uint32_t code_start, uint32_t code_len) {
+        std::vector<goemon64::dialogue::Rect> rects;
+        for (uint32_t c = code_start; c < code_start + code_len && c < e.glyph_ordinal.size(); c++) {
+            if (e.glyph_ordinal[c] < 0) {
+                continue;
+            }
+            int slot = (int)e.base_slot + e.glyph_ordinal[c];
+            if (slot >= 60 || !slot_active(slot)) {
+                continue;
+            }
+            int32_t base = 0x198 + slot * 0xB8;
+            // Slot coordinates are the glyph centre inside the window; glyphs are 13x16.
+            goemon64::dialogue::Rect r{ win_x + (int16_t)MEM_H(base + 8, w) - 6.5f, win_y + (int16_t)MEM_H(base + 0xA, w) - 8.0f, 13.0f, 16.0f };
+            if (!rects.empty() && rects.back().y == r.y && std::abs(rects.back().x + rects.back().w - r.x) < 1.0f) {
+                rects.back().w += r.w;
+            } else {
+                rects.push_back(r);
+            }
+        }
+        return rects;
+    };
+
     for (const auto& e : entries) {
         view->segments.push_back(e.segment);
+        for (const auto& r : e.segment->ruby) {
+            view->rubies.push_back({ &r, rects_for(e, r.code_start, r.code_len) });
+        }
         for (const auto& t : e.segment->tokens) {
-            goemon64::dialogue::ViewToken vt{ &t, {} };
-            for (uint32_t c = t.code_start; c < t.code_start + t.code_len && c < e.glyph_ordinal.size(); c++) {
-                if (e.glyph_ordinal[c] < 0) {
-                    continue;
-                }
-                int slot = (int)e.base_slot + e.glyph_ordinal[c];
-                if (slot >= 60 || !slot_active(slot)) {
-                    continue;
-                }
-                int32_t base = 0x198 + slot * 0xB8;
-                // Slot coordinates are the glyph centre inside the window; glyphs are 13x16.
-                goemon64::dialogue::Rect r{ win_x + (int16_t)MEM_H(base + 8, w) - 6.5f, win_y + (int16_t)MEM_H(base + 0xA, w) - 8.0f, 13.0f, 16.0f };
-                if (!vt.rects.empty() && vt.rects.back().y == r.y && std::abs(vt.rects.back().x + vt.rects.back().w - r.x) < 1.0f) {
-                    vt.rects.back().w += r.w;
-                } else {
-                    vt.rects.push_back(r);
-                }
-            }
-            view->tokens.push_back(std::move(vt));
+            view->tokens.push_back({ &t, rects_for(e, t.code_start, t.code_len) });
         }
     }
 
@@ -137,7 +180,8 @@ static void rebuild_view(uint8_t* rdram) {
 
 // Called from a hook at the entry of the JP text printer (a0 = window id, a1 = pointer to the next s16 glyph code).
 extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) {
-    static uint32_t last_start = 0;
+    static uint32_t segment_start = 0;
+    static uint32_t segment_end = 0; // address of the 0xFFFF terminator
     uint32_t ptr = (uint32_t)ctx->r5;
     if (ptr < 0x80000000u || ptr >= 0x80800000u) {
         return;
@@ -151,62 +195,87 @@ extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) 
     }
     gpr w = (gpr)(int32_t)win;
 
-    // Messages end with 0xFFFF, so the start is just after the previous terminator.
-    uint32_t start = ptr;
-    int back = 0;
-    while (back < 1024 && word(start - 2) != 0xFFFF) {
-        start -= 2;
-        back++;
-    }
-    if (back >= 1024) {
-        return;
-    }
-
-    if (start != last_start || win != active_window) {
-        last_start = start;
-
+    // The first printer call for a message points at its first code, so any pointer outside the current one starts a new message.
+    if (ptr < segment_start || ptr > segment_end || win != active_window) {
         std::vector<uint16_t> words;
-        for (uint32_t a = start; words.size() < 512; a += 2) {
+        for (uint32_t a = ptr; words.size() < 512; a += 2) {
             words.push_back(word(a));
             if (words.back() == 0xFFFF) {
                 break;
             }
         }
+        segment_start = ptr;
+        segment_end = ptr + 2 * (uint32_t)(words.size() - 1);
 
         // Glyphs go into the first free slot, and a page change clears them all.
         uint32_t base_slot = 0;
         while (base_slot < 60 && (int16_t)MEM_H(0x198 + base_slot * 0xB8 + 4, w) != 0) {
             base_slot++;
         }
+        std::call_once(db_loaded, load_db);
+        const uint64_t hash = hash_words(words);
+
         if (base_slot == 0 || win != active_window) {
             entries.clear();
+            current_page = nullptr;
+            next_segment = 0;
         }
         active_window = win;
 
-        std::call_once(db_loaded, load_db);
-        auto it = db.find(hash_words(words));
-        if (it != db.end()) {
-            Entry e;
-            e.segment = it->second;
-            e.base_slot = base_slot;
-            e.glyph_ordinal.assign(words.size(), -1);
-            int n = 0;
-            for (size_t i = 0; i < words.size(); i++) {
-                if (words[i] < 0x8000 && words[i] != 0) {
-                    e.glyph_ordinal[i] = n++;
+        auto consume = [&]() {
+            if (!current_page) {
+                return false;
+            }
+            for (size_t i = next_segment; i < current_page->segment_hashes.size(); i++) {
+                if (current_page->segment_hashes[i] != hash) {
+                    continue;
+                }
+                Entry e;
+                e.segment = current_page->segments[i];
+                e.base_slot = base_slot;
+                e.glyph_ordinal.assign(words.size(), -1);
+                int n = 0;
+                for (size_t k = 0; k < words.size(); k++) {
+                    if (words[k] < 0x8000 && words[k] != 0) {
+                        e.glyph_ordinal[k] = n++;
+                    }
+                }
+                entries.push_back(std::move(e));
+                next_segment = i + 1;
+                return true;
+            }
+            return false;
+        };
+
+        // A message that is not the next line of the current page may start a new page, even when some earlier lines are not in the database.
+        if (!consume()) {
+            auto first = pages_by_first_segment.find(hash);
+            if (first != pages_by_first_segment.end()) {
+                entries.clear();
+                current_page = first->second.front();
+                next_segment = 0;
+                consume();
+            } else {
+                // The game clears the window at points the text does not show, so a page may start in the middle of a stored one.
+                auto any = segment_locations.find(hash);
+                if (any != segment_locations.end()) {
+                    entries.clear();
+                    current_page = any->second.front().page;
+                    next_segment = any->second.front().index;
+                    consume();
                 }
             }
-            entries.push_back(std::move(e));
         }
+        std::printf("[dlg] bank=%d segment %08X hash=%016llX base_slot=%u page=%d entries=%zu words=", (int)MEM_W(0, (gpr)(int32_t)0x801CD018u), segment_start, (unsigned long long)hash, base_slot, current_page ? 1 : 0, entries.size());
+        for (size_t k = 0; k < words.size() && k < 24; k++) {
+            std::printf("%04X ", words[k]);
+        }
+        std::printf("\n");
+        std::fflush(stdout);
     }
 
     rebuild_view(rdram);
     window_tick_ms = now_ms();
-    static int prints = 0;
-    if (prints++ < 3) {
-        std::printf("[dlg] print hook: entries=%zu\n", entries.size());
-        std::fflush(stdout);
-    }
 }
 
 // Called from a hook at the entry of the JP per-frame window update (a0 = window id).
@@ -221,9 +290,4 @@ extern "C" void goemon_dialogue_window_hook(uint8_t* rdram, recomp_context* ctx)
     }
     rebuild_view(rdram);
     window_tick_ms = now_ms();
-    static int ticks = 0;
-    if (ticks++ < 3) {
-        std::printf("[dlg] window hook active\n");
-        std::fflush(stdout);
-    }
 }
