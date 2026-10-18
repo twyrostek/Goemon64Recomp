@@ -194,6 +194,7 @@ set (SOURCES
     ${CMAKE_SOURCE_DIR}/src/game/debug.cpp
     ${CMAKE_SOURCE_DIR}/src/game/diagnostics.cpp
     ${CMAKE_SOURCE_DIR}/src/game/dialogue.cpp
+    ${CMAKE_SOURCE_DIR}/src/game/tts_player.cpp
     ${CMAKE_SOURCE_DIR}/src/game/recomp_api.cpp
     ${CMAKE_SOURCE_DIR}/src/game/recomp_actor_api.cpp
     ${CMAKE_SOURCE_DIR}/src/game/recomp_data_api.cpp

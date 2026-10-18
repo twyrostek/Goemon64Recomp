@@ -77,3 +77,5 @@ RSPRecomp
 .idea
 build-*
 cmake-build-*
+# Generated text-to-speech recordings (not shared yet)
+assets/tts/

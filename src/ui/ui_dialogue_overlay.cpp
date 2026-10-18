@@ -1,11 +1,13 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <vector>
 
 #include "SDL.h"
 #include "RmlUi/Core.h"
 
 #include "goemon_dialogue.h"
+#include "goemon_tts.h"
 #include "ui_dialogue_overlay.h"
 
 namespace {
@@ -19,7 +21,11 @@ namespace {
 
     Rml::ElementDocument* overlay_doc = nullptr;
     std::shared_ptr<const goemon64::dialogue::View> shown_view_ref;
-    int hovered_token = -1;
+    int hovered_token = -1;     // index of the phrase whose tooltip is shown
+    bool shown_pinned = false;
+    int active_pair = -1;     // aligned piece under the mouse inside a pinned tooltip
+    size_t pair_count = 0;    // number of aligned pieces in the shown tooltip
+    const goemon64::dialogue::Token* pinned_token = nullptr;
     bool translation_open = false;
     bool prev_left_down = false;
 
@@ -58,6 +64,22 @@ namespace {
     // The translate button sits under the bottom right corner of the dialogue box.
     goemon64::dialogue::Rect icon_rect(const goemon64::dialogue::View& view) {
         return { view.box.x + view.box.w - 20.0f, view.box.y + view.box.h + 3.0f, 20.0f, 12.0f };
+    }
+
+    // Rectangle of the "play whole box" button, left of the translate button.
+    goemon64::dialogue::Rect play_rect(const goemon64::dialogue::View& view) {
+        const auto ic = icon_rect(view);
+        return { ic.x - 18.0f, ic.y, 16.0f, ic.h };
+    }
+
+    // True when a framebuffer pixel is inside an element's box.
+    bool over_element(Rml::Element* e, float px, float py) {
+        if (!e) {
+            return false;
+        }
+        const Rml::Vector2f o = e->GetAbsoluteOffset(Rml::BoxArea::Border);
+        const Rml::Vector2f sz = e->GetBox().GetSize(Rml::BoxArea::Border);
+        return px >= o.x && px < o.x + sz.x && py >= o.y && py < o.y + sz.y;
     }
 
     void apply_panel_visibility() {
@@ -119,6 +141,23 @@ namespace {
             icon->SetInnerRML("EN");
             overlay_doc->AppendChild(std::move(icon));
 
+            if (goemon64::tts::available(view.page->audio_key)) {
+                const auto pr = play_rect(view);
+                Rml::ElementPtr play = overlay_doc->CreateElement("div");
+                play->SetId("full_play");
+                style_box(play.get(), m, pr.x, pr.y, pr.w, pr.h);
+                play->SetProperty("font-family", "LatoLatin");
+                play->SetProperty("font-size", std::to_string(size_dp(m, 8.0f)) + "dp");
+                play->SetProperty("line-height", std::to_string(size_dp(m, pr.h)) + "dp");
+                play->SetProperty("text-align", "center");
+                play->SetProperty("color", "#ffe060");
+                play->SetProperty("background-color", "#101830f0");
+                play->SetProperty("border-width", "2dp");
+                play->SetProperty("border-color", "#e8c040");
+                play->SetInnerRML("&#9654;");
+                overlay_doc->AppendChild(std::move(play));
+            }
+
             Rml::ElementPtr panel = overlay_doc->CreateElement("div");
             panel->SetId("translation");
             panel->SetProperty("position", "absolute");
@@ -138,7 +177,25 @@ namespace {
         }
     }
 
-    void show_tooltip(const goemon64::dialogue::ViewToken& vt, const Mapping& m) {
+    // Highlights piece `index` (and nothing else) in the shown tooltip.
+    void set_active_pair(int index) {
+        for (size_t i = 0; i < pair_count; i++) {
+            const bool on = (int)i == index;
+            for (const char* side : { "jp_", "en_" }) {
+                Rml::Element* e = overlay_doc->GetElementById(side + std::to_string(i));
+                if (e) {
+                    e->SetProperty("background-color", on ? "#e8c040" : "#303c68");
+                    e->SetProperty("color", on ? "#101830" : "#ffffff");
+                }
+            }
+        }
+        active_pair = index;
+    }
+
+    void show_tooltip(const goemon64::dialogue::ViewToken& vt, const Mapping& m, bool pinned) {
+        if (vt.rects.empty()) {
+            return;
+        }
         Rml::Element* old = overlay_doc->GetElementById("tooltip");
         if (old) {
             old->GetParentNode()->RemoveChild(old);
@@ -148,29 +205,86 @@ namespace {
         const auto& r = vt.rects.back();
         tip->SetProperty("position", "absolute");
         tip->SetProperty("left", std::to_string(to_dp_x(m, r.x)) + "dp");
-        tip->SetProperty("top", std::to_string(to_dp_y(m, r.y + r.h + 8.0f)) + "dp");
+        tip->SetProperty("top", std::to_string(to_dp_y(m, r.y + r.h + 3.0f)) + "dp");
         tip->SetProperty("font-family", "LatoLatin");
         tip->SetProperty("font-size", std::to_string(size_dp(m, 9.0f)) + "dp");
         tip->SetProperty("color", "#ffffff");
         tip->SetProperty("background-color", "#101830f0");
         tip->SetProperty("padding", std::to_string(size_dp(m, 3.0f)) + "dp");
         tip->SetProperty("border-width", "2dp");
-        tip->SetProperty("border-color", "#e8c040");
+        tip->SetProperty("border-color", pinned ? "#ffffff" : "#e8c040");
         tip->SetProperty("white-space", "nowrap");
 
-        std::string rml = "<b>" + escape(vt.token->surface) + "</b>";
+        // With a pinned phrase the Japanese and English text are cut into aligned pieces that highlight each other.
+        const bool pieces = pinned && !vt.token->pairs.empty();
+        active_pair = -1;
+        pair_count = pieces ? vt.token->pairs.size() : 0;
+        const std::string chip = "display: inline-block; background-color: #303c68; color: #ffffff";
+        std::string jp_rml, en_rml;
+        if (pieces) {
+            const std::string& jp = vt.token->surface;
+            size_t cursor = 0;
+            for (size_t i = 0; i < vt.token->pairs.size(); i++) {
+                const size_t at = jp.find(vt.token->pairs[i].first, cursor);
+                if (at == std::string::npos) {
+                    continue;
+                }
+                jp_rml += escape(jp.substr(cursor, at - cursor)) + "<span id=\"jp_" + std::to_string(i) + "\" style=\"" + chip + "\">" + escape(vt.token->pairs[i].first) + "</span>";
+                cursor = at + vt.token->pairs[i].first.size();
+            }
+            jp_rml += escape(jp.substr(cursor));
+
+            const std::string& en = vt.token->gloss;
+            struct Place { size_t at, len, index; };
+            std::vector<Place> places;
+            for (size_t i = 0; i < vt.token->pairs.size(); i++) {
+                const std::string& piece = vt.token->pairs[i].second;
+                for (size_t from = 0; !piece.empty();) {
+                    const size_t at = en.find(piece, from);
+                    if (at == std::string::npos) {
+                        break;
+                    }
+                    bool free_spot = true;
+                    for (const auto& p : places) {
+                        free_spot = free_spot && (at + piece.size() <= p.at || at >= p.at + p.len);
+                    }
+                    if (free_spot) {
+                        places.push_back({ at, piece.size(), i });
+                        break;
+                    }
+                    from = at + 1;
+                }
+            }
+            std::sort(places.begin(), places.end(), [](const Place& a, const Place& b) { return a.at < b.at; });
+            size_t en_cursor = 0;
+            for (const auto& p : places) {
+                en_rml += escape(en.substr(en_cursor, p.at - en_cursor)) + "<span id=\"en_" + std::to_string(p.index) + "\" style=\"" + chip + "\">" + escape(en.substr(p.at, p.len)) + "</span>";
+                en_cursor = p.at + p.len;
+            }
+            en_rml += escape(en.substr(en_cursor));
+        }
+
+        std::string rml = "<b>" + (pieces ? jp_rml : escape(vt.token->surface)) + "</b>";
         if (!vt.token->reading.empty()) {
             rml += " (" + escape(vt.token->reading) + ")";
         }
-        rml += "<br/>" + escape(vt.token->gloss);
+        if (goemon64::tts::available(vt.token->audio_key)) {
+            const std::string box = std::to_string(size_dp(m, 11.0f)) + "dp";
+            rml += " <div id=\"tip_play\" style=\"display: inline-block; width: " + box + "; height: " + box + "; line-height: " + box +
+                "; text-align: center; color: #ffe060; background-color: #302860; margin-left: " + std::to_string(size_dp(m, 3.0f)) + "dp\">&#9654;</div>";
+        }
+        rml += "<br/>" + (pieces ? en_rml : escape(vt.token->gloss));
         if (!vt.token->note.empty()) {
             rml += "<br/><span style=\"color: #b0b8d0\">" + escape(vt.token->note) + "</span>";
         }
+        rml += std::string("<br/><span style=\"color: #8088a8\">") + (pinned ? "click again to close" : "click to keep open") + "</span>";
         tip->SetInnerRML(rml);
         overlay_doc->AppendChild(std::move(tip));
     }
 
     void hide_tooltip() {
+        pair_count = 0;
+        active_pair = -1;
         Rml::Element* old = overlay_doc->GetElementById("tooltip");
         if (old) {
             old->GetParentNode()->RemoveChild(old);
@@ -229,7 +343,9 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
         overlay_doc->Hide();
         shown_view_ref = nullptr;
         hovered_token = -1;
+        pinned_token = nullptr;
         prev_left_down = false;
+        goemon64::tts::stop();
         return;
     }
 
@@ -252,12 +368,15 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
     int hit = -1;
     bool over_icon = false;
     bool left_down = false;
+    float px = -1.0f, py = -1.0f;
     if (sdl_window) {
         left_down = (SDL_GetMouseState(&mx, &my) & SDL_BUTTON_LMASK) != 0;
         int win_w = 1, win_h = 1;
         SDL_GetWindowSize(sdl_window, &win_w, &win_h);
-        float gx = ((mx * (float)fb_width / win_w) - m.offset_x) / m.scale;
-        float gy = ((my * (float)fb_height / win_h) - m.offset_y) / m.scale;
+        px = mx * (float)fb_width / win_w;
+        py = my * (float)fb_height / win_h;
+        float gx = (px - m.offset_x) / m.scale;
+        float gy = (py - m.offset_y) / m.scale;
         auto inside = [&](const goemon64::dialogue::Rect& r) { return gx >= r.x && gx < r.x + r.w && gy >= r.y && gy < r.y + r.h; };
         for (size_t i = 0; i < view->tokens.size() && hit < 0; i++) {
             for (const auto& r : view->tokens[i].rects) {
@@ -272,21 +391,61 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
         }
     }
 
-    if (over_icon && left_down && !prev_left_down) {
-        translation_open = !translation_open;
-        apply_panel_visibility();
+    if (left_down && !prev_left_down) {
+        if (over_icon) {
+            translation_open = !translation_open;
+            apply_panel_visibility();
+        } else if (view->page && over_element(overlay_doc->GetElementById("full_play"), px, py)) {
+            goemon64::tts::play(view->page->audio_key);
+        } else if (hovered_token >= 0 && hovered_token < (int)view->tokens.size() && over_element(overlay_doc->GetElementById("tip_play"), px, py)) {
+            goemon64::tts::play(view->tokens[hovered_token].token->audio_key);
+        } else if (hit >= 0) {
+            const auto* clicked = view->tokens[hit].token;
+            pinned_token = (pinned_token == clicked) ? nullptr : clicked;
+        }
     }
     prev_left_down = left_down;
 
-    if (hit != hovered_token || changed) {
-        hovered_token = hit;
-        if (hit >= 0) {
-            show_tooltip(view->tokens[hit], m);
+    // A pinned phrase keeps its tooltip open (and its play button reachable) until it is clicked again.
+    int pinned_idx = -1;
+    if (pinned_token) {
+        for (size_t i = 0; i < view->tokens.size(); i++) {
+            if (view->tokens[i].token == pinned_token && !view->tokens[i].rects.empty()) {
+                pinned_idx = (int)i;
+                break;
+            }
+        }
+        if (pinned_idx < 0) {
+            pinned_token = nullptr;
+        }
+    }
+    const int show = pinned_idx >= 0 ? pinned_idx : hit;
+    const bool pinned = pinned_idx >= 0;
+
+    if (show != hovered_token || pinned != shown_pinned || changed) {
+        hovered_token = show;
+        shown_pinned = pinned;
+        if (show >= 0) {
+            show_tooltip(view->tokens[show], m, pinned);
         } else {
             hide_tooltip();
         }
         if (view->page) {
-            update_translation_text(view->page->translation, hit >= 0 ? view->tokens[hit].token->gloss : std::string());
+            update_translation_text(view->page->translation, show >= 0 ? view->tokens[show].token->gloss : std::string());
+        }
+    }
+
+    // Hovering a Japanese or English piece of the pinned tooltip highlights the matching piece in the other language.
+    if (shown_pinned && pair_count > 0) {
+        int pair = -1;
+        for (size_t i = 0; i < pair_count && pair < 0; i++) {
+            if (over_element(overlay_doc->GetElementById("jp_" + std::to_string(i)), px, py) ||
+                over_element(overlay_doc->GetElementById("en_" + std::to_string(i)), px, py)) {
+                pair = (int)i;
+            }
+        }
+        if (pair != active_pair) {
+            set_active_pair(pair);
         }
     }
 

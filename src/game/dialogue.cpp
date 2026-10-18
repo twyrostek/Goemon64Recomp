@@ -92,6 +92,9 @@ namespace {
                 page = std::make_shared<Page>();
             } else if (cols[0] == "L" && page) {
                 page->translation = cols.size() > 1 ? cols[1] : "";
+            } else if (cols[0] == "V" && page && cols.size() >= 3) {
+                page->voice = cols[1];
+                page->audio_key = cols[2];
             } else if (cols[0] == "S" && page && cols.size() >= 3) {
                 seg = std::make_shared<Segment>();
                 seg->code_count = (uint32_t)std::stoul(cols[2]);
@@ -107,6 +110,17 @@ namespace {
                 t.reading = cols[4];
                 t.gloss = cols.size() > 5 ? cols[5] : "";
                 t.note = cols.size() > 6 ? cols[6] : "";
+                t.audio_key = cols.size() > 7 ? cols[7] : "";
+                if (cols.size() > 8) {
+                    std::stringstream ps(cols[8]);
+                    std::string pair;
+                    while (std::getline(ps, pair, '\x1e')) {
+                        const size_t sep = pair.find('\x1f');
+                        if (sep != std::string::npos) {
+                            t.pairs.emplace_back(pair.substr(0, sep), pair.substr(sep + 1));
+                        }
+                    }
+                }
                 seg->tokens.push_back(std::move(t));
             }
         }

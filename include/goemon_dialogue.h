@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace goemon64::dialogue {
@@ -22,6 +23,8 @@ namespace goemon64::dialogue {
         std::string reading; // hiragana, empty when the phrase has no kanji
         std::string gloss;
         std::string note;
+        std::string audio_key; // spoken recording of the phrase, empty when there is none
+        std::vector<std::pair<std::string, std::string>> pairs; // Japanese piece and the English piece it stands for
     };
 
     // One line of text as the game prints it.
@@ -34,6 +37,8 @@ namespace goemon64::dialogue {
     // One dialogue box: its lines and the full translation.
     struct Page {
         std::string translation;
+        std::string voice;     // "male" or "female" when the page has a recording
+        std::string audio_key; // spoken recording of the whole page
         std::vector<uint64_t> segment_hashes;
         std::vector<std::shared_ptr<const Segment>> segments;
     };
