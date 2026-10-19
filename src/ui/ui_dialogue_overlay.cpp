@@ -392,13 +392,17 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
     }
 
     if (left_down && !prev_left_down) {
-        if (over_icon) {
+        // The tooltip is drawn over the buttons under the dialogue box, so it gets the click first.
+        const bool over_tooltip = over_element(overlay_doc->GetElementById("tooltip"), px, py);
+        if (over_tooltip) {
+            if (hovered_token >= 0 && hovered_token < (int)view->tokens.size() && over_element(overlay_doc->GetElementById("tip_play"), px, py)) {
+                goemon64::tts::play(view->tokens[hovered_token].token->audio_key);
+            }
+        } else if (over_icon) {
             translation_open = !translation_open;
             apply_panel_visibility();
         } else if (view->page && over_element(overlay_doc->GetElementById("full_play"), px, py)) {
             goemon64::tts::play(view->page->audio_key);
-        } else if (hovered_token >= 0 && hovered_token < (int)view->tokens.size() && over_element(overlay_doc->GetElementById("tip_play"), px, py)) {
-            goemon64::tts::play(view->tokens[hovered_token].token->audio_key);
         } else if (hit >= 0) {
             const auto* clicked = view->tokens[hit].token;
             pinned_token = (pinned_token == clicked) ? nullptr : clicked;

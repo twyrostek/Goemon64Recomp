@@ -1,19 +1,23 @@
 #include <algorithm>
 #include <atomic>
 #include <cstdio>
+#include <cstdlib>
 #include <filesystem>
+#include <fstream>
+#include <vector>
 #include <mutex>
 #include <unordered_map>
 
 #include "SDL.h"
+
+extern "C" int stb_vorbis_decode_memory(const unsigned char* mem, int len, int* channels, int* sample_rate, short** output);
 
 #include "goemon_support.h"
 #include "goemon_tts.h"
 
 namespace {
     struct Clip {
-        Uint8* data = nullptr;
-        Uint32 length = 0;
+        std::vector<Sint16> samples;
         SDL_AudioSpec spec{};
     };
 
@@ -25,7 +29,7 @@ namespace {
     SDL_AudioSpec device_spec{};
 
     std::filesystem::path clip_path(const std::string& key) {
-        return goemon64::get_asset_path(("tts/" + key + ".wav").c_str());
+        return goemon64::get_asset_path(("tts/" + key + ".ogg").c_str());
     }
 
     bool open_device(const SDL_AudioSpec& wanted) {
@@ -64,27 +68,35 @@ void goemon64::tts::play(const std::string& key) {
     std::lock_guard lock(tts_mutex);
     auto it = clips.find(key);
     if (it == clips.end()) {
-        Clip clip;
-        if (SDL_LoadWAV(clip_path(key).string().c_str(), &clip.spec, &clip.data, &clip.length) == nullptr) {
-            std::printf("[tts] failed to load %s: %s\n", key.c_str(), SDL_GetError());
+        std::ifstream file(clip_path(key), std::ios::binary);
+        std::vector<unsigned char> bytes((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        int channels = 0, rate = 0;
+        short* decoded = nullptr;
+        const int frames = bytes.empty() ? -1 : stb_vorbis_decode_memory(bytes.data(), (int)bytes.size(), &channels, &rate, &decoded);
+        if (frames <= 0 || decoded == nullptr) {
+            std::printf("[tts] failed to decode %s\n", key.c_str());
             return;
         }
+        Clip clip;
+        clip.samples.assign(decoded, decoded + (size_t)frames * channels);
+        std::free(decoded);
+        clip.spec.freq = rate;
+        clip.spec.format = AUDIO_S16SYS;
+        clip.spec.channels = (Uint8)channels;
+        clip.spec.samples = 1024;
         // The recordings are quiet next to the game, so they are boosted once when loaded.
-        if (clip.spec.format == AUDIO_S16SYS) {
-            constexpr float voice_gain = 1.2f;
-            Sint16* samples = reinterpret_cast<Sint16*>(clip.data);
-            for (Uint32 i = 0; i < clip.length / sizeof(Sint16); i++) {
-                samples[i] = static_cast<Sint16>(std::clamp(samples[i] * voice_gain, -32768.0f, 32767.0f));
-            }
+        constexpr float voice_gain = 1.2f;
+        for (Sint16& sample : clip.samples) {
+            sample = static_cast<Sint16>(std::clamp(sample * voice_gain, -32768.0f, 32767.0f));
         }
-        it = clips.emplace(key, clip).first;
+        it = clips.emplace(key, std::move(clip)).first;
     }
     if (!open_device(it->second.spec)) {
         std::printf("[tts] failed to open audio device: %s\n", SDL_GetError());
         return;
     }
     SDL_ClearQueuedAudio(device);
-    SDL_QueueAudio(device, it->second.data, it->second.length);
+    SDL_QueueAudio(device, it->second.samples.data(), (Uint32)(it->second.samples.size() * sizeof(Sint16)));
     SDL_PauseAudioDevice(device, 0);
 }
 

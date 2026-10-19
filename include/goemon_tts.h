@@ -4,7 +4,7 @@
 #include <string>
 
 namespace goemon64::tts {
-    // True when assets/tts/<key>.wav exists.
+    // True when assets/tts/<key>.ogg exists.
     bool available(const std::string& key);
 
     // Plays the recording on its own audio device, replacing anything that is still playing.
