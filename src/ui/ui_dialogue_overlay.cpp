@@ -29,6 +29,123 @@ namespace {
     bool translation_open = false;
     bool prev_left_down = false;
 
+    // Right stick moves a virtual cursor and pressing it in (R3) clicks; the real mouse takes over again when it moves.
+    bool pad_mode = false;
+    float pad_x = 0.0f, pad_y = 0.0f;   // framebuffer pixels
+    int last_mouse_x = -1, last_mouse_y = -1;
+    Uint32 last_pad_tick = 0;
+    constexpr float pad_deadzone = 0.25f;
+    constexpr float pad_speed = 0.8f;   // framebuffer heights per second at full tilt
+    // Pressing the stick in also nudges it, so a click uses the position from slightly before the press and the cursor stays put while held.
+    constexpr Uint32 pad_click_lookback_ms = 120;
+    constexpr Uint32 pad_click_hold_ms = 200;
+    struct PadSample { Uint32 tick; float x, y; };
+    PadSample pad_history[16];
+    int pad_history_count = 0;
+    bool prev_r3 = false;
+    Uint32 pad_freeze_until = 0;
+
+    // Right stick position (-1..1) and R3 state of the first controller that uses them.
+    void poll_pad(float& ax, float& ay, bool& r3) {
+        ax = ay = 0.0f;
+        r3 = false;
+        for (int i = 0; i < SDL_NumJoysticks(); i++) {
+            if (!SDL_IsGameController(i)) {
+                continue;
+            }
+            SDL_GameController* c = SDL_GameControllerFromInstanceID(SDL_JoystickGetDeviceInstanceID(i));
+            if (!c) {
+                continue;
+            }
+            const float x = SDL_GameControllerGetAxis(c, SDL_CONTROLLER_AXIS_RIGHTX) / 32767.0f;
+            const float y = SDL_GameControllerGetAxis(c, SDL_CONTROLLER_AXIS_RIGHTY) / 32767.0f;
+            if (std::fabs(x) > std::fabs(ax)) {
+                ax = x;
+            }
+            if (std::fabs(y) > std::fabs(ay)) {
+                ay = y;
+            }
+            r3 = r3 || SDL_GameControllerGetButton(c, SDL_CONTROLLER_BUTTON_RIGHTSTICK) != 0;
+        }
+    }
+
+    // Pixel-art copy of the game's red menu arrow (outline, lit top half, dark bottom half), as runs of coloured blocks.
+    // The arrow is an isosceles triangle whose tip (the click point) sits at (arrow_tip, arrow_tip) and points up and to the left, tilted 30 degrees.
+    constexpr int arrow_w = 14;
+    constexpr int arrow_h = 16;
+    constexpr float arrow_tip = 1.5f;
+    constexpr float arrow_hotspot = 2.5f;   // centre of the single tip block
+
+    std::string arrow_rml() {
+        constexpr float length = 12.0f, half_base = 5.5f, sin_t = 0.5f, cos_t = 0.8660254f;
+        // Position along the arrow axis and across it for a cell centre.
+        auto axes = [](int x, int y, float& along, float& across) {
+            const float vx = x + 0.5f - arrow_tip, vy = y + 0.5f - arrow_tip;
+            along = vx * sin_t + vy * cos_t;
+            across = vx * cos_t - vy * sin_t;
+        };
+        auto inside = [&](float fx, float fy) {
+            const float vx = fx - arrow_tip, vy = fy - arrow_tip;
+            const float along = vx * sin_t + vy * cos_t;
+            const float across = vx * cos_t - vy * sin_t;
+            return along >= 0.0f && along <= length && std::fabs(across) <= half_base * along / length;
+        };
+        // A cell is part of the arrow when at least 40% of it is covered, which keeps the tip and edges from breaking up.
+        auto filled = [&](int x, int y) {
+            int hits = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    hits += inside(x + (i + 0.5f) / 4.0f, y + (j + 0.5f) / 4.0f) ? 1 : 0;
+                }
+            }
+            return hits >= 8;
+        };
+        // Distance from a point to the arrow triangle's edges; the outline only reaches blocks close to it so the tip stays sharp.
+        const float ax = arrow_tip, ay = arrow_tip;
+        const float b1x = ax + length * sin_t + half_base * cos_t, b1y = ay + length * cos_t - half_base * sin_t;
+        const float b2x = ax + length * sin_t - half_base * cos_t, b2y = ay + length * cos_t + half_base * sin_t;
+        auto segment_distance = [](float px, float py, float x0, float y0, float x1, float y1) {
+            const float dx = x1 - x0, dy = y1 - y0;
+            const float t = std::clamp(((px - x0) * dx + (py - y0) * dy) / (dx * dx + dy * dy), 0.0f, 1.0f);
+            return std::hypot(px - x0 - t * dx, py - y0 - t * dy);
+        };
+        auto color = [&](int x, int y) -> const char* {
+            if (!filled(x, y)) {
+                if (filled(x - 1, y) || filled(x + 1, y) || filled(x, y - 1) || filled(x, y + 1)) {
+                    const float cx = x + 0.5f, cy = y + 0.5f;
+                    const float along_tip = (cx - ax) * sin_t + (cy - ay) * cos_t;
+                    const float d = std::min({ segment_distance(cx, cy, ax, ay, b1x, b1y), segment_distance(cx, cy, ax, ay, b2x, b2y), segment_distance(cx, cy, b1x, b1y, b2x, b2y) });
+                    if (d <= 1.0f && along_tip >= 1.0f) {
+                        return "#2a0000";
+                    }
+                }
+                return nullptr;
+            }
+            float along, across;
+            axes(x, y, along, across);
+            if (across < -0.5f) {
+                return !filled(x - 1, y) || !filled(x, y - 1) ? "#ffc0b0" : "#ff5040";
+            }
+            return across <= 0.5f ? "#e01818" : "#9a0808";
+        };
+        std::string out;
+        for (int y = 0; y < arrow_h; y++) {
+            for (int x = 0; x < arrow_w;) {
+                const char* c = color(x, y);
+                int n = 1;
+                while (c && x + n < arrow_w && color(x + n, y) == c) {
+                    n++;
+                }
+                if (c) {
+                    out += "<div style=\"position: absolute; left: " + std::to_string(100.0f * x / arrow_w) + "%; top: " + std::to_string(100.0f * y / arrow_h) +
+                        "%; width: " + std::to_string(100.0f * n / arrow_w) + "%; height: " + std::to_string(100.0f / arrow_h + 0.5f) + "%; background-color: " + c + "\"></div>";
+                }
+                x += n;
+            }
+        }
+        return out;
+    }
+
     std::string escape(const std::string& s) {
         std::string out;
         for (char c : s) {
@@ -220,6 +337,14 @@ namespace {
         active_pair = -1;
         pair_count = pieces ? vt.token->pairs.size() : 0;
         const std::string chip = "display: inline-block; background-color: #303c68; color: #ffffff";
+        // Spaces next to an inline-block chip are dropped by the layout, so they are written as non-breaking spaces.
+        auto gap = [](const std::string& s) {
+            std::string out = escape(s);
+            for (size_t at = 0; (at = out.find(' ', at)) != std::string::npos; at += 6) {
+                out.replace(at, 1, "&nbsp;");
+            }
+            return out;
+        };
         std::string jp_rml, en_rml;
         if (pieces) {
             const std::string& jp = vt.token->surface;
@@ -229,10 +354,10 @@ namespace {
                 if (at == std::string::npos) {
                     continue;
                 }
-                jp_rml += escape(jp.substr(cursor, at - cursor)) + "<span id=\"jp_" + std::to_string(i) + "\" style=\"" + chip + "\">" + escape(vt.token->pairs[i].first) + "</span>";
+                jp_rml += gap(jp.substr(cursor, at - cursor)) + "<span id=\"jp_" + std::to_string(i) + "\" style=\"" + chip + "\">" + escape(vt.token->pairs[i].first) + "</span>";
                 cursor = at + vt.token->pairs[i].first.size();
             }
-            jp_rml += escape(jp.substr(cursor));
+            jp_rml += gap(jp.substr(cursor));
 
             const std::string& en = vt.token->gloss;
             struct Place { size_t at, len, index; };
@@ -258,10 +383,10 @@ namespace {
             std::sort(places.begin(), places.end(), [](const Place& a, const Place& b) { return a.at < b.at; });
             size_t en_cursor = 0;
             for (const auto& p : places) {
-                en_rml += escape(en.substr(en_cursor, p.at - en_cursor)) + "<span id=\"en_" + std::to_string(p.index) + "\" style=\"" + chip + "\">" + escape(en.substr(p.at, p.len)) + "</span>";
+                en_rml += gap(en.substr(en_cursor, p.at - en_cursor)) + "<span id=\"en_" + std::to_string(p.index) + "\" style=\"" + chip + "\">" + escape(en.substr(p.at, p.len)) + "</span>";
                 en_cursor = p.at + p.len;
             }
-            en_rml += escape(en.substr(en_cursor));
+            en_rml += gap(en.substr(en_cursor));
         }
 
         std::string rml = "<b>" + (pieces ? jp_rml : escape(vt.token->surface)) + "</b>";
@@ -345,6 +470,9 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
         hovered_token = -1;
         pinned_token = nullptr;
         prev_left_down = false;
+        pad_mode = false;
+        prev_r3 = false;
+        pad_history_count = 0;
         goemon64::tts::stop();
         return;
     }
@@ -369,12 +497,101 @@ void goemon64::update_dialogue_overlay(Rml::Context* context, int fb_width, int 
     bool over_icon = false;
     bool left_down = false;
     float px = -1.0f, py = -1.0f;
+    bool have_pointer = false;
+
+    float stick_x, stick_y;
+    bool r3;
+    poll_pad(stick_x, stick_y, r3);
+    const Uint32 now = SDL_GetTicks();
+    const float dt = last_pad_tick ? std::min(0.1f, (now - last_pad_tick) / 1000.0f) : 0.0f;
+    last_pad_tick = now;
+
     if (sdl_window) {
         left_down = (SDL_GetMouseState(&mx, &my) & SDL_BUTTON_LMASK) != 0;
+        if (mx != last_mouse_x || my != last_mouse_y) {
+            if (last_mouse_x >= 0) {
+                pad_mode = false;
+            }
+            last_mouse_x = mx;
+            last_mouse_y = my;
+        }
+    }
+
+    const float stick_mag = std::sqrt(stick_x * stick_x + stick_y * stick_y);
+    if (stick_mag > pad_deadzone || (r3 && !pad_mode)) {
+        if (!pad_mode) {
+            // Start in the middle of the dialogue box.
+            pad_x = m.offset_x + (view->box.x + view->box.w * 0.5f) * m.scale;
+            pad_y = m.offset_y + (view->box.y + view->box.h * 0.5f) * m.scale;
+            pad_mode = true;
+        }
+    }
+    if (pad_mode) {
+        if (r3 && !prev_r3) {
+            float sx = pad_x, sy = pad_y;
+            for (int i = pad_history_count - 1; i >= 0; i--) {
+                sx = pad_history[i].x;
+                sy = pad_history[i].y;
+                if (now - pad_history[i].tick >= pad_click_lookback_ms) {
+                    break;
+                }
+            }
+            pad_x = sx;
+            pad_y = sy;
+            pad_freeze_until = now + pad_click_hold_ms;
+        }
+        if (r3) {
+            pad_freeze_until = std::max(pad_freeze_until, now + pad_click_hold_ms);
+        }
+        if (stick_mag > pad_deadzone && now >= pad_freeze_until) {
+            const float k = (stick_mag - pad_deadzone) / (1.0f - pad_deadzone);
+            const float speed = pad_speed * fb_height * k * k / stick_mag;
+            pad_x = std::clamp(pad_x + stick_x * speed * dt, 0.0f, (float)fb_width - 1.0f);
+            pad_y = std::clamp(pad_y + stick_y * speed * dt, 0.0f, (float)fb_height - 1.0f);
+        }
+        if (pad_history_count == 16) {
+            std::copy(pad_history + 1, pad_history + 16, pad_history);
+            pad_history_count--;
+        }
+        if (now < pad_freeze_until) {
+            pad_history_count = 0;
+        }
+        pad_history[pad_history_count++] = { now, pad_x, pad_y };
+        prev_r3 = r3;
+        left_down = r3;
+        px = pad_x;
+        py = pad_y;
+        have_pointer = true;
+    } else if (sdl_window) {
         int win_w = 1, win_h = 1;
         SDL_GetWindowSize(sdl_window, &win_w, &win_h);
         px = mx * (float)fb_width / win_w;
         py = my * (float)fb_height / win_h;
+        have_pointer = true;
+    }
+
+    // Arrow shown only while the stick drives the pointer.
+    {
+        Rml::Element* cursor = overlay_doc->GetElementById("pad_cursor");
+        if (!cursor) {
+            Rml::ElementPtr c = overlay_doc->CreateElement("div");
+            c->SetId("pad_cursor");
+            c->SetProperty("position", "absolute");
+            c->SetProperty("z-index", "100");
+            c->SetInnerRML(arrow_rml());
+            cursor = overlay_doc->AppendChild(std::move(c));
+        }
+        // The arrow tip is the hotspot.
+        // Whole screen pixels per block and a whole pixel origin keep the blocks from blurring into each other.
+        const float cell = std::max(1.0f, std::round(size_dp(m, 0.75f) * m.dp_ratio)) / m.dp_ratio;
+        cursor->SetProperty("width", std::to_string(cell * arrow_w) + "dp");
+        cursor->SetProperty("height", std::to_string(cell * arrow_h) + "dp");
+        cursor->SetProperty("left", std::to_string(std::round(px - cell * m.dp_ratio * arrow_hotspot) / m.dp_ratio) + "dp");
+        cursor->SetProperty("top", std::to_string(std::round(py - cell * m.dp_ratio * arrow_hotspot) / m.dp_ratio) + "dp");
+        cursor->SetProperty("display", pad_mode ? "block" : "none");
+    }
+
+    if (have_pointer) {
         float gx = (px - m.offset_x) / m.scale;
         float gy = (py - m.offset_y) / m.scale;
         auto inside = [&](const goemon64::dialogue::Rect& r) { return gx >= r.x && gx < r.x + r.w && gy >= r.y && gy < r.y + r.h; };
