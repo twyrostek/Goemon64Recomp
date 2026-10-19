@@ -42,3 +42,9 @@ text = "extern void goemon_dialogue_print_hook(uint8_t*, recomp_context*); goemo
 func = "func_8000B760_C360"
 before_vram = 0x8000B760
 text = "extern void goemon_dialogue_window_hook(uint8_t*, recomp_context*); goemon_dialogue_window_hook(rdram, ctx);"
+
+# Dialogue: whole-string printer used for menu options.
+[[patches.hook]]
+func = "func_8003E7A4_3F3A4"
+before_vram = 0x8003E7A4
+text = "extern void goemon_dialogue_string_hook(uint8_t*, recomp_context*); goemon_dialogue_string_hook(rdram, ctx);"

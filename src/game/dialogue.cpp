@@ -34,6 +34,7 @@ namespace {
     struct Entry {
         std::shared_ptr<const Segment> segment;
         uint32_t base_slot;
+        uint32_t start_ptr;
         std::vector<int> glyph_ordinal; // per code: printed glyph number or -1
     };
     std::vector<Entry> entries;
@@ -193,24 +194,32 @@ static void rebuild_view(uint8_t* rdram) {
 }
 
 // Called from a hook at the entry of the JP text printer (a0 = window id, a1 = pointer to the next s16 glyph code).
-extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) {
+// `whole_string` is set when the game prints a complete string at once (menu options) instead of one glyph per call.
+static void handle_text(uint8_t* rdram, uint32_t window_id, uint32_t ptr, bool whole_string) {
     static uint32_t segment_start = 0;
     static uint32_t segment_end = 0; // address of the 0xFFFF terminator
-    uint32_t ptr = (uint32_t)ctx->r5;
     if (ptr < 0x80000000u || ptr >= 0x80800000u) {
         return;
     }
 
     auto word = [&](uint32_t addr) -> uint16_t { return (uint16_t)MEM_HU(0, (gpr)(int32_t)addr); };
 
-    uint32_t win = (uint32_t)MEM_W(0, (gpr)(int32_t)(0x8016D430u + (uint32_t)ctx->r4 * 4));
+    uint32_t win = (uint32_t)MEM_W(0, (gpr)(int32_t)(0x8016D430u + window_id * 4));
     if (win < 0x80000000u || win >= 0x80800000u) {
         return;
     }
     gpr w = (gpr)(int32_t)win;
 
     // The first printer call for a message points at its first code, so any pointer outside the current one starts a new message.
-    if (ptr < segment_start || ptr > segment_end || win != active_window) {
+    if (whole_string && win == active_window) {
+        for (const auto& e : entries) {
+            if (e.start_ptr == ptr) {
+                return; // already shown; the game may redraw its menu
+            }
+        }
+    }
+
+    if (whole_string || ptr < segment_start || ptr > segment_end || win != active_window) {
         std::vector<uint16_t> words;
         for (uint32_t a = ptr; words.size() < 512; a += 2) {
             words.push_back(word(a));
@@ -218,8 +227,10 @@ extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) 
                 break;
             }
         }
-        segment_start = ptr;
-        segment_end = ptr + 2 * (uint32_t)(words.size() - 1);
+        if (!whole_string) {
+            segment_start = ptr;
+            segment_end = ptr + 2 * (uint32_t)(words.size() - 1);
+        }
 
         // Glyphs go into the first free slot, and a page change clears them all.
         uint32_t base_slot = 0;
@@ -236,48 +247,52 @@ extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) 
         }
         active_window = win;
 
+        auto push_entry = [&](const std::shared_ptr<const Segment>& segment) {
+            Entry e;
+            e.segment = segment;
+            e.base_slot = base_slot;
+            e.start_ptr = ptr;
+            e.glyph_ordinal.assign(words.size(), -1);
+            int n = 0;
+            for (size_t k = 0; k < words.size(); k++) {
+                if (words[k] < 0x8000 && words[k] != 0) {
+                    e.glyph_ordinal[k] = n++;
+                }
+            }
+            entries.push_back(std::move(e));
+        };
+
         auto consume = [&]() {
             if (!current_page) {
                 return false;
             }
             for (size_t i = next_segment; i < current_page->segment_hashes.size(); i++) {
-                if (current_page->segment_hashes[i] != hash) {
-                    continue;
+                if (current_page->segment_hashes[i] == hash) {
+                    push_entry(current_page->segments[i]);
+                    next_segment = i + 1;
+                    return true;
                 }
-                Entry e;
-                e.segment = current_page->segments[i];
-                e.base_slot = base_slot;
-                e.glyph_ordinal.assign(words.size(), -1);
-                int n = 0;
-                for (size_t k = 0; k < words.size(); k++) {
-                    if (words[k] < 0x8000 && words[k] != 0) {
-                        e.glyph_ordinal[k] = n++;
-                    }
-                }
-                entries.push_back(std::move(e));
-                next_segment = i + 1;
-                return true;
             }
             return false;
         };
 
-        // A message that is not the next line of the current page may start a new page, even when some earlier lines are not in the database.
         if (!consume()) {
             auto first = pages_by_first_segment.find(hash);
-            if (first != pages_by_first_segment.end()) {
-                entries.clear();
-                current_page = first->second.front();
-                next_segment = 0;
-                consume();
-            } else {
-                // The game clears the window at points the text does not show, so a page may start in the middle of a stored one.
-                auto any = segment_locations.find(hash);
-                if (any != segment_locations.end()) {
-                    entries.clear();
+            auto any = segment_locations.find(hash);
+            if (!current_page) {
+                // The window was just cleared: this message starts a page, possibly in the middle of a stored one.
+                if (first != pages_by_first_segment.end()) {
+                    current_page = first->second.front();
+                    next_segment = 0;
+                    consume();
+                } else if (any != segment_locations.end()) {
                     current_page = any->second.front().page;
                     next_segment = any->second.front().index;
                     consume();
                 }
+            } else if (any != segment_locations.end()) {
+                // Extra text printed into the same window, such as a menu option from another page; the translation stays.
+                push_entry(any->second.front().page->segments[any->second.front().index]);
             }
         }
         std::printf("[dlg] bank=%d segment %08X hash=%016llX base_slot=%u page=%d entries=%zu words=", (int)MEM_W(0, (gpr)(int32_t)0x801CD018u), segment_start, (unsigned long long)hash, base_slot, current_page ? 1 : 0, entries.size());
@@ -290,6 +305,22 @@ extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) 
 
     rebuild_view(rdram);
     window_tick_ms = now_ms();
+}
+
+// Called from a hook at the entry of the JP text printer (a0 = window id, a1 = pointer to the next s16 glyph code).
+extern "C" void goemon_dialogue_print_hook(uint8_t* rdram, recomp_context* ctx) {
+    uint32_t ptr = (uint32_t)ctx->r5;
+    if (ptr >= 0x80000000u && ptr < 0x80800000u) {
+        handle_text(rdram, (uint32_t)ctx->r4, ptr, false);
+    }
+}
+
+// Called from a hook at the entry of the JP whole-string printer used for menu options (a0 = window id, a1 = string).
+extern "C" void goemon_dialogue_string_hook(uint8_t* rdram, recomp_context* ctx) {
+    uint32_t ptr = (uint32_t)ctx->r5;
+    if (ptr >= 0x80000000u && ptr < 0x80800000u) {
+        handle_text(rdram, (uint32_t)ctx->r4, ptr, true);
+    }
 }
 
 // Called from a hook at the entry of the JP per-frame window update (a0 = window id).

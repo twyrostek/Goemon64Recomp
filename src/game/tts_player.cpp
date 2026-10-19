@@ -96,7 +96,7 @@ void goemon64::tts::stop() {
 }
 
 float goemon64::tts::duck_gain() {
-    constexpr float ducked = 0.45f;
+    constexpr float ducked = 0.40f;
     constexpr float attack = 0.12f;
     constexpr float release = 0.02f;
     static float gain = 1.0f;

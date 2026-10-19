@@ -47,8 +47,8 @@ T	1	8	ネオもも山ばくふ	ネオももやまばくふ	Neo Momoyama Shogunat
 S	f03004ffaa0d5488	19
 R	13	3	じょうない
 T	5	11	ゴーストおもちゃ城内	ゴーストおもちゃじょうない	inside Ghost Toy Castle	城内 means 'inside the castle'.		
-P	7d5b7c7e5c196e37	3	1
-L	Would you like to record your game progress so far in the travel journal? Yes / No. Understood! I'll start keeping the travel journal now.
+P	7d5b7c7e5c196e37	4	1
+L	Would you like to record your game progress so far in the travel journal?
 S	7d5b7c7e5c196e37	17
 T	1	5	ここまでの		up to this point's			
 T	6	8	ゲームしんこうを		game progress			
@@ -56,13 +56,11 @@ S	3cc202bef25b3f37	18
 T	2	7	たびにっきに		in the travel journal			
 T	9	5	つけますか		would you record?			
 S	8885382262177fb2	9
-T	2	2	はい		yes			
-P	dd41ce0c1ea90b85	1	1
-L	Would you like to record your game progress so far in the travel journal? Yes / No. Understood! I'll start keeping the travel journal now.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		no			
+T	2	3	いいえ		No	Menu option		
 P	82a95f302d7ad700	2	1
-L	Would you like to record your game progress so far in the travel journal? Yes / No. Understood! I'll start keeping the travel journal now.
+L	Understood! I'll start keeping the travel journal now.
 S	82a95f302d7ad700	13
 T	2	8	しょうちしました		understood			
 S	9eff3be590a4169b	21
@@ -1021,12 +1019,11 @@ T	0	4	とのさま		lord	Tonosama, the feudal lord
 T	5	3	たのむ		I'm counting on you			
 T	8	2	のだ		I insist!	Emphatic explanatory ending		
 P	8f993455f6fd93b6	2	0
-L	Leave it to me! What a pain...
+L	
 S	8f993455f6fd93b6	11
-T	2	6	まかしときな		leave it to me	Casual contraction of 任せておきな		
+T	2	6	まかしときな		Leave it to me!	Menu option		
 S	54b2e0fa11d8111c	15
-T	2	6	めんどくさい		what a pain			
-T	8	2	なぁ		huh...	Drawn-out casual exclamation		
+T	2	8	めんどくさいなぁ		What a pain...	Menu option		
 P	d8d78b2a3fd0226a	3	0
 L	Goemon: I won't forgive anyone who does something this stupid!
 S	d8d78b2a3fd0226a	12
@@ -1088,7 +1085,7 @@ S	5b53b1cdb3299317	15
 T	0	8	ことができる		will be able to	ことができる expresses ability		
 T	8	2	ぞい		you know!	Old-fashioned, emphatic ending		
 P	87ae721773aa57f8	2	1
-L	Received the Super Pass from the lord! Lord: I'm counting on you! Lord: Oh, how sad... Goemon the righteous... Ebisu-maru the righteous... Lord: Oh... I'm begging you! All right! But I don't wanna... Koron: Waaaah! I've been beaten!!
+L	Received the Super Pass from the lord!
 S	87ae721773aa57f8	8
 T	0	4	とのさま		lord	Tonosama, the feudal lord		
 T	4	2	から		from	Marks the source		
@@ -1097,12 +1094,12 @@ T	5	7	スーパーてがた		Super Pass	Item name; てがた means pass or permi
 T	14	1	を		the	Object particle		
 T	15	4	もらった		received	Past form of もらう		
 P	2b7bf6951885dad0	1	1
-L	Received the Super Pass from the lord! Lord: I'm counting on you! Lord: Oh, how sad... Goemon the righteous... Ebisu-maru the righteous... Lord: Oh... I'm begging you! All right! But I don't wanna... Koron: Waaaah! I've been beaten!!
+L	Lord: I'm counting on you!
 S	2b7bf6951885dad0	14
 T	0	4	とのさま		lord	Tonosama, the feudal lord		
 T	5	6	たのんだぞよ		I'm counting on you	Old-fashioned emphatic request		
-P	f7aea44d63cbc3e2	9	1
-L	Received the Super Pass from the lord! Lord: I'm counting on you! Lord: Oh, how sad... Goemon the righteous... Ebisu-maru the righteous... Lord: Oh... I'm begging you! All right! But I don't wanna... Koron: Waaaah! I've been beaten!!
+P	f7aea44d63cbc3e2	7	1
+L	Lord: Oh, how sad... The righteous Goemon... The righteous Ebisumaru... Lord: Oh... I'm begging you!
 S	f7aea44d63cbc3e2	19
 T	1	4	とのさま		lord	Tonosama, the feudal lord		
 T	6	3	なんと		oh my	Repeated for dramatic lament		
@@ -1125,10 +1122,11 @@ T	0	4	とのさま		lord	Tonosama, the feudal lord
 T	5	2	のぉ		oh...	Old-fashioned, drawn-out interjection		
 T	10	6	たのむのだぁ		I'm begging you	Drawn-out emphatic plea		
 S	a3c62c6e41860551	10
-T	2	5	わかったよ		all right	Reluctant agreement		
+T	2	5	わかったよ		All right!	Menu option		
 S	b6005ed1df7539ef	14
-T	2	2	でも		but			
-T	5	4	やだなぁ		I don't wanna	Casual reluctance, drawn out		
+T	2	7	でも、やだなぁ		But I don't wanna...	Menu option		
+P	0ee2d68d4cbe5565	2	1
+L	Koron: Waaaah! I've been beaten!!
 S	0ee2d68d4cbe5565	11
 T	0	3	コロン		Koron	Character name		
 T	4	4	ふえ〜ん		waaaah	Fueen, a crying sound		
@@ -1953,7 +1951,7 @@ S	186934c0dce1b2ca	20
 T	4	10	はじめようとしている		seem to be trying to start	ようとしている expresses an attempt or intention.		
 T	14	3	みたい		it seems			
 P	0c84023061963307	4	1
-L	Ebisumaru: Since it's about Momoyama, then shall we head to Kyushu!? Save your game progress so far in the travel diary? Yes / No. Understood! From now on, your travel diary will be kept.
+L	Ebisumaru: Since it's about Momoyama, then shall we head to Kyushu!?
 S	0c84023061963307	20
 R	3	1	まる
 T	0	4	エビス丸	エビスまる	Ebisumaru	A party member's name.		
@@ -1968,8 +1966,8 @@ T	6	12	九州（きゅうしゅう）に	きゅうしゅう（きゅうしゅう
 S	5f3f924008e9dff7	16
 R	5	2	いっ
 T	5	7	行ってみまっか	いってみまっか	shall we go	Kansai-style contraction of 行ってみますか; てみる means try going.		
-P	7d5b7c7e5c196e37	3	1
-L	Ebisumaru: Since it's about Momoyama, then shall we head to Kyushu!? Save your game progress so far in the travel diary? Yes / No. Understood! From now on, your travel diary will be kept.
+P	7d5b7c7e5c196e37	4	1
+L	Would you like to save your game progress so far in the travel diary?
 S	7d5b7c7e5c196e37	17
 T	1	5	ここまでの		up to this point's			
 T	6	8	ゲームしんこうを		game progress			
@@ -1977,13 +1975,11 @@ S	3cc202bef25b3f37	18
 T	2	7	たびにっきに		in the travel diary			
 T	9	5	つけますか		would you like to record	つける means to keep or make a record here.		
 S	8885382262177fb2	9
-T	2	2	はい		yes			
-P	dd41ce0c1ea90b85	1	1
-L	Ebisumaru: Since it's about Momoyama, then shall we head to Kyushu!? Save your game progress so far in the travel diary? Yes / No. Understood! From now on, your travel diary will be kept.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		no			
+T	2	3	いいえ		No	Menu option		
 P	82a95f302d7ad700	2	1
-L	Ebisumaru: Since it's about Momoyama, then shall we head to Kyushu!? Save your game progress so far in the travel diary? Yes / No. Understood! From now on, your travel diary will be kept.
+L	Understood! From now on, your travel diary will be kept.
 S	82a95f302d7ad700	13
 T	2	8	しょうちしました		understood	A polite acknowledgment.		
 S	9eff3be590a4169b	21
@@ -4829,18 +4825,20 @@ T	7	8	とんでっちゃった		flew away
 T	15	2	って		that	Casual quotation marker.		
 S	d87ff8eec0e3ef89	9
 T	1	3	ウワサ		There's a rumor			
-P	078f57762f99dd31	5	0
-L	“Is that true?” “Really, really! No way that's true...” “Huh!? It is true!!”
+P	078f57762f99dd31	3	1
+L	Is that true?
 S	078f57762f99dd31	10
-T	1	5	ほんとなの		Is that true?			
+T	1	5	ほんとなの		is it true?			
 S	07f5d1b6fb06fa9c	12
-T	2	7	ほんと、ほんと		Really, really!			
+T	2	7	ほんと、ほんと		It's true!	Menu option		
 S	8810fc44a9cd5d68	17
-T	2	10	んなわけ、ないでしょ		No way that's true...			
+T	2	10	んなわけ、ないでしょ		No way...	Menu option		
+P	60d7754c3537e614	2	1
+L	Huh!? It is true!!
 S	60d7754c3537e614	8
-T	2	2	えっ		Huh!?			
+T	2	2	えっ		huh			
 S	ca0a794dab8b113c	12
-T	2	5	ほんとなの		It is true!!			
+T	2	5	ほんとなの		is it really true?			
 P	5fb839510755bda3	1	0
 L	It's for real, for real, for real!!
 S	5fb839510755bda3	16
@@ -5177,18 +5175,15 @@ S	26f0968a4fae73e7	14
 T	1	3	パンダ		a panda			
 T	5	6	だぁぁぁ〜ぁ		It'd be			
 P	079346d07751b1fa	3	0
-L	“Well then, what brings you here?” “I came to see Omitchan for a bit...” “I came to eat the Deluxe Set.”
+L	Well then, what brings you here?
 S	079346d07751b1fa	15
 T	1	2	さて		Well then			
 T	4	7	なんのようじゃ		what brings you here?			
 S	f1f5e3179ffb35e6	21
-T	2	4	ちょっと		for a bit			
-T	7	7	おみっちゃんに		Omitchan			
-T	14	3	あいに		to see			
+T	2	15	ちょっと、おみっちゃんにあいに		I came to see Omitchan for a bit...	Menu option		
 S	0a50b2e5fbe11151	18
 R	14	1	き
-T	2	9	デラックスセットを		the Deluxe Set			
-T	11	5	たべに来た	たべにきた	I came to eat			
+T	2	14	デラックスセットをたべに来た	デラックスセットをたべにきた	I came to eat the Deluxe Set.	Menu option		
 P	a017e321e12464d6	3	0
 L	“I thought as much... Omitu is this town's idol, after all.”
 S	a017e321e12464d6	14
@@ -5228,64 +5223,74 @@ R	1	1	だい
 R	2	2	えど
 R	14	1	まち
 T	1	14	大江戸（おおえど）はぐれ町	だいえど（おおえど）はぐれまち	Ooedo Hagure Town			
-P	05a3c9d37f18b1ba	2	0
-L	“A town full of lively Edokko, huh!”
+P	05a3c9d37f18b1ba	2	1
+L	A town full of lively Edokko, huh!
 S	05a3c9d37f18b1ba	10
-T	1	7	チャキチャキの		lively			
+T	1	7	チャキチャキの		lively, true-blue			
 S	b8f511cb8e83a454	18
 R	2	2	えど
 R	4	2	っこ
 R	10	1	まち
-T	2	7	江戸っ子のすむ	えどっこのすむ				
-T	10	5	町ってかっ	まちってかっ	A town			
-P	6856e3e3626a1225	11	0
-L	Official: “Hm? What do you want?” “I'd like to ask for directions... Who are you?” Official: “Where are you trying to go?” “Which way is Edo Castle? Which road leads to Mount Fuji? Where's the checkpoint?” “Edo Castle is past this gate; cross Nihonbashi and it's further on.”
+T	2	4	江戸っ子	えどっこ	Edokko, Edo native	A spirited, born-and-raised Edo local.		
+T	6	3	のすむ		who live in			
+T	10	1	町	まち	town			
+T	11	4	ってかっ		you mean, huh!			
+P	6856e3e3626a1225	4	1
+L	Official: Hm? What do you want?
 S	6856e3e3626a1225	9
-T	0	4	やくにん		Official:			
-T	5	1	ん？		Hm?			
+T	0	4	やくにん		official			
+T	5	1	ん		hm			
 S	6e9b4d602f40189f	14
-T	5	6	なんのようだ		What do you want?			
+T	5	6	なんのようだ		what do you want			
 S	c238ab3c37766f2f	20
 R	10	2	きき
-T	2	4	ちょっと		I'd like to			
-T	7	11	みちを聞きたいんですが	みちをききたいんですが	ask for directions...			
+T	2	16	ちょっと、みちを聞きたいんですが	ちょっと、みちをききたいんですが	Ask for directions...	Menu option		
 S	0eac193418b3e811	12
-T	2	7	あなたは、だれ？		Who are you?			
+T	2	7	あなたは、だれ		Who are you?	Menu option		
+P	deed0d9a7faf48dc	7	1
+L	Official: Where are you trying to go? Edo Castle is past this gate; cross Nihonbashi and it's further on.
 S	deed0d9a7faf48dc	20
 R	10	2	いき
-T	1	4	やくにん		Official:			
-T	6	10	どこに、行きたいんだ？	どこに、いきたいんだ？	Where are you trying to go?			
+T	1	4	やくにん		official			
+T	6	3	どこに		where			
+T	10	6	行きたいんだ	いきたいんだ	do you want to go			
 S	6c1079e40135552e	14
 R	2	1	だい
 R	3	2	えど
 R	5	1	じょう
-T	2	9	大江戸城はどっち？	だいえどじょうはどっち？	Which way is Edo Castle?			
+T	2	4	大江戸城	だいえどじょう	Ooedo Castle			
+T	7	1	は		topic marker			
+T	8	3	どっち		which way			
 S	88361079132d9ea5	15
 R	4	1	やま
-T	2	10	ふじ山へのみちって？	ふじやまへのみちって？	Which road leads to Mount Fuji?			
+T	2	3	ふじ山	ふじやま	Mount Fuji			
+T	6	4	へのみち		road leading to			
+T	10	2	って		what about			
 S	ae9f9369cd6bedb7	13
-T	2	8	せきしょはどこ？		Where's the checkpoint?			
+T	2	4	せきしょ		checkpoint			
+T	7	3	はどこ		where is			
 S	b87657d113052b64	11
 R	2	1	おお
 R	3	2	えど
 R	5	1	じょう
-T	2	6	大江戸城は	だいえどじょうは	Edo Castle			
+T	2	6	大江戸城は	だいえどじょうは	as for Ooedo Castle			
 S	7aa686f4eb38a30c	22
-T	1	10	ここのもんをぬけ		past this gate			
+T	1	10	ここのもんをぬけ		go through this gate			
 T	13	7	ニホンばしを		Nihonbashi			
 S	04c6dcc02217e532	14
-T	1	4	わたった		cross			
-T	6	6	さきにあるぞ		and it's further on			
-P	072b3a76760792bd	3	0
-L	“For Mount Fuji, go through the red-pillared gate near Kaminarimon...”
+T	1	4	わたった		crossing			
+T	6	6	さきにあるぞ		it's further ahead			
+P	072b3a76760792bd	3	1
+L	For Mount Fuji, go through the red-pillared gate near Kaminarimon...
 S	072b3a76760792bd	11
 R	4	1	やま
-T	2	6	ふじ山へは	ふじやまへは	For Mount Fuji			
+T	2	6	ふじ山へは	ふじやまへは	to reach Mount Fuji			
 S	febe48d0f8069e5b	16
-T	2	6	カミナリもん		Kaminarimon			
+T	2	6	カミナリもん		Kaminarimon	Thunder Gate, a famous gate in Edo (Tokyo).		
 T	9	5	のちかくの		near			
 S	c664529909ab3c74	21
-T	2	14	あかいはしらのもんをぬけて		go through the red-pillared gate			
+T	2	10	あかいはしらのもん		red-pillared gate			
+T	12	4	をぬけて		go through			
 P	dc896802e3fdda8f	3	0
 L	Turn at the fortune-teller's on the corner and go straight; that should take you to the Kai Highway leading to Mount Fuji.
 S	dc896802e3fdda8f	22
@@ -5523,27 +5528,26 @@ R	8	2	いりぐち
 T	3	4	大江戸城	だいえどじょう	Ooedo Castle			
 T	8	2	入口	いりぐち	Entrance			
 T	11	4	いりぐち		Entrance	Reading of 入口.		
-P	7d5b7c7e5c196e37	3	0
-L	“Would you like to record your progress so far in the travel journal?” Yes /
+P	7d5b7c7e5c196e37	4	1
+L	Would you like to record your progress so far in the travel journal?
 S	7d5b7c7e5c196e37	17
-T	1	4	ここまで		so far			
-T	6	7	ゲームしんこう		your progress			
+T	1	5	ここまでの		up to this point			
+T	6	8	ゲームしんこうを		game progress			
 S	3cc202bef25b3f37	18
-T	2	5	たびにっき		the travel journal			
-T	9	5	つけますか		Would you like to record			
+T	2	7	たびにっきに		in the travel journal			
+T	9	5	つけますか		shall I record it			
 S	8885382262177fb2	9
-T	2	2	はい		Yes			
-P	dd41ce0c1ea90b85	1	0
-L	No.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		No			
-P	82a95f302d7ad700	2	0
-L	“Understood! I'll start keeping the travel journal now.”
+T	2	3	いいえ		No	Menu option		
+P	82a95f302d7ad700	2	1
+L	Understood! I'll start keeping the travel journal now.
 S	82a95f302d7ad700	13
-T	2	8	しょうちしました！		Understood!			
+T	2	8	しょうちしました		understood			
 S	9eff3be590a4169b	21
-T	1	4	これより		now			
-T	7	11	たびにっきをつけます		start keeping the travel journal			
+T	1	4	これより		from now on			
+T	7	7	たびにっきを		the travel journal			
+T	14	4	つけます		I'll keep			
 P	fa1c830f6efe949b	3	0
 L	“When you're ready, press the A Button.” (Press the B Button to cancel.)
 S	fa1c830f6efe949b	15
@@ -5835,18 +5839,18 @@ R	10	1	まち
 T	1	3	やっぱ		as expected			
 T	4	8	じぶんとこの町が	じぶんとこのまちが	my own town			
 T	12	5	いちばんや		is the best	Kansai dialect; や corresponds to だ.		
-P	30116874fc80ad22	5	0
-L	So, what do you want with me? Who closed that door...? Why was I kidnapped? Hah! That was me!!
+P	30116874fc80ad22	3	1
+L	So, what do you want with me?
 S	30116874fc80ad22	18
 T	1	2	んで		so then	Casual contraction of それで.		
 T	4	4	おいらに		with me			
 T	8	6	なんかようけ		what do you want?	Casual Kansai-flavored phrasing; ようけ means what business or purpose.		
 S	0e7ba092f92053e2	20
-T	2	7	そこのトビラを		that door			
-T	9	5	とじたのは		who closed			
+T	2	12	そこのトビラをとじたのは		Who closed that door...?	Menu option		
 S	e068d3e3ecd85a32	16
-T	2	4	どうして		why			
-T	6	7	さらわれたんだ		was I kidnapped?	Passive past of さらう, 'to abduct'; んだ asks for an explanation.		
+T	2	11	どうしてさらわれたんだ		Why was I kidnapped?	Menu option		
+P	f290f3d63af7fba0	2	1
+L	Hah! That was me!!
 S	f290f3d63af7fba0	7
 T	2	2	へん		hah!	A boastful interjection, like 'well!' or 'huh!'		
 S	6f368274e1d56491	11
@@ -6581,7 +6585,7 @@ R	4	3	みとれ
 T	0	3	いまに		just you wait			
 T	4	3	見とれ	みとれ	watch	Kansai command form of 見ていろ.		
 P	8848e44e2fb55e56	3	1
-L	Absolutely! I'll become Japan's number-one dancer, just you see! What do you want with me while I'm training my sense of balance? Do you know Kihachi's favorite food? Who is Kihachi? I know!
+L	Absolutely! I'll become Japan's number-one dancer, just you see!
 S	8848e44e2fb55e56	10
 T	0	7	ぜ〜〜〜ったい		absolutely			
 S	7d0534ba201bc43d	9
@@ -6591,8 +6595,8 @@ S	d47e8579616ac72a	17
 T	1	4	のダンサー		dancer			
 T	6	5	になったる		I'm gonna become	Kansai dialect for なってやる, I'll become.		
 T	11	3	さかい		because	Kansai dialect; here emphatic, like just you see.		
-P	94b7d6f97597873c	5	1
-L	Absolutely! I'll become Japan's number-one dancer, just you see! What do you want with me while I'm training my sense of balance? Do you know Kihachi's favorite food? Who is Kihachi? I know!
+P	94b7d6f97597873c	4	1
+L	What do you want with me while I'm training my sense of balance?
 S	94b7d6f97597873c	20
 T	2	8	へいこうかんかく		sense of balance			
 T	11	7	をきたえている		am training			
@@ -6601,12 +6605,11 @@ T	1	3	わいに		with me	わい is Kansai dialect for I/me.
 T	5	5	なんかよう		what do you want			
 T	10	1	け		with me?	Kansai question ending.		
 S	de91c1432d836a52	17
-T	2	3	キハチ		Kihachi	A character's name.		
-T	5	5	のこうぶつ		favorite food			
-T	10	4	しってる		do you know			
+T	2	12	キハチのこうぶつしってる		Do you know Kihachi's favorite food?	Menu option		
 S	4ecc2cd13ed98f13	14
-T	2	5	キハチって		Kihachi, you mean			
-T	7	4	なにもの		who is he			
+T	2	9	キハチってなにもの		Who is Kihachi?	Menu option		
+P	009d653ba28e802c	1	1
+L	I know!
 S	009d653ba28e802c	12
 T	2	4	しってる		I know	The elongated 〜っ adds an excited tone.		
 P	6eb247f19f16c199	2	1
@@ -6716,7 +6719,7 @@ T	0	4	おしょう		Priest	A speaker label.
 T	5	2	だれ		who			
 T	7	3	じゃろ		could it be	Old-fashioned conjectural ending.		
 P	aff8add9c8677c41	3	1
-L	Who's been stealing the secret manju from our temple's Kwan-Dance every single day? Priest: Oh? Did you come to hear my sermon? No, actually, where is your son? Never mind, another time. Priest: What? You need my son?
+L	Who's been stealing the secret manju from our temple's Kwan-Dance every single day?
 S	aff8add9c8677c41	11
 T	0	4	まいにち		every day			
 T	5	4	まいにち		day after day			
@@ -6731,8 +6734,8 @@ T	0	4	ひみつの		secret
 T	5	7	まんじゅうを		manju sweets			
 T	12	5	ぬすんどる		has been stealing	Kansai contraction of 盗んでいる.		
 T	17	2	のは		who is it that			
-P	a82279782cb62795	6	1
-L	Who's been stealing the secret manju from our temple's Kwan-Dance every single day? Priest: Oh? Did you come to hear my sermon? No, actually, where is your son? Never mind, another time. Priest: What? You need my son?
+P	a82279782cb62795	4	1
+L	Priest: Oh? Did you come to hear my sermon?
 S	a82279782cb62795	20
 T	0	4	おしょう		Priest	A speaker label.		
 T	5	2	おっ		oh			
@@ -6744,13 +6747,11 @@ R	5	2	きき
 T	0	10	を聞きにきた	をききにきた	came to listen to			
 T	10	2	のか		did you?			
 S	072ee5de6cafdc97	20
-T	2	5	じゃなくて		no, that's not it			
-T	8	5	むすこさん		your son			
-T	13	4	はどこに		where is			
+T	2	15	じゃなくて、むすこさんはどこに		Where is your son?	Menu option		
 S	83ab465098137fbc	18
-T	2	3	それは		as for that			
-T	6	5	またこんど		some other time			
-T	11	5	ってことで		let's leave it at that			
+T	2	14	それは、またこんどってことで		Never mind, another time.	Menu option		
+P	ee000071919e40b0	2	1
+L	Priest: What? You need my son?
 S	ee000071919e40b0	11
 T	1	4	おしょう		Priest	A speaker label.		
 T	6	2	なに		what			
@@ -6867,18 +6868,18 @@ R	5	3	いける
 T	0	4	もののみ		only those who			
 T	5	3	行ける	いける	can go			
 T	8	3	のじゃ		that's how it is	Old-fashioned explanatory sentence ending.		
-P	596d27f59c33e1b6	5	0
-L	Can you do it? I'll give it a try. I don't want to train. Priest: Oh! You're quite the challenger!
+P	596d27f59c33e1b6	3	1
+L	Can you do it?
 S	596d27f59c33e1b6	17
 T	1	4	おぬしに		can you			
 T	6	3	それが		that			
 T	9	4	できるか		do it			
 S	ce3489d00486eba3	10
-T	2	6	やってみます		I'll give it a try			
+T	2	6	やってみます		I'll give it a try.	Menu option		
 S	4e7eeb429e354915	14
-T	2	6	しゅぎょうは		as for training			
-T	8	2	イヤ		don't want			
-T	10	2	だな		I guess			
+T	2	10	しゅぎょうはイヤだな		I don't want to train.	Menu option		
+P	f2ba2bdeadd600af	2	1
+L	Oh! You're quite the challenger!
 S	f2ba2bdeadd600af	8
 T	2	3	おおっ		oh!			
 S	ae7d2e8380a9f2f6	19
@@ -6981,15 +6982,15 @@ T	5	3	おぬし		you
 T	9	4	なかなか		quite			
 T	13	4	やるのぉ		you're good	Old-fashioned praise: 'you've got some skill.'		
 P	590b40f221da3ec5	2	1
-L	Want my autograph as a reward? The priest: “What, have you decided to train after all?” Try it! Training is... well, maybe not... “All over Japan, there are all kinds of food.”
+L	Want my autograph as a reward?
 S	590b40f221da3ec5	8
 T	0	5	おいわいに		as a reward			
 S	84bc85c5d73b7803	18
 T	0	3	わしの		my			
 T	5	7	サインでも		an autograph or something			
 T	12	4	やろうか		shall I give you?			
-P	eefe6be0bb093117	6	1
-L	Want my autograph as a reward? The priest: “What, have you decided to train after all?” Try it! Training is... well, maybe not... “All over Japan, there are all kinds of food.”
+P	eefe6be0bb093117	4	1
+L	Priest: What, have you decided to train after all?
 S	eefe6be0bb093117	22
 T	0	4	おしょう		Oshō, the priest			
 T	5	4	なんじゃ		what is it			
@@ -6997,10 +6998,11 @@ T	11	9	しゅぎょうをする		to train
 S	5845743028c952d9	18
 T	5	9	きにでもなったのか		have you taken a mind to it?	きになる means to feel like doing something; でも softens the suggestion.		
 S	721b8c5c74e21a9f	10
-T	2	5	やってみる		I'll give it a try			
+T	2	5	やってみる		Try it!	Menu option		
 S	c50ae6b76df3b04c	21
-T	2	9	しゅぎょうってのは		as for training			
-T	12	4	ちょっと		it's a bit much			
+T	2	14	しゅぎょうってのは、ちょっと		Training is... well, maybe not...	Menu option		
+P	7def0d149d28690d	2	1
+L	All over Japan, there are all kinds of food.
 S	7def0d149d28690d	12
 R	4	3	かくち
 T	1	8	ニホンかく地には	ニホンかくちには	throughout Japan			
@@ -7096,7 +7098,7 @@ R	6	2	ちほう
 T	2	6	かんさい地方	かんさいちほう	the Kansai region			
 T	9	3	だワン		it is, woof	ワン is a dog's bark used as a sentence ending.		
 P	7e34307c36e2c3d5	2	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	This game teaches geography while you play, woof!
 S	7e34307c36e2c3d5	15
 T	0	6	このゲームは		this game			
 T	7	6	あそびながら		while playing			
@@ -7105,7 +7107,7 @@ T	2	2	ちり		geography
 T	6	10	のべんきょうにもなる		also teaches you			
 T	16	2	ワン		woof	A dog's bark used as a sentence ending.		
 P	26dbbd1861bd8191	3	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof!
 S	26dbbd1861bd8191	15
 T	1	4	いやだな		oh, come on			
 T	6	7	いくらなんでも		surely, even so			
@@ -7117,11 +7119,11 @@ T	1	6	しゃべらない		wouldn't speak
 T	8	3	でんな		would, right	Dialectal tag that seeks agreement.		
 T	12	2	ワン		woof	A dog's bark used as a sentence ending.		
 P	e34db2f7388911f3	1	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	...Huh?
 S	e34db2f7388911f3	12
 T	4	5	おりょ		huh?	A playful, surprised interjection.		
-P	2c99bf6039fb0c70	3	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+P	2c99bf6039fb0c70	4	1
+L	Do you know the story about the mysterious manju, woof?
 S	2c99bf6039fb0c70	18
 R	13	1	はなし
 T	1	4	ふしぎな		mysterious			
@@ -7130,25 +7132,23 @@ S	6807351d2cd4b20b	12
 T	1	5	しってるか		do you know?			
 T	6	2	ワン		woof	A dog's bark used as a sentence ending.		
 S	888909f8a8f430ec	10
-T	2	4	しってる		I know			
-P	3ef6958432df635a	1	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+T	2	4	しってる		I know	Menu option		
 S	3ef6958432df635a	7
-T	2	4	しらない		I don't know			
+T	2	4	しらない		I don't know	Menu option		
 P	eb6b41e1baa5b9c6	1	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	Then, that's fine, woof.
 S	eb6b41e1baa5b9c6	13
 T	2	2	なら		if so			
 T	5	4	いいです		that's fine			
 T	9	2	ワン		woof	A dog's bark used as a sentence ending.		
 P	e3af41155b5609a2	1	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	I don't know either, woof.
 S	e3af41155b5609a2	14
 T	2	3	おれも		me neither			
 T	6	4	しらない		don't know			
 T	10	2	ワン		woof	A dog's bark used as a sentence ending.		
 P	88427ac57bd03d91	3	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	Kihachi was always eating some kind of long, skinny green thing, woof.
 S	88427ac57bd03d91	19
 T	1	4	キハチは		as for Kihachi			
 T	6	3	なんか		some kind of			
@@ -7161,7 +7161,7 @@ T	1	3	いつも		always
 T	4	5	たべていた		used to eat			
 T	9	2	ワン		woof	A dog's bark used as a sentence ending.		
 P	797c83a52cc419f8	3	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?
 S	797c83a52cc419f8	23
 T	2	6	ダンサーを		a dancer			
 T	8	6	めざしていた		was aiming to become			
@@ -7175,7 +7175,7 @@ T	1	3	どこに		where
 T	4	6	行ってもうた	いってもうた	did he go	Kansai dialect for 行ってしまった, 'went off.'		
 T	10	3	んやろ		I wonder	Kansai dialect for のでしょう, expressing speculation.		
 P	aade82030d0dcf8a	2	1
-L	This game teaches geography while you play, woof! “Oh, come on. Surely a dog wouldn't speak in Kansai dialect, woof! ...Huh?” “Do you know the story about the mysterious manju, woof?” I know / I don't know. “Then, that's fine, woof.” “I don't know either, woof.” “Kihachi was always eating some kind of long, skinny green thing, woof.” “Yoshi-boy, who wanted to be a dancer, has disappeared... I wonder where he went?” “They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.”
+L	They say Yoshi-boy isn't aiming to be a dancer, but to be the local temple's head priest.
 S	aade82030d0dcf8a	19
 T	1	5	ヨシぼうは		as for Yoshi-boy			
 T	8	9	ダンサーやなくて		not a dancer, but	Kansai dialect for じゃなくて.		
@@ -7288,14 +7288,14 @@ S	2c39bb2e34d400d5	17
 T	4	4	おいらは		I			
 T	8	7	イヌのふりした		pretending to be a dog	The sentence breaks off mid-thought and continues in the next box.		
 P	13d67ec4ec524886	1	1
-L	Heh heh, that's a secret, woof. Chiyomaru: “Want to know my true identity, woof?” I do / Not really. Chiyomaru: “Actually, I...”
+L	Heh heh, that's a secret, woof.
 S	13d67ec4ec524886	16
 T	0	3	ふふふ		heh heh	A chuckling sound.		
 T	4	3	それは		that is			
 T	8	5	ひみつだ		a secret			
 T	13	2	ワン		woof	A dog's bark used as a sentence ending.		
-P	f618555a14cc3424	5	1
-L	Heh heh, that's a secret, woof. Chiyomaru: “Want to know my true identity, woof?” I do / Not really. Chiyomaru: “Actually, I...”
+P	f618555a14cc3424	4	1
+L	Chiyomaru: Want to know my true identity, woof?
 S	f618555a14cc3424	17
 R	2	1	まる
 T	0	3	ちよ丸	ちよまる	Chiyomaru, the dog			
@@ -7305,10 +7305,11 @@ S	d1e999f4d85eab6b	15
 T	4	5	しりたいか		do you want to know?			
 T	9	2	ワン		woof	A dog's bark used as a sentence ending.		
 S	afaf275d810f01b3	8
-T	2	4	しりたい		I want to know			
+T	2	4	しりたい		I do	Menu option		
 S	154940a55aa2fd4f	11
-T	2	3	べつに		not particularly			
-T	6	3	いいよ		I'm fine			
+T	2	7	べつに、いいよ		Not really	Menu option		
+P	b4d5c49017d3418d	1	1
+L	Chiyomaru: Actually, I...
 S	b4d5c49017d3418d	18
 R	3	1	まる
 T	1	3	ちよ丸	ちよまる	Chiyomaru, the dog			
@@ -7431,15 +7432,15 @@ R	5	1	ちょう
 T	2	4	ざぜん町	ざぜんちょう	Zazen Town	町 means town; zazen is seated meditation		
 T	7	2	やで		it is!	Kansai dialect sentence ending		
 P	23ee64467e4c8e0c	2	1
-L	“Welcome to this very old town steeped in history!” Son: “Huh? To come all the way out here...” Son: “Need something from me?” “I just came to see Daimonji... Do you have a kappa's ‘favorite food’?” Son: “How's that? Pretty gorgeous, huh!!” Son: “To get to see it with a cutie! Hyohyohyohyohyoh!” Son: “Huh? You mean cucumbers?”
+L	Welcome to this very old town steeped in history!
 S	23ee64467e4c8e0c	9
 T	1	6	れきしのある		steeped in history			
 S	c9691f876809b55a	16
 R	5	1	ちょう
 T	1	6	ふる〜い町に	ふる〜いちょうに	to this very old town			
 T	8	5	おいでやす		welcome	Traditional Kyoto-style greeting		
-P	1f1b14bb96509b4a	7	1
-L	“Welcome to this very old town steeped in history!” Son: “Huh? To come all the way out here...” Son: “Need something from me?” “I just came to see Daimonji... Do you have a kappa's ‘favorite food’?” Son: “How's that? Pretty gorgeous, huh!!” Son: “To get to see it with a cutie! Hyohyohyohyohyoh!” Son: “Huh? You mean cucumbers?”
+P	1f1b14bb96509b4a	5	1
+L	Son: Huh? To come all the way out here... Son: Need something from me?
 S	1f1b14bb96509b4a	9
 T	0	3	むすこ		son	Speaker label: the son		
 T	4	2	あに		huh?	Colloquial surprise, short for あれ、なに? in context		
@@ -7455,13 +7456,11 @@ S	e992b024f1091db1	18
 R	7	1	だい
 R	8	2	もじ
 R	11	1	み
-T	2	4	ちょっと		well, just			
-T	7	4	大文字を	だいもじを	Daimonji	The Kyoto hillside bonfire		
-T	11	2	見に	みに	to go see			
+T	2	11	ちょっと、大文字を見に	ちょっと、だいもじをみに	I just came to see Daimonji...	Menu option		
 S	6085d99aa5cb4bcc	20
-T	2	4	カッパの		a kappa's	Kappa is a Japanese water-dwelling creature		
-T	7	4	こうぶつ		favorite food	A homophone can mean either favorite or mineral; here it means a kappa's favorite food		
-T	12	5	もってます		do you have?			
+T	2	15	カッパの『こうぶつ』もってます		Do you have a kappa's favorite food?	Menu option		
+P	20aabfe73da87553	2	1
+L	Son: How's that? Pretty gorgeous, huh!!
 S	20aabfe73da87553	11
 T	1	3	むすこ		son	Speaker label: the son		
 T	5	3	ど〜や		how about that?	Kansai dialect; drawn-out for swagger		
@@ -7469,7 +7468,7 @@ S	415399cc07fe1af7	19
 T	4	3	ごっつ		really	Kansai dialect for very		
 T	9	6	キレイやろ		pretty, isn't it?	Kansai dialect ending		
 P	04c8cdecda492746	3	1
-L	“Welcome to this very old town steeped in history!” Son: “Huh? To come all the way out here...” Son: “Need something from me?” “I just came to see Daimonji... Do you have a kappa's ‘favorite food’?” Son: “How's that? Pretty gorgeous, huh!!” Son: “To get to see it with a cutie! Hyohyohyohyohyoh!” Son: “Huh? You mean cucumbers?”
+L	Son: To get to see it with a cutie! Hyohyohyohyoh!
 S	04c8cdecda492746	17
 T	1	3	むすこ		son	Speaker label: the son		
 T	6	9	カワイコちゃんと		with a cutie	Playful term for a cute girl		
@@ -7480,15 +7479,15 @@ T	9	7	見られるなんて	みられるなんて	to get to see it	なんて con
 S	f27b3f1eaa25c125	19
 T	4	13	うひょひょひょひょひょひょ		hyohyohyohyohyoh	Lecherous chuckle		
 P	fec226eb46e33a19	2	1
-L	“Welcome to this very old town steeped in history!” Son: “Huh? To come all the way out here...” Son: “Need something from me?” “I just came to see Daimonji... Do you have a kappa's ‘favorite food’?” Son: “How's that? Pretty gorgeous, huh!!” Son: “To get to see it with a cutie! Hyohyohyohyohyoh!” Son: “Huh? You mean cucumbers?”
+L	Son: Huh? You mean cucumbers?
 S	fec226eb46e33a19	10
 T	1	3	むすこ		son	Speaker label: the son		
 T	5	2	あん		huh?	Casual, clipped あん? expressing surprise		
 S	198437a1d3b349db	17
 T	5	8	キュウリのこと		you mean cucumbers			
 T	13	1	け		is that it?	Kansai-flavored question ending		
-P	962ae7a50b3c87b1	3	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+P	962ae7a50b3c87b1	4	1
+L	So, do you folks want the cucumbers I grew?
 S	962ae7a50b3c87b1	10
 T	0	3	なんや		so, well	Kansai conversational opener		
 T	4	4	あんたら		you folks			
@@ -7498,13 +7497,11 @@ T	3	4	つくった		grew	Literally made; said of growing produce
 T	8	4	キュウリ		cucumbers			
 T	13	5	ほしいんか		do you want?	Kansai dialect question		
 S	96e7ae79c21d29c7	10
-T	2	2	うん		yes			
-P	f943fdab861c1844	1	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+T	2	2	うん		Yes!	Menu option		
 S	f943fdab861c1844	7
-T	2	4	いらない		don't want it			
+T	2	4	いらない		No.	Menu option		
 P	2680bd65147f717a	2	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+L	Son: I figured... you're not a kappa, after all.
 S	2680bd65147f717a	14
 T	1	3	むすこ		son	Speaker label: the son		
 T	5	4	せやろな		I figured as much	Kansai dialect for そうだろうな		
@@ -7512,8 +7509,8 @@ S	e1141a01ae77f8d5	20
 T	4	3	あんた		you			
 T	9	7	カッパやない		aren't a kappa	やない is Kansai dialect for ではない		
 T	16	2	しな		after all	Casual Kansai sentence ending		
-P	7a3a817c455a99f4	3	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+P	7a3a817c455a99f4	4	1
+L	Son: Then I'll sell them for 800 ryo! Still want them?
 S	7a3a817c455a99f4	23
 R	12	1	りょう
 T	1	3	むすこ		son	Speaker label: the son		
@@ -7524,14 +7521,11 @@ S	020c6fe1dfed82ea	18
 T	4	4	それでも		even so			
 T	9	5	いりまっか		do you still want them?	Kansai dialect question		
 S	4697c1f0d3e53589	11
-T	2	5	ほしいのだ		I want them!			
-P	7d92e2deb50377bd	1	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+T	2	5	ほしいのだ		I want them!	Menu option		
 S	7d92e2deb50377bd	10
-T	2	2	げっ		yikes	Sound of startled dismay		
-T	5	3	たかい		expensive			
+T	2	6	げっ、たかい		Yikes, that's expensive!	Menu option		
 P	f983bda55c3e4910	3	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+L	Son: If you can't appreciate the value of my cucumbers, maybe you should go home!
 S	f983bda55c3e4910	20
 T	1	3	むすこ		son	Speaker label: the son		
 T	5	3	わての		my	Kansai dialect for 私の		
@@ -7543,7 +7537,7 @@ T	8	3	もんは		those who	もん is a casual form of 者
 S	4a0e85964228f7f6	18
 T	4	11	かえってもらいまひょか		maybe you should go home	Kansai phrasing, literally 'shall I have you return?'		
 P	7a45c2f7f2bb9972	2	1
-L	“So, do you folks want the cucumbers I grew?” Yes! / No. Son: “I figured... you're not a kappa, after all.” Son: “Then I'll sell them for 800 ryo! Still want them?” I want them! / Yikes, that's expensive! Son: “If you can't appreciate the value of my cucumbers, maybe you should go home!” Son: “Well, you've made a fine purchase!”
+L	Son: Well, you've made a fine purchase!
 S	7a45c2f7f2bb9972	14
 T	1	3	むすこ		son	Speaker label: the son		
 T	5	2	ええ		well, good	Kansai dialect for いい		
@@ -7768,13 +7762,13 @@ T	0	4	行くのが	いくのが	going is
 T	4	4	いちばん		the best			
 T	8	2	やで		it is!	Kansai dialect sentence ending		
 P	3a2d6f427de5a631	1	1
-L	“I'll give you folks something nice! In fact...” You got a Salmon Rice Ball, Gold Armor, and Gold Helmet! “Tch! I know there are fish in this river! But I can't catch a single one!” “What do you want, huh? What business do you have with me?” “Who are you?” “Do you know Benkei?” “What's with you, you rude thing! You don't know who I am?!”
+L	I'll give you folks something nice! In fact...
 S	3a2d6f427de5a631	18
 T	0	5	あんたらに		to you folks			
 T	7	4	ええもん		something nice	Kansai dialect for いいもの		
 T	12	4	あげるわ		I'll give you	Casual promise; わ softens the statement		
 P	d59fdd5208613ac1	3	1
-L	“I'll give you folks something nice! In fact...” You got a Salmon Rice Ball, Gold Armor, and Gold Helmet! “Tch! I know there are fish in this river! But I can't catch a single one!” “What do you want, huh? What business do you have with me?” “Who are you?” “Do you know Benkei?” “What's with you, you rude thing! You don't know who I am?!”
+L	You got a Salmon Rice Ball, Gold Armor, and Gold Helmet!
 S	d59fdd5208613ac1	17
 T	0	3	なんと		and what's more			
 T	6	6	サケおにぎり		Salmon Rice Ball	Item name		
@@ -7787,7 +7781,7 @@ T	6	6	きんのカブト		Gold Helmet	Item name
 T	14	1	を		object marker			
 T	15	4	もらった		received	Standard game item message		
 P	6af9cf2fc409fa07	3	1
-L	“I'll give you folks something nice! In fact...” You got a Salmon Rice Ball, Gold Armor, and Gold Helmet! “Tch! I know there are fish in this river! But I can't catch a single one!” “What do you want, huh? What business do you have with me?” “Who are you?” “Do you know Benkei?” “What's with you, you rude thing! You don't know who I am?!”
+L	Tch! I know there are fish in this river! But I can't catch a single one!
 S	6af9cf2fc409fa07	11
 R	7	1	かわ
 T	1	2	けっ		tch	Sound of irritation		
@@ -7802,8 +7796,8 @@ T	1	4	せやけど		but	Kansai dialect for そうだけど
 T	6	4	ぜんぜん		not at all			
 T	10	4	つれへん		can't catch any	Kansai negative form of 釣れる		
 T	14	1	で		you know	Kansai dialect sentence ending		
-P	b2df278f9ffbdbb4	7	1
-L	“I'll give you folks something nice! In fact...” You got a Salmon Rice Ball, Gold Armor, and Gold Helmet! “Tch! I know there are fish in this river! But I can't catch a single one!” “What do you want, huh? What business do you have with me?” “Who are you?” “Do you know Benkei?” “What's with you, you rude thing! You don't know who I am?!”
+P	b2df278f9ffbdbb4	4	1
+L	What do you want, huh? What business do you have with me?
 S	b2df278f9ffbdbb4	11
 T	1	3	なんや		what is it	Kansai conversational opener		
 T	5	3	おまえ		you	Blunt, familiar address		
@@ -7811,10 +7805,11 @@ S	9cad98bbd066cafe	16
 T	1	5	このワイに		with me, of all people	ワイ is the speaker's boastful self-reference		
 T	6	6	なんのようや		what do you want?	Kansai dialect for 何の用だ		
 S	c1b2f13182e0e4e6	10
-T	2	5	あんただれ		who are you?			
+T	2	5	あんただれ		Who are you?	Menu option		
 S	87c78d52e5caef04	13
-T	2	4	ベンケイ		Benkei	The legendary warrior monk		
-T	6	4	しってる		do you know			
+T	2	8	ベンケイしってる		Do you know Benkei?	Menu option		
+P	c29070393edbaa76	3	1
+L	What a rude thing to say! You don't know who I am?!
 S	c29070393edbaa76	8
 T	2	3	なんや		what's this	Kansai conversational opener		
 S	b7fd8cc59dbb87df	14
@@ -7881,16 +7876,16 @@ T	12	1	を		object marker
 S	fbfccfa55bb67f4f	15
 T	0	5	わたりたい		want to cross			
 T	5	7	んとちゃうんか		isn't that right?	Kansai dialect for のではないか		
-P	dd17896ba0096bec	5	0
-L	“Right?” “Y-yeah.” “N-not really...” “What? Then you should've told me sooner!”
+P	dd17896ba0096bec	3	1
+L	Right?
 S	dd17896ba0096bec	8
 T	1	3	せやろ		right?	Kansai dialect for そうだろう		
 S	f49e9c9d9704e477	10
-T	2	1	そ		y-	Stammered start of そう		
-T	4	4	そうだよ		yeah, that's right			
+T	2	6	そ、そうだよ		Y-yeah.	Menu option		
 S	9c070e039a0f73cc	12
-T	2	1	べ		n-	Stammered start of べつに		
-T	4	3	べつに		not really	Often implies 'it's nothing'		
+T	2	5	べ、べつに		N-not really...	Menu option		
+P	6c5655d62d63bbaf	2	1
+L	What? Then you should've told me sooner!
 S	6c5655d62d63bbaf	14
 T	2	3	なんや		what?	Kansai conversational opener		
 T	6	6	それやったら		if that's the case	Kansai dialect for それなら		
@@ -7915,17 +7910,19 @@ T	13	1	の		the thing
 S	37438cbe8fd01c3d	9
 T	0	5	おしえたる		I'll teach you	Kansai dialect for 教えてあげる		
 T	5	1	で		you know	Kansai dialect sentence ending		
-P	fd57110c0e377ca7	4	0
-L	How's that? Will you do what I say? All right! No way! Then it's settled!
+P	fd57110c0e377ca7	3	1
+L	How's that? Will you do what I say?
 S	fd57110c0e377ca7	19
 R	12	2	きく
 T	1	2	どや		how about it?			
 T	5	7	ワイのいうこと		what I say	Kansai-dialect 'I' is ワイ.		
 T	12	3	聞くか	きくか	will you listen?			
 S	05cee7f206a422ad	9
-T	2	5	わかったよ		all right			
+T	2	5	わかったよ		All right!	Menu option		
 S	73c75b142b97688a	10
-T	2	5	やなこった		no way			
+T	2	5	やなこった		No way!	Menu option		
+P	2673e4794ff2ff02	1	1
+L	Then it's settled!
 S	2673e4794ff2ff02	13
 T	2	2	ほな		well then	Kansai dialect for 'then'.		
 T	5	5	きまりやな		it's settled			
@@ -8268,7 +8265,7 @@ S	4aeae585eb281106	14
 T	0	9	とおることができる		can pass through			
 T	9	1	ぞ		emphatic ending	A forceful, masculine sentence-ending particle.		
 P	7777615095a4be7d	3	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!!
 S	7777615095a4be7d	19
 T	0	3	ただし		however			
 T	5	11	ちびエビスンのじゅつ		Mini Ebisun spell	A spell that shrinks its user.		
@@ -8281,8 +8278,8 @@ T	1	4	こうげき		attacks
 T	6	5	ができない		cannot do			
 T	11	2	ので		so; because			
 T	13	4	ちゅうい		be careful			
-P	a3f574732f329dbd	6	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+P	a3f574732f329dbd	4	1
+L	Ushiwaka: Looks like you failed. How was it? Want to try once more?
 S	a3f574732f329dbd	19
 T	0	4	ウシワカ		Ushiwaka	A character's name.		
 T	5	6	しっぱいした		failed	Past form of しっぱいする, to fail.		
@@ -8292,11 +8289,11 @@ T	5	2	どや		how about it?	Kansai dialect for どうだ.
 T	9	4	もっぺん		one more time	Kansai contraction of もう一遍.		
 T	13	3	やるけ		wanna try?	Kansai-style question ending.		
 S	d0509277fd29efdc	10
-T	2	5	やりまっせ		I'm ready!	Kansai-flavored emphatic form of やります.		
+T	2	5	やりまっせ		I'll do it!	Menu option		
 S	7a98eb071b6137c1	14
-T	2	3	ちょい		just a little	Casual shortening of ちょっと.		
-T	6	5	やすませて		let me rest	Causative request form of 休む.		
-T	11	1	や		please	Casual Kansai request ending.		
+T	2	10	ちょい、やすませてや		Let me rest a bit.	Menu option		
+P	47bba853def79f7f	2	1
+L	That's the spirit! Show me that Naniwa spirit!
 S	47bba853def79f7f	16
 T	2	3	さすが		as expected			
 T	7	6	そうこないと		that's the spirit	Literally, 'it wouldn't do unless you came like that.'		
@@ -8305,7 +8302,7 @@ R	10	2	みせ
 T	2	7	ナニワだましい		Naniwa spirit	Naniwa is the old name for Osaka; evokes Osaka grit.		
 T	10	5	見せたりや	みせたりや	show it off	Kansai-style command.		
 P	c6b4e2001d0522f0	2	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+L	Well then, get your spirits back and come again!!
 S	c6b4e2001d0522f0	15
 T	1	2	ほな		well then	Kansai dialect for それでは.		
 T	4	9	きぶんとりなおして		cheer yourself up	Literally, 'reset your mood.'		
@@ -8313,8 +8310,8 @@ S	ef31747b3e267052	11
 R	4	1	らい
 T	1	2	また		again			
 T	4	3	来〜や	らい〜や	come back	Kansai-style request; elongated 来〜 conveys a drawn-out call.		
-P	3f040b2174cce99a	3	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+P	3f040b2174cce99a	4	1
+L	Ushiwaka: You came to challenge me again?
 S	3f040b2174cce99a	17
 T	0	4	ウシワカ		Ushiwaka	A character's name.		
 T	5	2	また		again			
@@ -8323,14 +8320,11 @@ S	afebb539ae29846f	13
 R	5	1	き
 T	5	4	来たんか	きたんか	did you come?	Kansai-style past question.		
 S	e8d270c97d355aca	11
-T	2	6	そうでんがな		that's right	Comically formal Kansai dialect.		
-P	9bad36f6f0c69364	1	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+T	2	6	そうでんがな		That's right!	Menu option		
 S	9bad36f6f0c69364	11
-T	2	1	あ		ah			
-T	4	3	いやぁ		well, no...	Hesitation; trails off into a correction.		
+T	2	5	あ、いやぁ		Ah, no...	Menu option		
 P	9974426932d98c42	2	1
-L	However, while you're using the Mini Ebisun spell, you can't attack, so be careful!! Ushiwaka: Looks like you failed. How was it? Want to try once more? I'm ready! Just let me rest a bit. That's the spirit! Show me that Naniwa spirit! Well then, get your spirits back and come again!! Ushiwaka: You came to challenge me again? That's right! Ah, no... Ushiwaka: When you're small, you don't need much food...
+L	Ushiwaka: When you're small, you don't need much food...
 S	9974426932d98c42	17
 R	5	3	ちいさい
 T	0	4	ウシワカ		Ushiwaka	A character's name.		
@@ -8791,16 +8785,16 @@ S	dc12bfc31ac8af8d	18
 T	0	10	うごかせるようになる		become able to move			
 T	10	5	でおじゃる		you will	Comically courtly, old-fashioned speech.		
 P	cc0f3605e0c69364	4	0
-L	Will you train? I'll do it! I'll pass...
+L	Will you train?
 S	cc0f3605e0c69364	7
 T	1	3	おぬし		you			
 S	9b303aa8c87a55e9	18
 T	1	7	しゅぎょうする		will you train			
 T	8	6	でおじゃるか		(courtly question ending)			
 S	239a4c63b5a7a2b8	9
-T	2	4	やるぜっ		I'll do it!			
+T	2	4	やるぜっ		I'll do it!	Menu option		
 S	70873e3b5ab6e92a	12
-T	2	5	やめとくよ		I'll pass			
+T	2	5	やめとくよ		I'll pass...	Menu option		
 P	9899843036530e49	3	0
 L	Good grief... You could have had a muscular body, too...
 S	9899843036530e49	13
@@ -8928,13 +8922,15 @@ R	12	2	きく
 T	1	6	しゅぎょうの		of the training			
 T	7	5	せつめいを		the instructions			
 T	12	4	聞くかい	きくかい	want to hear?			
-P	b76b5d7736e46627	3	0
-L	I don't need it! I'll listen! Narrator: Well then, training...
+P	b76b5d7736e46627	2	1
+L	
 S	b76b5d7736e46627	10
-T	2	5	いらねえや		don't need it			
+T	2	5	いらねえや		I don't need it!	Menu option		
 S	937619249ce6a00c	8
 R	2	2	きく
-T	2	3	聞くぜ	きくぜ	I'll listen			
+T	2	3	聞くぜ	きくぜ	I'll listen!	Menu option		
+P	d9c1cc29ac1b2088	1	1
+L	Narrator: Well then, training...
 S	d9c1cc29ac1b2088	22
 T	1	5	ナレーター		Narrator			
 T	7	4	それじゃ		well then			
@@ -9037,15 +9033,16 @@ S	f0fc36a389c571d5	16
 T	6	7	じぶんのものに		make it your own			
 S	61d8bce2358539de	20
 T	6	11	チャレンジャーぼしゅう		challengers wanted			
-P	8036e8a7b6a41ac1	5	1
-L	“Would you like to try?” “I'll do it!” “Wait, I'll pass...” “Then come back when you feel like it.” Narrator: “Now then, get ready! Would you like to hear the training instructions?” “No, I'm good...” “Yes, tell me!” Narrator: “Climb the waterfall in front of you by repeatedly pressing the A button.”
+P	8036e8a7b6a41ac1	3	1
+L	Would you like to try?
 S	8036e8a7b6a41ac1	14
 T	1	9	チャレンジしますか		would you like to try			
 S	916a8a1672673213	9
-T	2	4	やります		I'll do it			
+T	2	4	やります		I'll do it!	Menu option		
 S	e3acf1510c205cca	14
-T	2	4	ちょっと		wait a second			
-T	7	2	パス		I'll pass			
+T	2	7	ちょっと、パス		Wait, I'll pass...	Menu option		
+P	5668c28ded6718b0	2	1
+L	Then come back when you feel like it.
 S	5668c28ded6718b0	13
 T	2	2	では		then			
 T	5	6	きがむいたら		when you feel like it			
@@ -9055,25 +9052,25 @@ R	6	3	ください
 T	1	2	また		again			
 T	4	5	来て下さい	きてください	please come			
 P	451daf09438275a1	1	1
-L	“Would you like to try?” “I'll do it!” “Wait, I'll pass...” “Then come back when you feel like it.” Narrator: “Now then, get ready! Would you like to hear the training instructions?” “No, I'm good...” “Yes, tell me!” Narrator: “Climb the waterfall in front of you by repeatedly pressing the A button.”
+L	Narrator: Now then, get ready!
 S	451daf09438275a1	19
 T	1	5	ナレーター		Narrator			
 T	7	4	それでは		now then			
 T	12	4	じゅんび		get ready			
-P	ad2746fe01756dc3	7	1
-L	“Would you like to try?” “I'll do it!” “Wait, I'll pass...” “Then come back when you feel like it.” Narrator: “Now then, get ready! Would you like to hear the training instructions?” “No, I'm good...” “Yes, tell me!” Narrator: “Climb the waterfall in front of you by repeatedly pressing the A button.”
+P	ad2746fe01756dc3	4	1
+L	Would you like to hear the training instructions?
 S	ad2746fe01756dc3	14
 T	1	11	しゅぎょうのせつめいを		the training instructions			
 S	10228f015e1e6870	10
 R	1	2	きき
 T	1	5	聞きますか	ききますか	would you like to hear			
 S	21b7d5f713524f9d	13
-T	2	2	いえ		no			
-T	5	3	いいわ		I'm fine			
+T	2	6	いえ、いいわ		No, I'm good...	Menu option		
 S	c87ddb08363ac3ce	12
 R	5	2	きか
-T	2	2	ええ		yes			
-T	5	4	聞かせて	きかせて	tell me			
+T	2	7	ええ、聞かせて	ええ、きかせて	Yes, tell me!	Menu option		
+P	30b83cecdc86fbb7	3	1
+L	Narrator: Climb the waterfall in front of you by repeatedly pressing the A button.
 S	30b83cecdc86fbb7	20
 R	7	1	め
 T	1	5	ナレーター		Narrator			
@@ -9127,16 +9124,17 @@ P	ffd9a3969760b5a7	1	0
 L	Ready...
 S	ffd9a3969760b5a7	19
 T	7	5	レ　デ　ィ		Ready			
-P	51b03514c749fd23	4	0
-L	“Will you try again?” “Yeah!” “Actually, I'll stop...” Narrator: “Well then...”
+P	51b03514c749fd23	3	1
+L	Will you try again?
 S	51b03514c749fd23	17
 T	1	4	ふたたび		again			
 T	6	7	チャレンジする		will you try			
 S	8e18f7a12cd99a48	7
-T	2	2	うん		yeah			
+T	2	2	うん		Yeah!	Menu option		
 S	fcc962e80a6af186	16
-T	2	4	やっぱり		on second thought			
-T	7	4	やめとく		I'll stop			
+T	2	9	やっぱり、やめとく		Actually, I'll stop...	Menu option		
+P	c552a44812613475	1	1
+L	Narrator: Well then...
 S	c552a44812613475	16
 T	1	5	ナレーター		Narrator			
 T	7	4	それでは		well then			
@@ -9214,8 +9212,8 @@ S	fc49a1fa8792ee72	14
 R	5	1	じょう
 T	0	6	しゅぎょう場	しゅぎょうじょう	training ground			
 T	6	5	でおじゃる		archaic courtly ending	A pompous, old-fashioned speech mannerism.		
-P	d457449fb4f74db0	3	1
-L	“Have you come to undergo training?” “Yeah!” “Nope!” “Hmph! I haven't got time to entertain sightseers!” “Well then, I'll show you to the training ground right away...” “Jumping is my life...”
+P	d457449fb4f74db0	4	1
+L	Have you come to undergo training?
 S	d457449fb4f74db0	14
 T	1	4	おぬしは		you			
 T	6	6	しゅぎょうを		training			
@@ -9224,13 +9222,11 @@ R	4	1	き
 T	1	5	うけに来た	うけにきた	came to undergo			
 T	6	7	のでおじゃるか		is that why, then			
 S	8d77d94eb0827f10	9
-T	2	2	うん		yeah			
-P	2d0910b979203ed9	1	1
-L	“Have you come to undergo training?” “Yeah!” “Nope!” “Hmph! I haven't got time to entertain sightseers!” “Well then, I'll show you to the training ground right away...” “Jumping is my life...”
+T	2	2	うん		Yeah!	Menu option		
 S	2d0910b979203ed9	9
-T	2	6	ちがうんだな		no, that's not it			
+T	2	6	ちがうんだな		Nope!	Menu option		
 P	12c69762a50c8e61	3	1
-L	“Have you come to undergo training?” “Yeah!” “Nope!” “Hmph! I haven't got time to entertain sightseers!” “Well then, I'll show you to the training ground right away...” “Jumping is my life...”
+L	Hmph! I haven't got time to entertain sightseers!
 S	12c69762a50c8e61	7
 T	2	2	ふん		hmph			
 S	1aa0df9e4806c2be	14
@@ -9240,7 +9236,7 @@ S	e4258a6c83991745	15
 T	1	9	ヒマではおじゃらぬ		I'm not free			
 T	10	2	わい		emphatic ending			
 P	ff9c2c5ddf42717c	3	1
-L	“Have you come to undergo training?” “Yeah!” “Nope!” “Hmph! I haven't got time to entertain sightseers!” “Well then, I'll show you to the training ground right away...” “Jumping is my life...”
+L	Well then, I'll show you to the training ground right away...
 S	ff9c2c5ddf42717c	7
 T	2	2	では		well then			
 S	6d736a806884be7e	15
@@ -9251,7 +9247,7 @@ S	73eeaef1dc298fb0	17
 T	1	6	あんないする		I'll show you			
 T	7	5	でおじゃる		archaic courtly ending	A pompous, old-fashioned speech mannerism.		
 P	fe89690702283812	2	1
-L	“Have you come to undergo training?” “Yeah!” “Nope!” “Hmph! I haven't got time to entertain sightseers!” “Well then, I'll show you to the training ground right away...” “Jumping is my life...”
+L	Jumping is my life...
 S	fe89690702283812	9
 T	1	5	ジャンプは		as for jumping			
 S	db9431776477ec96	16
@@ -9302,13 +9298,15 @@ T	6	5	がんばって		do your best
 T	12	5	時間ないに	じかんないに	within the time limit			
 S	6349d29a2e407136	16
 T	6	7	まにあうように		so you make it in time			
-P	0129fc6d9ae87c44	5	0
-L	“No thanks!” “I'll listen!” “Bravo! From today on, you are a super jumper!”
+P	0129fc6d9ae87c44	2	1
+L	
 S	0129fc6d9ae87c44	13
-T	2	8	けっこうでござる		no thanks			
+T	2	8	けっこうでござる		No thanks!	Menu option		
 S	d2f2cb156ea9c222	11
 R	2	2	きく
-T	2	6	聞くでござる	きくでござる	I'll listen			
+T	2	6	聞くでござる	きくでござる	I'll listen!	Menu option		
+P	fe51ae42289d5887	3	1
+L	Bravo! From today on, you are a super jumper!
 S	fe51ae42289d5887	8
 T	1	4	ブラボー		bravo			
 S	15dbcf75608b7a9e	13
@@ -9913,13 +9911,11 @@ T	1	3	どうだ		well?
 T	5	5	おどろいた		surprised			
 T	10	3	ずらか		are you?	Regional dialect question ending.		
 P	638dc615107cbd1c	2	0
-L	Amazing, amazing! Huh... why?
+L	
 S	638dc615107cbd1c	12
-T	2	3	すごい		amazing			
-T	6	3	すごい		amazing	Repeated for emphasis.		
+T	2	7	すごい、すごい		Amazing, amazing!	Menu option		
 S	4258577541974f23	12
-T	2	1	へ		huh	Confused interjection.		
-T	6	3	なんで		why			
+T	2	7	へ・・・なんで		Huh... why?	Menu option		
 P	7304c01a10d87138	2	0
 L	Dwohohohohohoho! Hehehehe!!
 S	7304c01a10d87138	14
@@ -11110,16 +11106,14 @@ T	6	8	ゲームしんこうを		game progress
 S	3cc202bef25b3f37	18
 T	2	7	たびにっきに		in the travel log			
 T	9	5	つけますか		shall I record?			
-P	8885382262177fb2	1	1
-L	Yes    No. The travel log has been saved.
+P	8885382262177fb2	2	1
+L	
 S	8885382262177fb2	9
-T	2	2	はい		yes			
-P	dd41ce0c1ea90b85	1	1
-L	Yes    No. The travel log has been saved.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		no			
+T	2	3	いいえ		No	Menu option		
 P	9146605e4ec481b3	2	1
-L	Yes    No. The travel log has been saved.
+L	The travel log has been saved.
 S	9146605e4ec481b3	7
 T	1	4	たしかに		successfully	Literally 'certainly'; this begins the save-confirmation message.		
 S	ef3ac32e5d7cec0d	16
@@ -11294,14 +11288,16 @@ S	497f1a75bcc6df8a	17
 R	9	3	ください
 T	0	4	どちらか		one of the two			
 T	5	7	えらんで下さい	えらんでください	please choose			
-P	dddfc45a52c09794	5	1
-L	What will you do? Continue as is / Reset and start from the beginning. Then continue the game without a travel log. Or replace the Controller Pak with a different one and reset. [Shinano to Iga] Ahead: the Wise Old Man's house.
+P	dddfc45a52c09794	3	1
+L	What will you do?
 S	dddfc45a52c09794	11
 T	1	6	どうしますか		what will you do?			
 S	d0ec97d8e2c1edb7	12
-T	2	8	このままつづける		continue as is			
+T	2	8	このままつづける		Continue as is	Menu option		
 S	b1bc52713d58e4f1	16
-T	2	12	リセットしてさいしょから		reset and start over			
+T	2	12	リセットしてさいしょから		Reset and start from the beginning	Menu option		
+P	d10114cce7f5acfa	2	1
+L	Then continue the game without a travel log.
 S	d10114cce7f5acfa	20
 T	1	4	それでは		in that case			
 T	6	5	たびにっき		travel log			
@@ -11311,7 +11307,7 @@ S	a7ca67aba1f0058c	13
 R	8	3	ください
 T	0	11	でゲームをつづけて下さい	でゲームをつづけてください	please continue the game with			
 P	bd0e7d46f748398d	3	1
-L	What will you do? Continue as is / Reset and start from the beginning. Then continue the game without a travel log. Or replace the Controller Pak with a different one and reset. [Shinano to Iga] Ahead: the Wise Old Man's house.
+L	Or replace the Controller Pak with a different one and reset.
 S	bd0e7d46f748398d	20
 T	1	4	それでは		in that case			
 T	7	11	コントローラパックを		the Controller Pak			
@@ -11322,18 +11318,18 @@ S	8d59be564cf4f82a	14
 R	9	3	ください
 T	1	11	リセットをして下さい	リセットをしてください	please reset			
 P	9ef3acb448ed4f5b	2	1
-L	What will you do? Continue as is / Reset and start from the beginning. Then continue the game without a travel log. Or replace the Controller Pak with a different one and reset. [Shinano to Iga] Ahead: the Wise Old Man's house.
+L	[Shinano to Iga]
 S	9ef3acb448ed4f5b	11
 T	3	3	シナノ		Shinano	Historic province name; part of the route label Shinano to Iga.		
 S	125344b015343bee	13
 T	8	2	イガ		Iga	Historic province name; part of the route label Shinano to Iga.		
 P	dd67378ea436d42b	2	1
-L	What will you do? Continue as is / Reset and start from the beginning. Then continue the game without a travel log. Or replace the Controller Pak with a different one and reset. [Shinano to Iga] Ahead: the Wise Old Man's house.
+L	Ahead:
 S	dd67378ea436d42b	6
 T	0	4	このさき		ahead			
 S	58b08e81d003faf4	13
 R	11	1	いえ
-T	2	10	ものしりじいさんの家	ものしりじいさんのいえ	Wise Old Man's house	A character's title/name: the knowledgeable old man.		
+T	2	10	ものしりじいさんの家	ものしりじいさんのいえ	The Wise Old Man's house	Menu option		
 P	7b74a9a71d6cca28	2	0
 L	Mokubee: Oh! You made it all the way out here.
 S	7b74a9a71d6cca28	10
@@ -11350,14 +11346,11 @@ T	1	4	いったい		on earth
 T	6	3	オレに		with me			
 T	9	6	なんのようだ		what do you want?			
 P	1e2fa511f467f721	2	0
-L	What are you doing in a place like this? Got a useful kiseru pipe?
+L	
 S	1e2fa511f467f721	18
-T	2	6	こんなとこで		in a place like this			
-T	8	7	なにやってんの		what are you doing?			
+T	2	13	こんなとこでなにやってんの		What are you doing in a place like this?	Menu option		
 S	6aee878f30e6c622	18
-T	2	4	やくだつ		useful			
-T	7	3	キセル		kiseru pipe	A traditional Japanese tobacco pipe.		
-T	11	4	ってある		do you have?			
+T	2	13	やくだつ【キセル】ってある		Got a useful kiseru pipe?	Menu option		
 P	36a930ba1c45ea84	4	0
 L	Mokubee: I'm training on Japan's highest mountain to become Japan's number-one craftsman!
 S	36a930ba1c45ea84	22
@@ -11454,18 +11447,19 @@ P	2668a7b9865e2871	1	1
 L	I'll work hard so a gal will say that! Long time no see!
 S	2668a7b9865e2871	15
 T	5	7	ひさしぶりだな		long time no see	Casual greeting after a long absence.		
-P	6fa76c1f3121446a	5	1
-L	'What do you want this time?' [I came to drink at the checkpoint] [I want my weapon reforged]. Mokubei: 'Hey, hey, this isn't a checkpoint!' Mokubei: 'Hmm! So that's what you mean...'
+P	6fa76c1f3121446a	3	1
+L	What do you want this time?
 S	6fa76c1f3121446a	16
 T	1	4	こんどは		this time	こんど means this time or next time.		
 T	6	6	なんのようだ		what do you want	よう is a purpose or business; casual question.		
 S	0e56397f994c7c06	12
 R	3	1	せき
 R	8	1	き
-T	2	8	お関をのみに来た	おせきをのみにきた	came for a drink at the checkpoint	A menu choice that prompts Mokubei's checkpoint joke.		
+T	2	8	お関をのみに来た	おせきをのみにきた	I came to drink at the checkpoint	Menu option		
 S	757a26e7babd6b6b	19
-T	3	4	ぶきを		my weapon	ぶき means weapon; を marks what is worked on.		
-T	7	10	きたえなおしてほしい		want it reforged	きたえなおす means retrain or reforge; ほしい expresses a request.		
+T	3	14	ぶき】をきたえなおしてほしい		I want my weapon reforged	Menu option		
+P	f0e7ac592f840668	2	1
+L	Mokubei: Hey, hey, this isn't a checkpoint!
 S	f0e7ac592f840668	13
 T	1	4	モクベエ		Mokubei	The pipe-making blacksmith.		
 T	6	5	おい、おい		Hey, hey	A casual attention-getting expression.		
@@ -11474,7 +11468,7 @@ R	9	2	せきしょ
 T	5	3	ここは		this place	は marks the topic.		
 T	9	8	関所じゃねえぜ	せきしょじゃねえぜ	isn't a checkpoint	じゃねえ is a rough form of じゃない.		
 P	b503932cdbe4413c	2	1
-L	'What do you want this time?' [I came to drink at the checkpoint] [I want my weapon reforged]. Mokubei: 'Hey, hey, this isn't a checkpoint!' Mokubei: 'Hmm! So that's what you mean...'
+L	Mokubei: Hmm! So that's what you mean...
 S	b503932cdbe4413c	11
 T	1	4	モクベエ		Mokubei	The pipe-making blacksmith.		
 T	6	2	ふむ		Hmm	A thoughtful sound.		
@@ -12390,8 +12384,8 @@ R	7	1	かね
 T	0	4	ゴエモン		Goemon	The game's hero, a cheeky young thief.		
 T	6	2	お金	おかね	money			
 T	9	5	とんのかよ		you're charging us?!	Casual contraction of 取るのかよ; incredulous and blunt.		
-P	50081c9dba640bdf	8	1
-L	Itako: Of course! This is how we make our living... Itako: 300 ryo! What'll it be? All right, fine, I understand. I don't have that kind of money... Itako: In that case, nothing to do with me... Itako: You don't have enough money...
+P	50081c9dba640bdf	6	1
+L	Itako: Of course! This is how we make our living... Itako: 300 ryo! What'll it be?
 S	50081c9dba640bdf	14
 T	0	3	いたこ		Itako	A medium who communicates with the dead.		
 T	4	7	あたりまえじゃ		Of course	じゃ is an old-fashioned sentence ending.		
@@ -12407,12 +12401,12 @@ T	0	3	いたこ		Itako	A medium who communicates with the dead.
 T	5	4	３００両	３００りょう	300 ryo	両 (ryo) was an old Japanese currency unit.		
 T	14	5	どうするね		What will you do?	ね softens the question; here she is asking whether to pay.		
 S	67d96aec516273fd	16
-T	2	6	しょうがない		It can't be helped			
-T	9	5	わかったよ		All right, I understand	よ gives the response an assertive tone.		
+T	2	12	しょうがない、わかったよ		All right, fine, I understand.	Menu option		
 S	58d1164180cadca7	14
 R	5	1	かね
-T	2	4	そんな金	そんなかね	that kind of money			
-T	6	3	ねえよ		I don't have	Casual contraction of ないよ.		
+T	2	7	そんな金ねえよ	そんなかねねえよ	I don't have that kind of money...	Menu option		
+P	a64db3814c31c35e	2	1
+L	Itako: In that case, nothing to do with me...
 S	a64db3814c31c35e	11
 T	1	3	いたこ		Itako	A medium who communicates with the dead.		
 T	5	3	ならば		in that case	A somewhat formal or old-fashioned form of なら.		
@@ -12420,7 +12414,7 @@ S	5df6337bcb4e7632	17
 T	4	3	わしゃ		I	Elderly contraction of わたしは.		
 T	7	5	しらんわい		don't care	Blunt, old-fashioned way to say 'I don't know/care.'		
 P	c7d662237d653558	2	1
-L	Itako: Of course! This is how we make our living... Itako: 300 ryo! What'll it be? All right, fine, I understand. I don't have that kind of money... Itako: In that case, nothing to do with me... Itako: You don't have enough money...
+L	Itako: You don't have enough money...
 S	c7d662237d653558	11
 T	1	3	いたこ		Itako	A medium who communicates with the dead.		
 T	5	3	おぬし		you	Old-fashioned way of addressing someone.		
@@ -12720,7 +12714,7 @@ S	ec2cc21cd99daed0	16
 T	4	5	もっておる		have	Old-fashioned form of 持っている.		
 T	9	4	でないか		don't you?!	An emphatic rhetorical question.		
 P	b7112904f40107ed	3	1
-L	Old Man: Only one is left! Keep looking hard! Itako: Well, have you got the money? Perfect! Well, not yet... Itako: You need to find the last Miracle Item that old man mentioned, don't you...
+L	Old Man: Only one is left! Keep looking hard!
 S	b7112904f40107ed	11
 T	0	3	じじい		Old Man	Speaker title; literally 'old man' or 'geezer'.		
 T	4	4	のこりは		as for what's left			
@@ -12730,8 +12724,8 @@ T	10	2	じゃ		there is	Old-fashioned emphatic copula.
 S	088c8476720d1254	17
 T	4	5	がんばって		keep at it			
 T	9	6	さがすのじゃ		you must search	Old-fashioned command.		
-P	1f2bbe052e01ec11	5	1
-L	Old Man: Only one is left! Keep looking hard! Itako: Well, have you got the money? Perfect! Well, not yet... Itako: You need to find the last Miracle Item that old man mentioned, don't you...
+P	1f2bbe052e01ec11	3	1
+L	Itako: Well, have you got the money?
 S	1f2bbe052e01ec11	20
 R	10	1	かね
 T	0	3	いたこ		Itako	A spirit medium; speaker name.		
@@ -12739,10 +12733,11 @@ T	4	4	どうじゃ		how is it?	Old-fashioned way to ask how things are going.
 T	9	3	お金は	おかねは	the money			
 T	12	4	できたか		have you managed?			
 S	3526559c8ca855dd	10
-T	2	4	バッチリ		perfectly			
+T	2	5	バッチリっ		Perfect!	Menu option		
 S	0fa2af374dd90f53	13
-T	2	3	それが		well, the thing is			
-T	6	2	まだ		not yet			
+T	2	6	それが、まだ		Well, not yet...	Menu option		
+P	a21e86754d6a690a	2	1
+L	Itako: You need to find the last Miracle Item that old man mentioned, don't you...
 S	a21e86754d6a690a	11
 T	0	3	いたこ		Itako	A spirit medium; speaker name.		
 T	4	4	おぬしは		you			
@@ -13040,7 +13035,7 @@ T	4	2	いま		for now
 T	7	5	わかってる		know			
 T	12	2	のは		as for what			
 P	1b8f1143bf76aff0	4	1
-L	Sasuke: The place where the Miracle Item was dropped is Zazen Town, indeed. Would you like to record your game progress so far in the travel journal? Yes / No. The travel journal has been recorded.
+L	Sasuke: The place where the Miracle Item was dropped is Zazen Town, indeed.
 S	1b8f1143bf76aff0	17
 T	0	3	サスケ		Sasuke	Character name.		
 T	5	8	ミラクルアイテム		Miracle Item			
@@ -13055,8 +13050,8 @@ T	12	3	である		is
 T	15	3	ことで		the fact that			
 S	1c8374ee278e219a	10
 T	4	4	ござるな		indeed	Sasuke's samurai-style sentence ending.		
-P	7d5b7c7e5c196e37	3	1
-L	Sasuke: The place where the Miracle Item was dropped is Zazen Town, indeed. Would you like to record your game progress so far in the travel journal? Yes / No. The travel journal has been recorded.
+P	7d5b7c7e5c196e37	4	1
+L	Would you like to record your game progress so far in the travel journal?
 S	7d5b7c7e5c196e37	17
 T	1	4	ここまで		up to this point			
 T	5	1	の		of			
@@ -13067,13 +13062,11 @@ T	2	5	たびにっき		travel journal
 T	8	1	に		in			
 T	9	5	つけますか		shall I record?			
 S	8885382262177fb2	9
-T	2	2	はい		yes			
-P	dd41ce0c1ea90b85	1	1
-L	Sasuke: The place where the Miracle Item was dropped is Zazen Town, indeed. Would you like to record your game progress so far in the travel journal? Yes / No. The travel journal has been recorded.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		no			
+T	2	3	いいえ		No	Menu option		
 P	50339005bafc7882	2	1
-L	Sasuke: The place where the Miracle Item was dropped is Zazen Town, indeed. Would you like to record your game progress so far in the travel journal? Yes / No. The travel journal has been recorded.
+L	The travel journal has been recorded.
 S	50339005bafc7882	8
 T	1	4	たしかに		certainly			
 S	ef3ac32e5d7cec0d	16
@@ -13176,21 +13169,19 @@ T	1	2	もう		anymore	Emphasizes that return may be impossible.
 T	5	8	もどってこれない		can't come back	Negative potential form of 戻ってくる.		
 T	14	2	かも		might	Expresses possibility.		
 T	16	2	ペモ		pemo	The god's characteristic sentence ending.		
-P	266b2097867f204c	2	1
-L	Even so, will you go, pemo...? I'll go! Maybe I'll pass... Pemopemo God: Then come back here when your hearts are ready, pemo. I have firmly accepted your strong resolve, pemo!! Understood! From now on, I will keep a travel journal.
+P	266b2097867f204c	3	1
+L	Even so, will you go, pemo...?
 S	266b2097867f204c	17
 R	6	2	いく
 T	1	4	それでも		even so	Signals a choice despite the warning.		
 T	6	4	行くペモ	いくペモ	will you go	ペモ is the god's characteristic speech ending.		
 S	d2365d207cb61c23	10
 R	2	2	いき
-T	2	4	行きます	いきます	I'll go	A polite affirmative choice.		
-P	7f31a5796c1a7c58	1	1
-L	Even so, will you go, pemo...? I'll go! Maybe I'll pass... Pemopemo God: Then come back here when your hearts are ready, pemo. I have firmly accepted your strong resolve, pemo!! Understood! From now on, I will keep a travel journal.
+T	2	4	行きます	いきます	I'll go!	Menu option		
 S	7f31a5796c1a7c58	10
-T	2	4	やめとく		I'll pass	Casual contraction of やめておく.		
+T	2	4	やめとく		Maybe I'll pass...	Menu option		
 P	8f419f77a0ea7f67	3	1
-L	Even so, will you go, pemo...? I'll go! Maybe I'll pass... Pemopemo God: Then come back here when your hearts are ready, pemo. I have firmly accepted your strong resolve, pemo!! Understood! From now on, I will keep a travel journal.
+L	Pemopemo God: Then come back here when your hearts are ready, pemo.
 S	8f419f77a0ea7f67	8
 R	5	1	かみ
 T	1	5	ペモペモ神	ペモペモかみ	Pemopemo God	The deity's name and title.		
@@ -13204,7 +13195,7 @@ T	1	2	また		again	Means to return another time.
 T	4	3	ここに		here	に marks the destination.		
 T	7	4	来るペモ	くるペモ	come back, pemo	ペモ is the god's characteristic speech ending.		
 P	8ecab91363f64e47	2	1
-L	Even so, will you go, pemo...? I'll go! Maybe I'll pass... Pemopemo God: Then come back here when your hearts are ready, pemo. I have firmly accepted your strong resolve, pemo!! Understood! From now on, I will keep a travel journal.
+L	I have firmly accepted your strong resolve, pemo!!
 S	8ecab91363f64e47	16
 T	1	5	おぬしらの		your	おぬしら is an old-fashioned 'you all'.		
 T	6	6	つよいいし		strong resolve	Literally, 'strong will'.		
@@ -13212,7 +13203,7 @@ S	e76cb54be14ce258	16
 T	1	3	しかと		firmly	An emphatic, old-fashioned adverb.		
 T	5	7	うけとめたペモ		I accept it, pemo	ペモ is the god's characteristic speech ending.		
 P	82a95f302d7ad700	2	1
-L	Even so, will you go, pemo...? I'll go! Maybe I'll pass... Pemopemo God: Then come back here when your hearts are ready, pemo. I have firmly accepted your strong resolve, pemo!! Understood! From now on, I will keep a travel journal.
+L	Understood! From now on, I will keep a travel journal.
 S	82a95f302d7ad700	13
 T	2	8	しょうちしました		understood	A polite acknowledgment.		
 S	9eff3be590a4169b	21
@@ -14300,14 +14291,12 @@ T	6	1	で		for
 T	8	3	げんき		energy			
 T	11	4	モリモリ		bursting with	Sound-symbolic word for being full or overflowing		
 T	15	3	じゃよ		they'll be!	Old-fashioned emphatic ending		
-P	fe84a6325331c168	1	1
-L	I'll take some! / No thanks.
+P	fe84a6325331c168	2	0
+L	
 S	fe84a6325331c168	13
-T	2	6	もらおっかな		maybe I'll take some	Casual, tentative form of もらおうかな		
-P	ca9eae0b83d32825	1	1
-L	I'll take some! / No thanks.
+T	2	6	もらおっかな		I'll take some!	Menu option		
 S	ca9eae0b83d32825	6
-T	2	3	いいや		no thanks			
+T	2	3	いいや		No thanks.	Menu option		
 P	0962e3fad4a1c4e7	2	0
 L	Here! Eat your fill!
 S	0962e3fad4a1c4e7	7
@@ -14454,18 +14443,18 @@ T	12	5	のおともに		as a companion for	おとも means a companion or someth
 S	7f06e1294c703cbd	17
 T	1	5	ニホンちず		map of Japan	ニホン means Japan; ちず means map		
 T	7	7	はいらないか		would you like one?	いらないか is a casual offer asking whether it is wanted		
-P	e26189324f16f0b4	6	0
-L	“I’ll give you a good price. What do you say?” “I really want it!!” “Weird! I don’t need it...” “Oh! Nice! I like the way you said that like you really wanted it!”
+P	e26189324f16f0b4	3	1
+L	I'll give you a good price. What do you say?
 S	e26189324f16f0b4	18
 T	1	6	やすくしとく		I’ll make it cheap	しとく contracts しておく, here meaning to set a price		
 T	7	2	けど		but	Connects the offer to the question		
 T	10	4	どうする		what will you do?			
 S	354c7bebb0c33bb2	14
-T	2	4	むっちゃ		really	Kansai-style intensifier meaning very		
-T	7	3	ほしい		want it	Desire for a thing		
+T	2	8	むっちゃ　ほしい		I really want it!!	Menu option		
 S	7ffac408d15aaecb	16
-T	2	2	へん		weird	A reaction meaning strange		
-T	6	5	いらねえや		I don’t need it	Casual, rough form of いらない		
+T	2	9	へん！　いらねえや		Weird! I don't need it...	Menu option		
+P	9015c7d177bb66d9	3	1
+L	Oh! Nice! I like the way you said that like you really wanted it!
 S	9015c7d177bb66d9	12
 T	2	2	おっ		oh!	Surprised interjection		
 T	6	3	いいね		that’s good	Here, approving the response		
@@ -15199,7 +15188,7 @@ R	12	1	りょう
 T	2	6	うめおにぎり		pickled-plum rice ball			
 T	9	4	１２０両	１２０りょう	120 ryo			
 P	fc8506d7e5bef6ca	2	1
-L	Yorozuya: Then, what would you like? Yorozuya: Would you like anything else? This restores 4 health points automatically when your health gauge reaches 0. I want that / Never mind. Thanks for your business! Would you like anything else?
+L	Yorozuya: Then, what would you like?
 V	male	949c27599e3c78bb
 S	fc8506d7e5bef6ca	12
 R	1	4	よろずや
@@ -15210,7 +15199,7 @@ T	5	3	なにを		what		fbcbb9332de00cff	なにをwhat
 T	8	4	おもとめ		would you like		c2dcfbabebc9acc2	おもとめwould you like
 T	12	2	かの		shall it be?; old-fashioned		1c253368aa958a48	かのshall it be?
 P	8121bdb709c30a73	2	1
-L	Yorozuya: Then, what would you like? Yorozuya: Would you like anything else? This restores 4 health points automatically when your health gauge reaches 0. I want that / Never mind. Thanks for your business! Would you like anything else?
+L	Yorozuya: Would you like anything else?
 S	8121bdb709c30a73	18
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	Yorozuya, the shopkeeper			
@@ -15220,8 +15209,8 @@ T	15	1	を		object marker
 S	d016905a700b3851	14
 T	5	4	おもとめ		would you like			
 T	9	2	かの		shall it be?; old-fashioned			
-P	88d10ee7e08a31f2	4	1
-L	Yorozuya: Then, what would you like? Yorozuya: Would you like anything else? This restores 4 health points automatically when your health gauge reaches 0. I want that / Never mind. Thanks for your business! Would you like anything else?
+P	88d10ee7e08a31f2	5	1
+L	This restores 4 health points automatically when your health gauge reaches 0.
 S	88d10ee7e08a31f2	17
 R	2	2	たいりょく
 R	13	1	とき
@@ -15236,13 +15225,11 @@ S	adeb3c4d259f133b	10
 T	0	4	かいふくします		restores; recovers			
 T	4	3	のじゃ		it does; old-fashioned			
 S	21ca1f4c5d383e34	10
-T	2	5	それほしい		I want that			
-P	76d3133d7d26640a	1	1
-L	Yorozuya: Then, what would you like? Yorozuya: Would you like anything else? This restores 4 health points automatically when your health gauge reaches 0. I want that / Never mind. Thanks for your business! Would you like anything else?
+T	2	5	それほしい		I want that	Menu option		
 S	76d3133d7d26640a	9
-T	2	6	やっぱいいや		never mind			
+T	2	6	やっぱいいや		Never mind	Menu option		
 P	dee04d59c2d8902d	2	1
-L	Yorozuya: Then, what would you like? Yorozuya: Would you like anything else? This restores 4 health points automatically when your health gauge reaches 0. I want that / Never mind. Thanks for your business! Would you like anything else?
+L	Thanks for your business! Would you like anything else?
 S	dee04d59c2d8902d	10
 T	2	5	まいどあり		thanks for your business			
 S	77d75059a488f0ad	19
@@ -15250,16 +15237,14 @@ T	1	2	まだ		still; anything else
 T	4	3	なにか		anything			
 T	7	4	おもとめ		would you like			
 T	11	4	ですかい		would you?; colloquial			
-P	1bde305405e4ee0a	1	1
-L	Yes / That's all. Automatically restores 10 points. Customer, it seems you already have that item...
+P	1bde305405e4ee0a	2	1
+L	
 S	1bde305405e4ee0a	7
-T	2	2	はい		yes			
-P	960c415470cb4a85	1	1
-L	Yes / That's all. Automatically restores 10 points. Customer, it seems you already have that item...
+T	2	2	はい		Yes	Menu option		
 S	960c415470cb4a85	8
-T	2	5	もういいや		that's all; I'm done			
+T	2	5	もういいや		That's all	Menu option		
 P	6101ae0d3f259b93	3	1
-L	Yes / That's all. Automatically restores 10 points. Customer, it seems you already have that item...
+L	Automatically restores 10 points. Customer, it seems you already have that item...
 S	6101ae0d3f259b93	21
 T	1	6	じどうてきに		automatically			
 T	8	6	１０ポイント		10 points			
@@ -15316,9 +15301,9 @@ S	3a07c5fd1a267c94	19
 T	5	3	なにを		what		fbcbb9332de00cff	なにをwhat
 T	8	4	おもとめ		would you like		c2dcfbabebc9acc2	おもとめwould you like
 T	12	3	かのお		shall it be?; old-fashioned		76c4c0451c52bd0e	かのおshall it be?
-P	6250868af5419a7b	12	1
-L	Umbrella: 50 ryo; rain cape: 80 ryo; iron armor: 200 ryo. It blocks three enemy shots; it blocks enemy attacks three times; blocks five times. But its durability seems to be low... Shall I replace it? Yes! / I'll pass. Meshiya: Oh, welcome! What'll it be today?
-V	male	c89026a0efe2d171
+P	6250868af5419a7b	13	1
+L	Umbrella: 50 ryo; rain cape: 80 ryo; iron armor: 200 ryo. It blocks three enemy shots; it blocks enemy attacks three times; blocks five times. But its durability seems to be low... Shall I replace it?
+V	male	2be41efd2b2e5830
 S	6250868af5419a7b	15
 R	12	1	りょう
 T	2	2	かさ		umbrella		1c253e68aa959cf9	かさumbrella
@@ -15369,13 +15354,11 @@ S	f0211a04c0f663fd	13
 T	1	5	かいかえる		replace; buy a new one		62e7dfe549ff5ed5	かいかえるreplace; buy a new one
 T	6	3	かのぉ		shall I?; old-fashioned		76c4bf451c52bb5b	かのぉshall I?
 S	1b060c67c6f7d2ae	8
-T	2	2	はい		yes		41a42656fd9032ea	はいyes
-P	f22a32683d421660	1	1
-L	Umbrella: 50 ryo; rain cape: 80 ryo; iron armor: 200 ryo. It blocks three enemy shots; it blocks enemy attacks three times; blocks five times. But its durability seems to be low... Shall I replace it? Yes! / I'll pass. Meshiya: Oh, welcome! What'll it be today?
+T	2	2	はい		Yes!	Menu option	41a42656fd9032ea	
 S	f22a32683d421660	7
-T	2	4	やめとく		I'll pass			
+T	2	4	やめとく		I'll pass.	Menu option	46621077d8a1e6c5	
 P	492f6b3749d3937d	2	1
-L	Umbrella: 50 ryo; rain cape: 80 ryo; iron armor: 200 ryo. It blocks three enemy shots; it blocks enemy attacks three times; blocks five times. But its durability seems to be low... Shall I replace it? Yes! / I'll pass. Meshiya: Oh, welcome! What'll it be today?
+L	Meshiya: Oh, welcome! What'll it be today?
 S	492f6b3749d3937d	17
 R	0	3	めしや
 T	0	3	めし屋	めしや	Meshiya, the eatery owner	Literally a food shop; here, the restaurant keeper speaking.		
@@ -15386,7 +15369,7 @@ T	4	3	きょう		today
 T	7	1	は		topic marker			
 T	8	6	なんにします		what will you have			
 P	2fb6890fa4176b16	5	1
-L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be? Meshiya: Would you like something else? Perfect for dessert! Restores 2 health points! I want that! / Never mind... Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
+L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be?
 S	2fb6890fa4176b16	14
 R	11	1	りょう
 T	2	3	ダンゴ		dango, dumpling sweets			
@@ -15406,14 +15389,14 @@ T	5	3	じゃあ		well then
 S	cb3b6d5db8c57e92	13
 T	4	6	なんにします		what will you have			
 P	66aeb771fa7f1238	1	1
-L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be? Meshiya: Would you like something else? Perfect for dessert! Restores 2 health points! I want that! / Never mind... Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
+L	Meshiya: Would you like something else?
 S	66aeb771fa7f1238	15
 R	1	3	めしや
 T	1	3	めし屋	めしや	Meshiya, the eatery owner			
 T	5	3	ほかの		something else			
 T	8	4	にします		would you like			
-P	ad24d162feb21b00	3	1
-L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be? Meshiya: Would you like something else? Perfect for dessert! Restores 2 health points! I want that! / Never mind... Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
+P	ad24d162feb21b00	4	1
+L	Perfect for dessert! Restores 2 health points!
 S	ad24d162feb21b00	14
 T	2	4	デザート		dessert			
 T	6	1	に		for			
@@ -15425,14 +15408,11 @@ T	7	5	２ポイント		2 points
 T	13	4	かいふく		recovery; restore			
 T	17	1	よ		you know			
 S	1c3dd16451c3ae70	12
-T	2	2	それ		that			
-T	4	4	たべたい		want to eat			
-P	a176026d44685b7b	1	1
-L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be? Meshiya: Would you like something else? Perfect for dessert! Restores 2 health points! I want that! / Never mind... Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
+T	2	6	それたべたい		I want that!	Menu option		
 S	a176026d44685b7b	9
-T	2	3	やめた		never mind			
+T	2	3	やめた		Never mind...	Menu option		
 P	138da65e82737036	7	1
-L	Dango: 15 ryo; oden: 25 ryo; sushi: 45 ryo. Meshiya: So, what'll it be? Meshiya: Would you like something else? Perfect for dessert! Restores 2 health points! I want that! / Never mind... Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
+L	Would you like seconds? Hot Kanto-style stew! Restores 3 health points! Fresh Edomae nigiri! Restores 5 health points! Oh, customer, you don't have enough money!
 S	138da65e82737036	13
 T	1	4	おかわり		another helping			
 T	5	4	しますぅ		would you like?; polite			
@@ -15590,16 +15570,16 @@ T	1	4	いっぱい		full
 T	5	4	じゃねぇ		isn't	Rough contraction of じゃない.		
 T	9	2	のか		is it that...?	Explanatory の plus question particle か.		
 P	46ceed16296153d5	1	1
-L	Then, come again! Inn: Welcome. What can we do for you today? Stay / Travel journal. Now then, which room would you like?
+L	Then, come again!
 S	46ceed16296153d5	16
 R	8	1	き
 T	2	3	じゃあ		well then			
 T	6	2	また		again			
 T	8	4	来てくれ	きてくれ	come for me	くれる makes the requested action a favor to the speaker.		
 T	12	1	よ		emphatic ending			
-P	e10f48bd16deca1c	3	1
-L	Then, come again! Inn: Welcome. What can we do for you today? Stay / Travel journal. Now then, which room would you like?
-V	male	b487b53da5b4f9bc
+P	e10f48bd16deca1c	4	1
+L	Inn: Welcome. What can we do for you today?
+V	male	3fbcbed58dd61e89
 S	e10f48bd16deca1c	15
 R	2	1	や
 T	0	3	やど屋	やどや	inn	A lodging house.	d902f0a756e951e6	やど屋inn
@@ -15610,21 +15590,19 @@ T	8	1	の		of		701819197527cce9	のof
 T	9	5	ごようけん		your business	Polite form of 用件, purpose or request.	3a00a02202c5c397	ごyourようけんbusiness
 T	14	1	は		as for		701818197527cb36	はas for
 S	87a1b5c4783b7481	7
-T	2	3	とまり		stay	Menu option for lodging.	7fb05cc1d12d0cf4	とまりstay
-P	c08e03047244e94b	1	1
-L	Then, come again! Inn: Welcome. What can we do for you today? Stay / Travel journal. Now then, which room would you like?
+T	2	3	とまり		Stay	Menu option	7fb05cc1d12d0cf4	
 S	c08e03047244e94b	9
-T	2	5	たびにっき		travel journal	Menu option for recording the adventure.		
+T	2	5	たびにっき		Travel journal	Menu option	ceb17c2968184638	
 P	ff9c2c5ddf42717c	2	1
-L	Then, come again! Inn: Welcome. What can we do for you today? Stay / Travel journal. Now then, which room would you like?
+L	Now then, which room would you like?
 S	ff9c2c5ddf42717c	7
 T	2	2	では		well then			
 S	3bf6e32b4887b3dd	18
 T	1	2	どの		which			
 T	3	3	おへや		room	Polite form of 部屋.		
 T	6	8	にいたしましょう		shall we make it	Very polite form asking the guest to choose.		
-P	3a0a38df3052e4b1	6	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. It's a little run-down, but please forgive us since it's cheap... All right, that one! Actually, never mind. Then, this way to your room...
+P	3a0a38df3052e4b1	7	1
+L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. It's a little run-down, but please forgive us since it's cheap...
 S	3a0a38df3052e4b1	14
 R	11	1	りょう
 T	2	2	うめ		plum	Room-price tier; the traditional ranking is plum, bamboo, pine.		
@@ -15647,15 +15625,11 @@ T	4	3	やすい		cheap
 T	7	2	から		because			
 T	9	6	ごかんべんを		please forgive us	Polite request for leniency.		
 S	9e8e534c529f36bf	13
-T	2	3	じゃあ		all right then			
-T	6	3	そこを		that one	そこ refers to the selected room tier.		
-P	0908a924f559bf9a	1	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. It's a little run-down, but please forgive us since it's cheap... All right, that one! Actually, never mind. Then, this way to your room...
+T	2	7	じゃあ、そこを		All right, that one!	Menu option		
 S	0908a924f559bf9a	9
-T	2	3	やっぱ		after all; actually			
-T	6	2	やめ		stop; cancel	Menu choice to back out.		
+T	2	6	やっぱ、やめ		Actually, never mind.	Menu option		
 P	c192909f3a0d9076	1	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. It's a little run-down, but please forgive us since it's cheap... All right, that one! Actually, never mind. Then, this way to your room...
+L	Then, this way to your room...
 S	c192909f3a0d9076	19
 R	11	1	ほう
 T	2	4	それでは		then			
@@ -15741,29 +15715,30 @@ T	7	5	たびにっき		travel journal
 T	13	1	を		object marker			
 T	14	5	つけました		recorded	Past polite form of つける, to keep a record.		
 P	6bfc9a388e6af548	1	1
-L	Well then, please visit again... Your health gauge seems to be full... I'll pass / Stay anyway! Is that so... Then, please visit again... Now, I'll save your current state. Please press the A button.
+L	Well then, please visit again...
 S	6bfc9a388e6af548	18
 T	1	4	それでは		well then			
 T	6	6	またのおこし		your next visit	Polite expression for coming back again.		
 T	12	1	を		object marker			
-P	bd27e048fea2ec24	6	1
-L	Well then, please visit again... Your health gauge seems to be full... I'll pass / Stay anyway! Is that so... Then, please visit again... Now, I'll save your current state. Please press the A button.
-V	male	4bce8d4cf1b841c0
+P	bd27e048fea2ec24	4	1
+L	Your health gauge seems to be full...
 S	bd27e048fea2ec24	16
 R	3	1	きゃく
 R	7	2	たいりょく
-T	2	4	お客さま	おきゃくさま	dear customer	Very polite form of 客.	3c62acb1acb85863	お客customerさまdear
-T	6	1	の		your		701819197527cce9	のyour
-T	7	5	体力ゲージ	たいりょくゲージ	health gauge		cbfbde9bff6b3eab	体力healthゲージgauge
-T	12	1	は		as for		701818197527cb36	はas for
+T	2	4	お客さま	おきゃくさま	dear customer	Very polite form of 客.		
+T	6	1	の		your			
+T	7	5	体力ゲージ	たいりょくゲージ	health gauge			
+T	12	1	は		as for			
 S	64f1898aed753923	20
-T	1	4	いっぱい		full		dd7a052879555bb5	いっぱいfull
-T	5	6	のようですが		it seems, but	ようだ expresses appearance; が softens the statement.	b8260ea6461e820e	のようit seemsですがbut
+T	1	4	いっぱい		full			
+T	5	6	のようですが		it seems, but	ようだ expresses appearance; が softens the statement.		
 S	02682d877b70137f	8
-T	2	4	やめとく		I'll pass	Casual contraction of やめておく.	46621077d8a1e6c5	やめとくI'll pass
+T	2	4	やめとく		I'll pass	Menu option		
 S	d8e042b32131df0b	13
-T	2	4	それでも		even so		db2cd34ea49445f9	それでもeven so
-T	7	3	とまる		stay overnight		7fb05dc1d12d0ea7	とまるstay overnight
+T	2	8	それでも、とまる		Stay anyway!	Menu option		
+P	f12f4ee0bae2c148	2	1
+L	Is that so... Then, please visit again...
+V	male	b909d03c3daef708
 S	f12f4ee0bae2c148	17
 T	2	10	さようでございますか		is that so	Very polite acknowledgment.	67a03e2e2f9ce298	さようでございますかis that so
 S	0a69bfc2a5e03fe2	16
@@ -15771,7 +15746,7 @@ T	1	2	では		then		7106ed939024dff7	ではthen
 T	4	6	またのおこし		your next visit	Polite expression for coming back again.	a95bd9cdfb4d19d0	またのyour nextおこしvisit
 T	10	1	を		object marker		700de319751f1ca2	をobject marker
 P	018cb293cd59354d	3	1
-L	Well then, please visit again... Your health gauge seems to be full... I'll pass / Stay anyway! Is that so... Then, please visit again... Now, I'll save your current state. Please press the A button.
+L	Now, I'll save your current state as a memory. Please press the A button.
 S	018cb293cd59354d	18
 T	2	2	では		now then			
 T	5	2	いま		now			
@@ -15844,7 +15819,7 @@ R	12	1	りょう
 T	2	6	うめおにぎり		plum rice ball	Rice ball filled with pickled plum.		
 T	9	4	１２０両	１２０りょう	120 ryo	両 is an old Japanese currency unit.		
 P	400946a583b8dbe1	2	1
-L	General store: So, what shall I get for you? General store: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that / Never mind. Thanks a lot! Would you like to buy anything else?
+L	General store: So, what shall I get for you?
 S	400946a583b8dbe1	14
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	general store	A shop selling assorted goods.		
@@ -15854,7 +15829,7 @@ T	11	1	に		as
 S	31e16302c296a86c	18
 T	5	10	させてもらいましょう		shall I get for you	Polite offer phrased as receiving permission to do something.		
 P	3ba99f4b95092478	2	1
-L	General store: So, what shall I get for you? General store: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that / Never mind. Thanks a lot! Would you like to buy anything else?
+L	General store: Would you like something else?
 S	3ba99f4b95092478	18
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	general store	A shop selling assorted goods.		
@@ -15863,8 +15838,8 @@ T	10	5	べつなもの		something different
 T	15	1	に		as			
 S	b79ee10d88cae848	14
 T	5	6	しはりますか		would you like	Kansai polite form of しますか.		
-P	88d10ee7e08a31f2	4	1
-L	General store: So, what shall I get for you? General store: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that / Never mind. Thanks a lot! Would you like to buy anything else?
+P	88d10ee7e08a31f2	5	1
+L	When your health gauge reaches zero, it automatically restores 4 points.
 S	88d10ee7e08a31f2	17
 R	2	2	たいりょく
 R	13	1	とき
@@ -15878,15 +15853,11 @@ T	14	4	かいふく		recovery
 S	6327a631c3cae16b	8
 T	1	4	しまっせ		it'll do	Kansai dialect for しますよ, with an emphatic promise.		
 S	21ca1f4c5d383e34	10
-T	2	2	それ		that			
-T	4	3	ほしい		I want			
-P	76d3133d7d26640a	1	1
-L	General store: So, what shall I get for you? General store: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that / Never mind. Thanks a lot! Would you like to buy anything else?
+T	2	5	それほしい		I want that	Menu option		
 S	76d3133d7d26640a	9
-T	2	3	やっぱ		actually; after all			
-T	5	3	いいや		never mind			
+T	2	6	やっぱいいや		Never mind	Menu option		
 P	286d06b8dd2dc300	2	1
-L	General store: So, what shall I get for you? General store: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that / Never mind. Thanks a lot! Would you like to buy anything else?
+L	Thanks a lot! Would you like to buy anything else?
 S	286d06b8dd2dc300	13
 T	2	3	まいど		thanks as always	Kansai shopkeeper's greeting.		
 T	6	4	おおきに		thank you	Kansai dialect for ありがとう.		
@@ -15894,16 +15865,14 @@ S	8bd0675010ea1bb6	18
 T	1	2	まだ		any more			
 T	4	3	ほかに		anything else			
 T	7	7	かわはれますか		would you like to buy	Kansai polite form of 買われますか.		
-P	1bde305405e4ee0a	1	1
-L	Yes / That's enough. Automatically restores 10 points. Customer, it looks like you already have that item, though.
+P	1bde305405e4ee0a	2	1
+L	
 S	1bde305405e4ee0a	7
-T	2	2	はい		yes			
-P	960c415470cb4a85	1	1
-L	Yes / That's enough. Automatically restores 10 points. Customer, it looks like you already have that item, though.
+T	2	2	はい		Yes	Menu option		
 S	960c415470cb4a85	8
-T	2	5	もういいや		that's enough			
+T	2	5	もういいや		That's enough	Menu option		
 P	6101ae0d3f259b93	3	1
-L	Yes / That's enough. Automatically restores 10 points. Customer, it looks like you already have that item, though.
+L	Automatically restores 10 points. Customer, it looks like you already have that item, though.
 S	6101ae0d3f259b93	21
 T	1	6	じどうてきに		automatically			
 T	8	6	１０ポイント		10 points			
@@ -16007,8 +15976,8 @@ T	1	2	もう		already		eaa62e36ae8a6a80	もうalready
 T	4	5	もってはる		you have	Kansai respectful form of 持っている.	24f06e0ea9aee962	もってはるyou have
 T	9	3	みたい		it seems		36a032b7c1d289b1	みたいit seems
 T	12	4	ですけど		though		aac7cd0fb601d1b7	ですけどthough
-P	3c1cd69ee20b2dca	4	1
-L	But it looks like the durability has worn down... Would you like to replace it? Yes! / I'll pass. You don't have enough money...
+P	3c1cd69ee20b2dca	5	1
+L	But it looks like the durability has worn down... Would you like to replace it?
 S	3c1cd69ee20b2dca	18
 R	13	1	りょく
 T	2	4	せやけど		but	Kansai dialect for そうだけど or だけど.		
@@ -16020,13 +15989,11 @@ T	6	3	ようや		it seems	Kansai equivalent of ようだ.
 S	0299a87d66849862	12
 T	1	7	かいかえまっか		would you like to replace it	Kansai dialect for 買い替えますか.		
 S	1b060c67c6f7d2ae	8
-T	2	2	はい		yes			
-P	f22a32683d421660	1	1
-L	But it looks like the durability has worn down... Would you like to replace it? Yes! / I'll pass. You don't have enough money...
+T	2	2	はい		Yes!	Menu option		
 S	f22a32683d421660	7
-T	2	4	やめとく		I'll pass	Casual contraction of やめておく.		
+T	2	4	やめとく		I'll pass.	Menu option		
 P	250d84ec606f5407	1	1
-L	But it looks like the durability has worn down... Would you like to replace it? Yes! / I'll pass. You don't have enough money...
+L	You don't have enough money...
 S	250d84ec606f5407	16
 R	2	1	かね
 T	1	2	お金	おかね	money			
@@ -16075,20 +16042,17 @@ R	9	3	だいすき
 T	2	3	ヤマト		Yamato, a region			
 T	6	2	シカ		deer			
 T	9	3	大スキ	だいすき	love it			
-P	b5a885cc7018582b	2	1
-L	It restores 2 points! I want that! Never mind... Thank you! Would you like seconds? It's got a giant octopus! It restores 3 points. It's hot, so be careful... It restores 5 points. Customer... you don't have enough money...
+P	b5a885cc7018582b	3	1
+L	It restores 2 points!
 S	b5a885cc7018582b	19
 T	2	5	２ポイント		2 points			
 T	8	7	かいふくですわ		it restores			
 S	1c3dd16451c3ae70	12
-T	2	2	それ		that			
-T	4	4	たべたい		want to eat			
-P	a176026d44685b7b	1	1
-L	It restores 2 points! I want that! Never mind... Thank you! Would you like seconds? It's got a giant octopus! It restores 3 points. It's hot, so be careful... It restores 5 points. Customer... you don't have enough money...
+T	2	6	それたべたい		I want that!	Menu option		
 S	a176026d44685b7b	9
-T	2	3	やめた		never mind			
+T	2	3	やめた		Never mind...	Menu option		
 P	d7acda947799b9ca	8	1
-L	It restores 2 points! I want that! Never mind... Thank you! Would you like seconds? It's got a giant octopus! It restores 3 points. It's hot, so be careful... It restores 5 points. Customer... you don't have enough money...
+L	Thank you! Would you like seconds? It's got a giant octopus! It restores 3 points. It's hot, so be careful... It restores 5 points. Customer... you don't have enough money...
 S	d7acda947799b9ca	9
 T	2	4	おおきに		thanks			
 S	3405ca18c8a4c6bc	15
@@ -16216,14 +16180,14 @@ S	52d35dfce7077d95	13
 T	1	4	いっぱい		full			
 T	5	2	やな		it seems, dialect			
 P	dc559a7a36a43ca3	1	1
-L	Well then, come again! Yadoya (innkeeper): What brings you here today? Stay the night; travel journal. Which room may I show you to?
+L	Well then, come again!
 S	dc559a7a36a43ca3	14
 R	8	1	き
 T	2	2	ほな		well then			
 T	5	2	また		again			
 T	7	4	の来てや	のきてや	please come			
-P	037caffd999de768	3	1
-L	Well then, come again! Yadoya (innkeeper): What brings you here today? Stay the night; travel journal. Which room may I show you to?
+P	037caffd999de768	4	1
+L	Yadoya (innkeeper): What brings you here today?
 S	037caffd999de768	14
 R	2	1	や
 T	0	3	やど屋	やどや	Yadoya, innkeeper			
@@ -16232,19 +16196,17 @@ T	7	4	のごよう		your business
 S	c7f0e429d38d4b2c	16
 T	7	5	なんでっか		what is it, dialect			
 S	87a1b5c4783b7481	7
-T	2	3	とまり		overnight stay			
-P	c08e03047244e94b	1	1
-L	Well then, come again! Yadoya (innkeeper): What brings you here today? Stay the night; travel journal. Which room may I show you to?
+T	2	3	とまり		Stay the night	Menu option		
 S	c08e03047244e94b	9
-T	2	5	たびにっき		travel journal			
+T	2	5	たびにっき		Travel journal	Menu option		
 P	0ddebb54ceefaf45	1	1
-L	Well then, come again! Yadoya (innkeeper): What brings you here today? Stay the night; travel journal. Which room may I show you to?
+L	Which room may I show you to?
 S	0ddebb54ceefaf45	21
 T	1	5	どのおへや		which room			
 T	6	1	に		to			
 T	8	9	させてもらいましょ		may I arrange for you			
-P	3a0a38df3052e4b1	6	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. If you just need somewhere to sleep, this place will do... Then, that one! Actually, never mind. Well then, I'll show you to your room.
+P	3a0a38df3052e4b1	7	1
+L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. If you just need somewhere to sleep, this place will do...
 S	3a0a38df3052e4b1	14
 R	11	1	りょう
 T	2	2	うめ		plum room, basic			
@@ -16265,15 +16227,11 @@ S	b897ea96e78bda66	18
 T	1	3	ここで		here			
 T	4	5	じゅうぶん		is sufficient			
 S	9e8e534c529f36bf	13
-T	2	3	じゃあ		then			
-T	6	3	そこを		that one, please			
-P	0908a924f559bf9a	1	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. If you just need somewhere to sleep, this place will do... Then, that one! Actually, never mind. Well then, I'll show you to your room.
+T	2	7	じゃあ、そこを		Then, that one!	Menu option		
 S	0908a924f559bf9a	9
-T	2	3	やっぱ		on second thought			
-T	6	2	やめ		never mind			
+T	2	6	やっぱ、やめ		Actually, never mind.	Menu option		
 P	851bf6ffa1671ff9	2	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. If you just need somewhere to sleep, this place will do... Then, that one! Actually, never mind. Well then, I'll show you to your room.
+L	Well then, I'll show you to your room.
 S	851bf6ffa1671ff9	13
 R	9	1	ほう
 T	2	2	ほな		well then			
@@ -16355,13 +16313,13 @@ S	64ed0fd88190522c	22
 T	2	5	たびにっき		travel journal			
 T	8	11	つけさせてもらいました		I've made an entry			
 P	51e951a927d8b40c	1	1
-L	Well then, please come again... Your health gauge is full, though... I'll pass. Stay anyway! Is that so... Well then, please come again... I'll save your current state as a 'memory,' so please press the A Button.
+L	Well then, please come again...
 S	51e951a927d8b40c	14
 T	1	2	ほな		well then			
 T	4	2	また		again			
 T	6	3	おこし		your visit			
-P	c3b22b5d2e29cea9	6	1
-L	Well then, please come again... Your health gauge is full, though... I'll pass. Stay anyway! Is that so... Well then, please come again... I'll save your current state as a 'memory,' so please press the A Button.
+P	c3b22b5d2e29cea9	4	1
+L	Your health gauge is full, though...
 S	c3b22b5d2e29cea9	16
 R	3	1	きゃく
 R	7	2	たいりょく
@@ -16373,10 +16331,11 @@ S	89dce0d407a1f168	15
 T	1	4	いっぱい		full			
 T	5	4	ですけど		though it is			
 S	02682d877b70137f	8
-T	2	4	やめとく		I'll pass			
+T	2	4	やめとく		I'll pass.	Menu option		
 S	d8e042b32131df0b	13
-T	2	4	それでも		even so			
-T	7	3	とまる		stay overnight			
+T	2	8	それでも、とまる		Stay anyway!	Menu option		
+P	c86bf9dde999fe99	2	1
+L	Is that so... Well then, please come again...
 S	c86bf9dde999fe99	12
 T	2	5	そうでっか		is that so, dialect			
 S	5d8b7e914d2c6946	19
@@ -16385,7 +16344,7 @@ T	1	2	ほな		well then
 T	4	2	また		again			
 T	6	8	おいで下さいまし	おいでくださいまし	please come, polite			
 P	e1dc1de030ce8464	3	1
-L	Well then, please come again... Your health gauge is full, though... I'll pass. Stay anyway! Is that so... Well then, please come again... I'll save your current state as a 'memory,' so please press the A Button.
+L	I'll save your current state as a memory, so please press the A Button.
 S	e1dc1de030ce8464	18
 T	2	2	ほな		well then			
 T	5	2	いま		now			
@@ -16458,7 +16417,7 @@ R	12	1	りょう
 T	2	6	大入りぶくろ	おおいりぶくろ	large lucky pouch			
 T	9	4	５００両	５００りょう	500 ryo			
 P	fc8506d7e5bef6ca	2	1
-L	Yorozuya: Well then, what do you need? Yorozuya: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that. Actually, no. Thank you very much! Is there anything else you'd like?
+L	Yorozuya: Well then, what do you need?
 V	male	ea1a3e1831ff7084
 S	fc8506d7e5bef6ca	12
 R	1	4	よろずや
@@ -16469,7 +16428,7 @@ T	5	2	なに		what		ccce197bd156da56	なにwhat
 T	7	1	が		subject marker		7017f71975279323	がsubject marker
 T	8	5	いるんかの		do you need, dialect		da366a94cf4ad20a	いるdo you need
 P	3ba99f4b95092478	2	1
-L	Yorozuya: Well then, what do you need? Yorozuya: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that. Actually, no. Thank you very much! Is there anything else you'd like?
+L	Yorozuya: Would you like something else?
 S	3ba99f4b95092478	18
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	Yorozuya, general-store owner			
@@ -16478,8 +16437,8 @@ T	10	5	べつなもの		a different item
 T	15	1	に		into			
 S	0e49e5f411f3e5a0	14
 T	5	5	するんかの		will you choose, dialect			
-P	88d10ee7e08a31f2	4	1
-L	Yorozuya: Well then, what do you need? Yorozuya: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that. Actually, no. Thank you very much! Is there anything else you'd like?
+P	88d10ee7e08a31f2	5	1
+L	When your health gauge reaches zero, it automatically restores 4 points.
 S	88d10ee7e08a31f2	17
 R	2	2	たいりょく
 R	13	1	とき
@@ -16494,15 +16453,11 @@ T	14	4	かいふく		recovery
 S	9fee4343230a2630	10
 T	1	5	するけんの		it does, dialect			
 S	21ca1f4c5d383e34	10
-T	2	2	それ		that			
-T	4	3	ほしい		want			
-P	76d3133d7d26640a	1	1
-L	Yorozuya: Well then, what do you need? Yorozuya: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that. Actually, no. Thank you very much! Is there anything else you'd like?
+T	2	5	それほしい		I want that.	Menu option		
 S	76d3133d7d26640a	9
-T	2	3	やっぱ		on second thought			
-T	5	3	いいや		never mind			
+T	2	6	やっぱいいや		Actually, no.	Menu option		
 P	2076d60292fbae52	2	1
-L	Yorozuya: Well then, what do you need? Yorozuya: Would you like something else? When your health gauge reaches zero, it automatically restores 4 points. I want that. Actually, no. Thank you very much! Is there anything else you'd like?
+L	Thank you very much! Is there anything else you'd like?
 S	2076d60292fbae52	18
 T	2	3	まいど		thank you very much			
 T	5	10	ありがとうございます		thank you			
@@ -16510,16 +16465,14 @@ S	2a60d59016a53223	18
 T	1	2	まだ		still			
 T	4	5	ほしいもん		something you want			
 T	9	4	あるかの		is there, dialect			
-P	1bde305405e4ee0a	1	1
-L	Yes. That's enough. Automatically restores 10 points. The player's remaining lives increase by one. Customer, you already have that item...
+P	1bde305405e4ee0a	2	1
+L	
 S	1bde305405e4ee0a	7
-T	2	2	はい		yes			
-P	960c415470cb4a85	1	1
-L	Yes. That's enough. Automatically restores 10 points. The player's remaining lives increase by one. Customer, you already have that item...
+T	2	2	はい		Yes	Menu option		
 S	960c415470cb4a85	8
-T	2	5	もういいや		that's enough			
+T	2	5	もういいや		That's enough	Menu option		
 P	6101ae0d3f259b93	5	1
-L	Yes. That's enough. Automatically restores 10 points. The player's remaining lives increase by one. Customer, you already have that item...
+L	Automatically restores 10 points. The player's remaining lives increase by one. Customer, you already have that item...
 S	6101ae0d3f259b93	21
 T	1	6	じどうてきに		automatically			
 T	8	6	１０ポイント		10 points			
@@ -16590,9 +16543,9 @@ S	52df8418fe6567f3	19
 T	1	6	それいじょう		any further			
 T	8	4	ふやせん		can't increase	Dialectal form of 増やせない.		
 T	12	3	けんの〜		you see	Regional sentence-ending expression.		
-P	1a6294299b88fb29	10	1
-L	Iron Helmet, 150 ryo; Iron Armor, 200 ryo. It blocks five enemy bullets. It also blocks five enemy attacks. But its durability seems to be getting low... Want to replace it? Yes! / I'll pass. Restaurant keeper: Welcome! What would you like to eat, customer?
-V	male	d51050be302ca2b9
+P	1a6294299b88fb29	11	1
+L	Iron Helmet, 150 ryo; Iron Armor, 200 ryo. It blocks five enemy bullets. It also blocks five enemy attacks. But its durability seems to be getting low... Want to replace it?
+V	male	28a0794748685c68
 S	1a6294299b88fb29	15
 R	12	1	りょう
 T	2	5	テツかぶと		iron helmet		6241bcae0a43128e	テツironかぶとhelmet
@@ -16625,13 +16578,11 @@ S	76963c15ccf06b7e	13
 T	1	5	かいかえる		replace it		62e7dfe549ff5ed5	かいかえるreplace it
 T	6	2	かの〜		shall we?	Folksy question ending.	1c253368aa958a48	かの〜shall we?
 S	1b060c67c6f7d2ae	8
-T	2	2	はい		yes		41a42656fd9032ea	はいyes
-P	f22a32683d421660	1	1
-L	Iron Helmet, 150 ryo; Iron Armor, 200 ryo. It blocks five enemy bullets. It also blocks five enemy attacks. But its durability seems to be getting low... Want to replace it? Yes! / I'll pass. Restaurant keeper: Welcome! What would you like to eat, customer?
+T	2	2	はい		Yes!	Menu option	41a42656fd9032ea	
 S	f22a32683d421660	7
-T	2	4	やめとく		I'll pass			
+T	2	4	やめとく		I'll pass.	Menu option	46621077d8a1e6c5	
 P	2bd411031fd0c294	2	1
-L	Iron Helmet, 150 ryo; Iron Armor, 200 ryo. It blocks five enemy bullets. It also blocks five enemy attacks. But its durability seems to be getting low... Want to replace it? Yes! / I'll pass. Restaurant keeper: Welcome! What would you like to eat, customer?
+L	Restaurant keeper: Welcome! What would you like to eat, customer?
 S	2bd411031fd0c294	13
 R	0	3	めしや
 T	0	3	めし屋	めしや	restaurant keeper			
@@ -16641,7 +16592,7 @@ R	5	1	きゃく
 T	4	4	お客さん	おきゃくさん	customer			
 T	9	6	なにたべるん		what will you eat?	Casual regional question.		
 P	916ddf11fe58f25d	5	1
-L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have? Restaurant keeper: Want something else? So sweet and juicy! It restores 2 points on your health meter. I want that! / Never mind... Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
+L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have?
 S	916ddf11fe58f25d	15
 R	12	1	りょう
 T	2	3	ミカン		mandarin orange			
@@ -16661,14 +16612,14 @@ T	5	3	じゃあ		well then
 S	cd71ee26d46287a8	13
 T	4	6	なにたべるん		what will you have?			
 P	b454074c7e7ad02a	1	1
-L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have? Restaurant keeper: Want something else? So sweet and juicy! It restores 2 points on your health meter. I want that! / Never mind... Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
+L	Restaurant keeper: Want something else?
 S	b454074c7e7ad02a	17
 R	1	3	めしや
 T	1	3	めし屋	めしや	restaurant keeper			
 T	5	6	ほかのにする		choose something else			
 T	11	2	かの〜		shall you?	Folksy question ending.		
-P	b30d8e856a56a303	4	1
-L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have? Restaurant keeper: Want something else? So sweet and juicy! It restores 2 points on your health meter. I want that! / Never mind... Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
+P	b30d8e856a56a303	5	1
+L	So sweet and juicy! It restores 2 points on your health meter.
 S	b30d8e856a56a303	19
 T	2	4	とっても		very			
 T	7	4	あまくて		sweet and			
@@ -16681,13 +16632,11 @@ T	2	5	２ポイント		2 points
 T	8	6	かいふくする		will recover			
 T	14	3	けんの〜		you see	Regional sentence-ending expression.		
 S	1c3dd16451c3ae70	12
-T	2	6	それたべたい		I want that			
-P	a176026d44685b7b	1	1
-L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have? Restaurant keeper: Want something else? So sweet and juicy! It restores 2 points on your health meter. I want that! / Never mind... Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
+T	2	6	それたべたい		I want that!	Menu option		
 S	a176026d44685b7b	9
-T	2	3	やめた		never mind			
+T	2	3	やめた		Never mind...	Menu option		
 P	5b4472fddde93f49	8	1
-L	Mandarin, 15 ryo; Sanuki udon, 25 ryo; bonito tataki, 45 ryo. Restaurant keeper: So, what'll you have? Restaurant keeper: Want something else? So sweet and juicy! It restores 2 points on your health meter. I want that! / Never mind... Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
+L	Thanks for your custom! Want anything else? Springy, slippery noodles that warm you up; they restore 3 points. Freshly caught this morning! They restore 5 points. Oh, customer... you're short on money.
 S	5b4472fddde93f49	11
 T	2	5	まいどあり〜		thanks for your custom	Shopkeeper's set phrase after a sale.		
 S	d6c1e6e3cbb63d62	15
@@ -16822,7 +16771,7 @@ T	1	4	タダでは		for free
 T	5	3	イカン		isn't allowed	Dialectal form of いかん, 'no good'.		
 T	8	3	けんの〜		you see	Regional sentence-ending expression.		
 P	3abc351e313e5615	2	1
-L	Your health meter... 'Well then, come back again!' Lodging keeper: What can I do for you today? Stay / Travel journal. 'Well then, which room would you like?'
+L	Your health meter... Well then, come back again!
 S	3abc351e313e5615	14
 R	3	1	きゃく
 R	7	2	たいりょく
@@ -16834,8 +16783,8 @@ T	2	4	ほんだら		well then	Regional form of それなら or そうしたら.
 T	7	2	また		again			
 T	9	3	来まい	きまい	come back	Regional invitation, equivalent to 来てください.		
 T	12	1	の〜		you hear	Folksy sentence ending.		
-P	c439bc3bd70e715a	3	1
-L	Your health meter... 'Well then, come back again!' Lodging keeper: What can I do for you today? Stay / Travel journal. 'Well then, which room would you like?'
+P	c439bc3bd70e715a	4	1
+L	Lodging keeper: What can I do for you today?
 S	c439bc3bd70e715a	11
 R	2	1	や
 T	0	3	やど屋	やどや	lodging keeper			
@@ -16845,13 +16794,11 @@ T	4	4	なによう		what business
 T	8	3	ですか		do you have?			
 T	11	1	の〜		you see	Folksy sentence ending.		
 S	87a1b5c4783b7481	7
-T	2	3	とまり		stay overnight			
-P	c08e03047244e94b	1	1
-L	Your health meter... 'Well then, come back again!' Lodging keeper: What can I do for you today? Stay / Travel journal. 'Well then, which room would you like?'
+T	2	3	とまり		Stay	Menu option		
 S	c08e03047244e94b	9
-T	2	5	たびにっき		travel journal			
+T	2	5	たびにっき		Travel journal	Menu option		
 P	8a57fbe6ae23fc00	2	1
-L	Your health meter... 'Well then, come back again!' Lodging keeper: What can I do for you today? Stay / Travel journal. 'Well then, which room would you like?'
+L	Well then, which room would you like?
 S	8a57fbe6ae23fc00	9
 T	2	4	ほんだら		well then	Regional form of それなら or そうしたら.		
 S	d4bec6104d2fbf68	16
@@ -16859,8 +16806,8 @@ T	1	5	どのおへや		which room
 T	6	1	が		as the one			
 T	7	2	ええ		would be good			
 T	9	2	かの〜		do you think?	Folksy question ending.		
-P	3a0a38df3052e4b1	6	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. At least, there's a proper futon and the basics... Then I'll take that one! / Actually, never mind. Well then, allow me to show you to your room.
+P	3a0a38df3052e4b1	7	1
+L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. At least, there's a proper futon and the basics...
 S	3a0a38df3052e4b1	14
 R	11	1	りょう
 T	2	2	うめ		plum room	Traditional inn room grade; 梅 is the lowest tier.		
@@ -16880,15 +16827,11 @@ S	5bbfbb86d7652a9f	17
 T	1	6	ちゃんとある		is properly provided			
 T	7	3	けんの〜		you see	Regional sentence-ending expression.		
 S	9e8e534c529f36bf	13
-T	2	3	じゃあ		then			
-T	6	3	そこを		that one, please			
-P	0908a924f559bf9a	1	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. At least, there's a proper futon and the basics... Then I'll take that one! / Actually, never mind. Well then, allow me to show you to your room.
+T	2	7	じゃあ、そこを		Then I'll take that one!	Menu option		
 S	0908a924f559bf9a	9
-T	2	3	やっぱ		on second thought			
-T	6	2	やめ		I'll stop			
+T	2	6	やっぱ、やめ		Actually, never mind.	Menu option		
 P	c0021f5308a511bc	2	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. At least, there's a proper futon and the basics... Then I'll take that one! / Actually, never mind. Well then, allow me to show you to your room.
+L	Well then, allow me to show you to your room.
 S	c0021f5308a511bc	15
 R	11	1	ほう
 T	2	4	ほんだら		well then	Regional form of それなら or そうしたら.		
@@ -16968,15 +16911,15 @@ T	8	1	を		as the thing
 T	9	3	つけた		made an entry			
 T	12	3	けんの〜		you see	Regional sentence-ending expression.		
 P	085349d90517997b	1	1
-L	Well then, come back again! Your health meter is already full... I'll pass / Stay anyway! I see... Well then, do come back again. Now, I'll save your current state. Press the A Button.
+L	Well then, come back again!
 S	085349d90517997b	15
 R	8	1	き
 T	1	4	ほんだら		well then	Regional form of それなら or そうしたら.		
 T	6	2	また		again			
 T	8	3	来まい	きまい	come back	Regional invitation, equivalent to 来てください.		
 T	11	1	の〜		you hear	Folksy sentence ending.		
-P	c3b22b5d2e29cea9	6	1
-L	Well then, come back again! Your health meter is already full... I'll pass / Stay anyway! I see... Well then, do come back again. Now, I'll save your current state. Press the A Button.
+P	c3b22b5d2e29cea9	4	1
+L	Your health meter is already full...
 S	c3b22b5d2e29cea9	16
 R	3	1	きゃく
 R	7	2	たいりょく
@@ -16986,10 +16929,11 @@ S	7f950fcd82023e30	14
 T	1	4	いっぱい		is full			
 T	5	2	やの〜		it is, you see	Folksy regional sentence ending.		
 S	02682d877b70137f	8
-T	2	4	やめとく		I'll pass			
+T	2	4	やめとく		I'll pass	Menu option		
 S	d8e042b32131df0b	13
-T	2	4	それでも		even so			
-T	7	3	とまる		stay overnight			
+T	2	8	それでも、とまる		Stay anyway!	Menu option		
+P	9ef2e024f9c402d5	2	1
+L	I see... Well then, do come back again.
 S	9ef2e024f9c402d5	10
 T	2	3	そうけ		I see	Regional form of そうか.		
 S	4142f2bf4625adf8	15
@@ -16999,7 +16943,7 @@ T	6	2	また		again
 T	8	3	来まい	きまい	come back	Regional invitation, equivalent to 来てください.		
 T	11	1	の〜		you hear	Folksy sentence ending.		
 P	108cae9a50754076	3	1
-L	Well then, come back again! Your health meter is already full... I'll pass / Stay anyway! I see... Well then, do come back again. Now, I'll save your current state. Press the A Button.
+L	Now, I'll save your current state as a memory. Press the A Button.
 S	108cae9a50754076	18
 T	2	2	じゃ		well then			
 T	5	3	いまの		current			
@@ -17064,7 +17008,7 @@ T	13	1	に		to
 S	b6382749becc00c0	12
 T	1	8	てんそうできます		you can be transported			
 P	2e6d952f5a1c5661	2	1
-L	10 ryo per trip. What would you like to do? Transport me / We hope to serve you again. Right away, we'll transport you to Awaji! Dear customer... you're a little short on money... Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
+L	10 ryo per trip. What would you like to do?
 S	2e6d952f5a1c5661	21
 R	2	1	かい
 R	7	1	りょう
@@ -17072,16 +17016,16 @@ T	1	2	１回	１かい	per trip
 T	5	3	１０両	１０りょう	10 ryo			
 T	10	7	どうなさいます		what would you like?	Polite form of どうする.		
 S	892b69061212c2dc	12
-T	2	6	てんそうする		transport me			
+T	2	6	てんそうする		Transport me	Menu option		
 P	734578898e71babd	2	1
-L	10 ryo per trip. What would you like to do? Transport me / We hope to serve you again. Right away, we'll transport you to Awaji! Dear customer... you're a little short on money... Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
+L	We hope to serve you again.
 S	734578898e71babd	9
 T	2	4	それでは		well then			
 S	a97d26d9e1a4b560	20
 T	1	7	またのごりよう		your next visit			
 T	9	9	おまちしております		we look forward to			
 P	5a12147c9fe7d6db	2	1
-L	10 ryo per trip. What would you like to do? Transport me / We hope to serve you again. Right away, we'll transport you to Awaji! Dear customer... you're a little short on money... Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
+L	Right away, we'll transport you to Awaji!
 S	5a12147c9fe7d6db	11
 T	2	2	では		well then			
 T	5	4	さっそく		right away			
@@ -17089,7 +17033,7 @@ S	fecd3cf1b687ab79	19
 T	1	5	アワジまで		to Awaji			
 T	7	9	てんそういたします		we will transport you	Humble, polite form of てんそうする.		
 P	66268f5a1241f5b5	3	1
-L	10 ryo per trip. What would you like to do? Transport me / We hope to serve you again. Right away, we'll transport you to Awaji! Dear customer... you're a little short on money... Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
+L	Dear customer... you're a little short on money...
 S	66268f5a1241f5b5	11
 R	3	1	きゃく
 T	2	4	お客さま	おきゃくさま	dear customer			
@@ -17101,7 +17045,7 @@ T	1	4	ちょっと		a little
 T	6	4	たりない		isn't enough			
 T	10	4	のですが		I'm afraid	Polite explanatory phrase that softens the statement.		
 P	59477074007a1374	3	1
-L	10 ryo per trip. What would you like to do? Transport me / We hope to serve you again. Right away, we'll transport you to Awaji! Dear customer... you're a little short on money... Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
+L	Great Edo Tourist, Awa Office: Thank you for traveling with us. This is Awa in Shikoku.
 S	59477074007a1374	14
 R	0	1	おお
 R	1	2	えど
@@ -17196,25 +17140,25 @@ T	0	4	とつぜん		suddenly
 T	5	11	あばれはじめてしまって		started rampaging, unfortunately			
 S	01cf9d296771f3fd	17
 T	0	12	それどころじゃないんです		we have bigger worries			
-P	bbcdf0274e601bdb	6	0
-L	“Could someone please do something?” “Then, shall I do something about it?” “I want no part of a hassle...” “Oh, really?! You'd be a lifesaver!!”
+P	bbcdf0274e601bdb	4	1
+L	Could someone please do something?
 S	bbcdf0274e601bdb	7
 T	1	3	だれか		someone			
 S	2296d84edf8d62a4	17
 T	1	13	なんとかしてくれないかしら		could you do something?	A tentative request, voiced by a woman.		
 S	d249687e783c032f	18
-T	2	2	なら		in that case			
-T	5	10	なんとかしましょうか		shall I take care of it?			
+T	2	13	なら、なんとかしましょうか		Shall I do something about it?	Menu option		
 S	7dad125378109f12	20
-T	2	8	めんどうなことは		as for troublesome things			
-T	10	5	ゴメンだな		count me out			
+T	2	13	めんどうなことはゴメンだな		I'd rather not get involved...	Menu option		
+P	aec03bcf0529007b	2	1
+L	Oh, really?! You'd be a lifesaver!!
 S	aec03bcf0529007b	16
 T	2	2	まっ		well, hey			
 T	6	6	それはほんと		really?			
 S	42ae811a7dba4540	14
 T	1	5	たすかるわ		that's a lifesaver			
 P	ee78b6ff4ddf3b0f	2	1
-L	“All right, get on Ryū's back right away! Get inside this machine!!” “Well... you might not be enough of a cure...” “So you'll turn Ryū back into the gentle dragon he used to be?” “Leave it to me!” “Actually, no, I don't want to...” “Wow! Thanks to you, the tourist office can reopen!”
+L	All right, get on Ryū's back right away! Get inside this machine!!
 S	ee78b6ff4ddf3b0f	21
 T	0	3	じゃあ		all right then			
 T	4	4	さっそく		right away			
@@ -17225,14 +17169,14 @@ R	9	2	はいっ
 T	0	9	このマシーンの中に	このマシーンのなかに	inside this machine			
 T	9	3	入って	はいって	get in			
 P	09d4b6bd7536a98c	2	1
-L	“All right, get on Ryū's back right away! Get inside this machine!!” “Well... you might not be enough of a cure...” “So you'll turn Ryū back into the gentle dragon he used to be?” “Leave it to me!” “Actually, no, I don't want to...” “Wow! Thanks to you, the tourist office can reopen!”
+L	Well... you might not be enough of a cure...
 S	09d4b6bd7536a98c	10
 T	2	3	そうね		well, let's see			
 S	0e546546014d0fb3	21
 T	1	5	あなたじゃ		with you			
 T	7	9	ヤクぶそくかもね		might be short on medicine	A joke suggesting the helper may not be enough of a remedy.		
-P	e8719e33a232c85c	7	1
-L	“All right, get on Ryū's back right away! Get inside this machine!!” “Well... you might not be enough of a cure...” “So you'll turn Ryū back into the gentle dragon he used to be?” “Leave it to me!” “Actually, no, I don't want to...” “Wow! Thanks to you, the tourist office can reopen!”
+P	e8719e33a232c85c	4	1
+L	So you'll turn Ryū back into the gentle dragon he used to be?
 S	e8719e33a232c85c	16
 T	1	4	やっぱり		so, after all			
 T	6	4	あなたが		you			
@@ -17241,10 +17185,11 @@ S	9a29c4266cf66154	22
 T	1	11	おとなしいリュウに		into gentle Ryū	Ryū is the dragon.		
 T	12	6	してくれるの		will you make it?			
 S	6af69b25d00e36aa	10
-T	2	6	まかしときな		leave it to me	Casual contraction of まかせておきな.		
+T	2	6	まかしときな		Leave it to me!	Menu option		
 S	62da441889ecc328	14
-T	2	3	やっぱ		on second thought			
-T	6	3	やだな		I don't want to			
+T	2	7	やっぱ、やだな		Actually, no, I don't want to...	Menu option		
+P	1ef8b91bd8675d17	3	1
+L	Wow! Thanks to you, the tourist office can reopen!
 S	1ef8b91bd8675d17	6
 T	1	1	わ〜		wow			
 S	a5391ea9fb87ec43	11
@@ -17330,7 +17275,7 @@ R	12	1	りょう
 T	2	6	テツのヨロイ		iron armor			
 T	9	4	２００両	２００りょう	200 ryō	Ryō is an old Japanese currency unit.		
 P	778d5260a0dc0c22	2	1
-L	General Store: So then, what would you like? General Store: Would you like to buy something else? 'When your health gauge reaches zero, it automatically restores 10 points.' I want that. Never mind. 'Thanks for your business! Would you like to buy anything else?'
+L	General Store: So then, what would you like?
 S	778d5260a0dc0c22	12
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	General Store	A shop selling a variety of goods.		
@@ -17340,7 +17285,7 @@ T	5	3	なにが		what	が marks what the customer wants.
 T	8	3	ほしい		would you like			
 T	11	1	べ		then?	Folksy regional sentence ending.		
 P	8121bdb709c30a73	2	1
-L	General Store: So then, what would you like? General Store: Would you like to buy something else? 'When your health gauge reaches zero, it automatically restores 10 points.' I want that. Never mind. 'Thanks for your business! Would you like to buy anything else?'
+L	General Store: Would you like to buy something else?
 S	8121bdb709c30a73	18
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	General Store	A shop selling a variety of goods.		
@@ -17349,8 +17294,8 @@ T	10	6	べつなものを		something else	を marks the item being bought.
 S	8aaf12a4a3c0740c	12
 T	5	2	かう		buy			
 T	7	2	べか		would you?	Folksy question ending.		
-P	88d10ee7e08a31f2	4	1
-L	General Store: So then, what would you like? General Store: Would you like to buy something else? 'When your health gauge reaches zero, it automatically restores 10 points.' I want that. Never mind. 'Thanks for your business! Would you like to buy anything else?'
+P	88d10ee7e08a31f2	5	1
+L	When your health gauge reaches zero, it automatically restores 10 points.
 S	88d10ee7e08a31f2	17
 R	2	2	たいりょく
 R	13	1	とき
@@ -17364,15 +17309,11 @@ S	5cc6ea00743b4b51	8
 T	0	3	かいふくする		restores	回復する means to recover or restore.		
 T	3	2	べな		you know	Folksy sentence ending.		
 S	21ca1f4c5d383e34	10
-T	2	2	それ		that			
-T	4	3	ほしい		I want			
-P	76d3133d7d26640a	1	1
-L	General Store: So then, what would you like? General Store: Would you like to buy something else? 'When your health gauge reaches zero, it automatically restores 10 points.' I want that. Never mind. 'Thanks for your business! Would you like to buy anything else?'
+T	2	5	それほしい		I want that.	Menu option		
 S	76d3133d7d26640a	9
-T	2	3	やっぱ		after all	Casual shortening of やっぱり.		
-T	5	3	いいや		never mind	Here it declines or cancels the purchase.		
+T	2	6	やっぱいいや		Never mind.	Menu option		
 P	43b532b63c732c2a	2	1
-L	General Store: So then, what would you like? General Store: Would you like to buy something else? 'When your health gauge reaches zero, it automatically restores 10 points.' I want that. Never mind. 'Thanks for your business! Would you like to buy anything else?'
+L	Thanks for your business! Would you like to buy anything else?
 S	43b532b63c732c2a	16
 T	2	3	まいど		Thanks as always	Shopkeeper's set phrase; literally 'every time.'		
 T	6	5	ありがとう		thank you			
@@ -17382,16 +17323,14 @@ T	1	2	まだ		anything else
 T	4	3	なにか		something			
 T	8	2	かう		buy			
 T	10	3	ずらか		would you?	Folksy question ending.		
-P	1bde305405e4ee0a	1	1
-L	Yes. That's enough. Automatically restores you completely. “It'll block five enemy attacks.” “You already seem to own that item, customer...”
+P	1bde305405e4ee0a	2	1
+L	
 S	1bde305405e4ee0a	7
-T	2	2	はい		yes			
-P	960c415470cb4a85	1	1
-L	Yes. That's enough. Automatically restores you completely. “It'll block five enemy attacks.” “You already seem to own that item, customer...”
+T	2	2	はい		Yes.	Menu option		
 S	960c415470cb4a85	8
-T	2	5	もういいや		that's enough			
+T	2	5	もういいや		That's enough.	Menu option		
 P	68c35ad1f0a07e4e	5	1
-L	Yes. That's enough. Automatically restores you completely. “It'll block five enemy attacks.” “You already seem to own that item, customer...”
+L	Automatically restores you completely. It'll block five enemy attacks. You already seem to own that item, customer...
 S	68c35ad1f0a07e4e	19
 T	1	6	じどうてきに		automatically			
 T	8	9	かんぜんかいふく		fully restores			
@@ -17408,8 +17347,8 @@ T	7	7	そのしなもんは		that item
 S	74a6beaa99f6f5b9	18
 T	1	2	もう		already			
 T	4	8	もっとるようだべ		seem to own it	Dialectal form of 持っているようだ.		
-P	4eed6e6bdaac7f5b	4	1
-L	“But its durability seems to be getting low... would you like to replace it?” “Yes!” “I'll pass.” “Customer, you already have something better than this.”
+P	4eed6e6bdaac7f5b	5	1
+L	But its durability seems to be getting low... would you like to replace it?
 S	4eed6e6bdaac7f5b	16
 R	11	1	りょく
 T	2	2	でも		but			
@@ -17419,13 +17358,11 @@ T	1	9	おちているようだべ		seems to be wearing down	Dialectal sentence e
 S	e1ebb4d6ac367f23	14
 T	1	9	かいかえするずらか		want to replace it?	Dialectal question ending.		
 S	1b060c67c6f7d2ae	8
-T	2	2	はい		yes			
-P	f22a32683d421660	1	1
-L	“But its durability seems to be getting low... would you like to replace it?” “Yes!” “I'll pass.” “Customer, you already have something better than this.”
+T	2	2	はい		Yes!	Menu option		
 S	f22a32683d421660	7
-T	2	4	やめとく		I'll pass			
+T	2	4	やめとく		I'll pass.	Menu option		
 P	3324784afd217c31	2	1
-L	“But its durability seems to be getting low... would you like to replace it?” “Yes!” “I'll pass.” “Customer, you already have something better than this.”
+L	Customer, you already have something better than this.
 S	3324784afd217c31	11
 R	3	1	きゃく
 R	7	1	ほう
@@ -17541,20 +17478,17 @@ S	17001429cd38ec2d	20
 T	2	3	おらの		my	Folksy dialect for おれの.		
 T	5	7	ホッペのように		just like my cheek			
 T	12	5	カワイイべ		it's cute	Dialectal sentence ending.		
-P	2c0e31728fe8fd67	2	1
-L	“Restores 2 points.” “I want to eat that!” “Never mind...” “Thanks for your business! Want to eat anything else?” “How many bowls you can eat is the real test! Restores 3 points.” “A specialty of Tohoku, the rice-growing region! Restores 5 points.” “Customer... you're short on money...”
+P	2c0e31728fe8fd67	3	1
+L	Restores 2 points.
 S	2c0e31728fe8fd67	18
 T	2	5	２ポイント		2 points			
 T	8	7	かいふくするべ		will restore	Dialectal sentence ending.		
 S	1c3dd16451c3ae70	12
-T	2	2	それ		that			
-T	4	4	たべたい		want to eat			
-P	a176026d44685b7b	1	1
-L	“Restores 2 points.” “I want to eat that!” “Never mind...” “Thanks for your business! Want to eat anything else?” “How many bowls you can eat is the real test! Restores 3 points.” “A specialty of Tohoku, the rice-growing region! Restores 5 points.” “Customer... you're short on money...”
+T	2	6	それたべたい		I want to eat that!	Menu option		
 S	a176026d44685b7b	9
-T	2	3	やめた		never mind			
+T	2	3	やめた		Never mind...	Menu option		
 P	e9a9217d120b2e89	8	1
-L	“Restores 2 points.” “I want to eat that!” “Never mind...” “Thanks for your business! Want to eat anything else?” “How many bowls you can eat is the real test! Restores 3 points.” “A specialty of Tohoku, the rice-growing region! Restores 5 points.” “Customer... you're short on money...”
+L	Thanks for your business! Want to eat anything else? How many bowls you can eat is the real test! Restores 3 points. A specialty of Tohoku, the rice-growing region! Restores 5 points. Customer... you're short on money...
 S	e9a9217d120b2e89	11
 T	2	6	まいどありっ		thanks for your business	Folksy shopkeeper's thanks.		
 S	175c5f5f3a7686dd	15
@@ -17694,15 +17628,15 @@ S	c7b5a9d08e2e2bba	15
 T	1	4	いっぱい		full			
 T	5	4	だなっす		it is	Folksy regional sentence ending.		
 P	77ce6aab5ca46efb	1	1
-L	'Well then, come again!' Inn: Welcome! What brings you here today? Stay the night. Travel log. 'So then, which room will you choose?'
+L	Then come again!
 S	77ce6aab5ca46efb	15
 R	8	2	くる
 T	2	3	んじゃ		well then	Casual contraction of それじゃ.		
 T	6	2	また		again			
 T	8	2	来る	くる	come			
 T	10	3	ずらよ		please	Folksy sentence ending; よ adds emphasis.		
-P	755f7476cbab26c7	3	1
-L	'Well then, come again!' Inn: Welcome! What brings you here today? Stay the night. Travel log. 'So then, which room will you choose?'
+P	755f7476cbab26c7	4	1
+L	Inn: Welcome! What brings you here today?
 S	755f7476cbab26c7	13
 R	2	1	や
 T	0	3	やど屋	やどや	Inn	A lodging house.		
@@ -17712,21 +17646,19 @@ T	4	4	きょうは		today	は marks the topic.
 T	9	4	なによう		what brings you here	何用 means what business or purpose.		
 T	13	3	だべさ		is it?	Folksy regional question ending.		
 S	87a1b5c4783b7481	7
-T	2	3	とまり		Stay overnight	Menu option; lodging for one night.		
-P	c08e03047244e94b	1	1
-L	'Well then, come again!' Inn: Welcome! What brings you here today? Stay the night. Travel log. 'So then, which room will you choose?'
+T	2	3	とまり		Stay the night	Menu option		
 S	c08e03047244e94b	9
-T	2	5	たびにっき		Travel log	Menu option for the travel diary.		
+T	2	5	たびにっき		Travel journal	Menu option		
 P	2ab1967925496a0d	2	1
-L	'Well then, come again!' Inn: Welcome! What brings you here today? Stay the night. Travel log. 'So then, which room will you choose?'
+L	So then, which room will you choose?
 S	2ab1967925496a0d	9
 T	2	4	そんだら		in that case	Folksy regional form of それなら.		
 S	15239005bed7db10	14
 T	1	5	どのおへや		which room			
 T	6	3	にする		will you choose	にする means to select something.		
 T	9	1	べ		then?	Folksy regional question ending.		
-P	3a0a38df3052e4b1	6	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. 'It's a little cold, but I suppose I can sleep...' 'Then that one! Actually, never mind.' 'Then I'll show you to your room.'
+P	3a0a38df3052e4b1	7	1
+L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. It's a little cold, but I suppose I can sleep...
 S	3a0a38df3052e4b1	14
 R	11	1	りょう
 T	2	2	うめ		plum room			
@@ -17746,15 +17678,11 @@ S	9379122db437f701	20
 T	1	2	まあ		well, I suppose			
 T	4	10	ねれないことはねぇべ		it's not that I can't sleep	Double negative softens the claim; べ marks rustic speech.		
 S	9e8e534c529f36bf	13
-T	2	3	じゃあ		then			
-T	6	3	そこを		that one, please			
-P	0908a924f559bf9a	1	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. 'It's a little cold, but I suppose I can sleep...' 'Then that one! Actually, never mind.' 'Then I'll show you to your room.'
+T	2	7	じゃあ、そこを		Then that one!	Menu option		
 S	0908a924f559bf9a	9
-T	2	3	やっぱ		after all			
-T	6	2	やめ		never mind			
+T	2	6	やっぱ、やめ		Actually, never mind.	Menu option		
 P	e49b674f37485f80	2	1
-L	Plum: 60 ryo; bamboo: 100 ryo; pine: 200 ryo. 'It's a little cold, but I suppose I can sleep...' 'Then that one! Actually, never mind.' 'Then I'll show you to your room.'
+L	Then I'll show you to your room.
 S	e49b674f37485f80	13
 R	9	1	ほう
 T	2	2	では		well then			
@@ -17820,13 +17748,13 @@ S	4b27356892cab058	17
 T	2	7	たびにっきを		the travel journal			
 T	9	5	つけたずら		I've made an entry	つける means to keep a record; ずら is rustic speech.		
 P	5f53c30f53a66e8d	1	1
-L	'Then come visit again.' 'Your health gauge is full...' [Never mind / Stay anyway!] 'Is that so... Then come again.' 'I'll save your current state. Please press the A button.'
+L	Then come visit again.
 S	5f53c30f53a66e8d	16
 R	8	1	き
 T	1	4	そしたら		in that case			
 T	6	8	また来てくれずら	またきてくれずら	come visit again	くれ asks the listener to do it; ずら is rustic speech.		
-P	c3b22b5d2e29cea9	6	1
-L	'Then come visit again.' 'Your health gauge is full...' [Never mind / Stay anyway!] 'Is that so... Then come again.' 'I'll save your current state. Please press the A button.'
+P	c3b22b5d2e29cea9	4	1
+L	Your health gauge is full...
 S	c3b22b5d2e29cea9	16
 R	3	1	きゃく
 R	7	2	たいりょく
@@ -17835,10 +17763,11 @@ T	7	6	体力ゲージは	たいりょくゲージは	health gauge
 S	6e10977ac681d184	13
 T	1	6	いっぱいずら		is full	ずら is a rustic regional sentence ending.		
 S	02682d877b70137f	8
-T	2	4	やめとく		never mind			
+T	2	4	やめとく		Never mind.	Menu option		
 S	d8e042b32131df0b	13
-T	2	4	それでも		even so			
-T	7	3	とまる		stay overnight			
+T	2	8	それでも、とまる		Stay anyway!	Menu option		
+P	4da508b3a7bb12c6	2	1
+L	Is that so... Then come again.
 S	4da508b3a7bb12c6	12
 T	2	5	そうだべか		is that so?	だべか is a rustic way to ask 'is that so?'		
 S	b0620c4518ec1598	14
@@ -17846,7 +17775,7 @@ R	6	1	き
 T	1	2	なら		in that case			
 T	4	8	また来てくれずら	またきてくれずら	come visit again	くれ asks the listener to do it; ずら is rustic speech.		
 P	5a2b27d91a9dc7ec	3	1
-L	'Then come visit again.' 'Your health gauge is full...' [Never mind / Stay anyway!] 'Is that so... Then come again.' 'I'll save your current state. Please press the A button.'
+L	I'll save your current state. Please press the A button.
 S	5a2b27d91a9dc7ec	20
 T	2	4	そんだら		then			
 T	7	11	いまのじょうたいを		your current state			
@@ -17902,7 +17831,7 @@ S	c6a0cfa994bd3a3f	15
 R	2	3	おおいり
 R	12	1	りょう
 P	fc8506d7e5bef6ca	2	1
-L	General Store: 'Well then, what would you like?' General Store: 'Would you like to buy something else?' 'When your health gauge hits zero, it automatically restores 10 points.' [I want that / Never mind.] 'Thanks for your business! Would you like to buy anything else?'
+L	General Store: Well then, what would you like?
 V	male	d1183523940b65c7
 S	fc8506d7e5bef6ca	12
 R	1	4	よろずや
@@ -17912,7 +17841,7 @@ S	153bf3d1224b988b	15
 T	5	3	なんが		what	Regional form of 何が, 'what'.	feee779610dab5f3	なんがwhat
 T	9	3	よかと		would be good?	よか is a regional form of よい, 'good'; と marks the question.	51d3bf5ea8c18f53	よかとwould be good?
 P	f2a82d50b5cd305c	2	1
-L	General Store: 'Well then, what would you like?' General Store: 'Would you like to buy something else?' 'When your health gauge hits zero, it automatically restores 10 points.' [I want that / Never mind.] 'Thanks for your business! Would you like to buy anything else?'
+L	General Store: Would you like to buy something else?
 S	f2a82d50b5cd305c	18
 R	1	4	よろずや
 T	1	4	よろず屋	よろずや	general store			
@@ -17921,8 +17850,8 @@ T	10	5	べつなもの		something else
 T	15	1	ば		object marker	Regional form of を.		
 S	3956c492d0bd952f	12
 T	5	4	かうとね		will you buy?	とね is a regional question ending.		
-P	88d10ee7e08a31f2	4	1
-L	General Store: 'Well then, what would you like?' General Store: 'Would you like to buy something else?' 'When your health gauge hits zero, it automatically restores 10 points.' [I want that / Never mind.] 'Thanks for your business! Would you like to buy anything else?'
+P	88d10ee7e08a31f2	5	1
+L	When your health gauge hits zero, it automatically restores 10 points.
 S	88d10ee7e08a31f2	17
 R	2	2	たいりょく
 R	13	1	とき
@@ -17935,15 +17864,11 @@ T	15	4	かいふくするとたい		it restores	するとたい means 'does'; �
 S	51d477f1c1457808	9
 T	0	6	かいふくするとたい		it restores	するとたい means 'does'; たい is regional speech.		
 S	21ca1f4c5d383e34	10
-T	2	2	それ		that			
-T	4	3	ほしい		I want			
-P	76d3133d7d26640a	1	1
-L	General Store: 'Well then, what would you like?' General Store: 'Would you like to buy something else?' 'When your health gauge hits zero, it automatically restores 10 points.' [I want that / Never mind.] 'Thanks for your business! Would you like to buy anything else?'
+T	2	5	それほしい		I want that.	Menu option		
 S	76d3133d7d26640a	9
-T	2	3	やっぱ		after all			
-T	5	3	いいや		never mind			
+T	2	6	やっぱいいや		Never mind.	Menu option		
 P	6752ac57bcbc3b0f	2	1
-L	General Store: 'Well then, what would you like?' General Store: 'Would you like to buy something else?' 'When your health gauge hits zero, it automatically restores 10 points.' [I want that / Never mind.] 'Thanks for your business! Would you like to buy anything else?'
+L	Thanks for your business! Would you like to buy anything else?
 S	6752ac57bcbc3b0f	14
 T	2	3	まいど		thanks, as always	A shopkeeper's friendly thanks to a customer.		
 T	6	5	ありがとう		thank you			
@@ -17951,16 +17876,14 @@ S	89f79b2e2245d612	16
 T	1	2	まだ		still			
 T	4	3	なにか		anything			
 T	8	4	かうとね		will you buy?	とね is a regional question ending.		
-P	1bde305405e4ee0a	1	1
-L	[Yes / That's enough.] Automatically restores you to full. 'The number of lives you have increases by one.' 'Customer, you already have one of those...'
+P	1bde305405e4ee0a	2	1
+L	
 S	1bde305405e4ee0a	7
-T	2	2	はい		yes			
-P	960c415470cb4a85	1	1
-L	[Yes / That's enough.] Automatically restores you to full. 'The number of lives you have increases by one.' 'Customer, you already have one of those...'
+T	2	2	はい		Yes.	Menu option		
 S	960c415470cb4a85	8
-T	2	5	もういいや		that's enough			
+T	2	5	もういいや		That's enough.	Menu option		
 P	68c35ad1f0a07e4e	5	1
-L	[Yes / That's enough.] Automatically restores you to full. 'The number of lives you have increases by one.' 'Customer, you already have one of those...'
+L	Automatically restores you to full. The number of lives you have increases by one. Customer, you already have one of those...
 S	68c35ad1f0a07e4e	19
 T	1	6	じどうてきに		automatically			
 T	8	9	かんぜんかいふく		full recovery			
@@ -18055,8 +17978,8 @@ S	e2154fa9e9ba3f54	20
 T	1	2	もう		already		eaa62e36ae8a6a80	もうalready
 T	4	5	もっちょる		you have	Dialectal form of 持っている.	2a049adcb4f6d24a	もっちょるyou have
 T	9	5	ようですが		it seems, but		207525fae07c28de	ようit seemsですがbut
-P	81a0f2f4815854a4	4	1
-L	'But its durability seems to be wearing down... Would you like to replace it?' [Yes! / Never mind.] 'It looks like you don't have enough money...'
+P	81a0f2f4815854a4	5	1
+L	But its durability seems to be wearing down... Would you like to replace it?
 S	81a0f2f4815854a4	18
 R	13	1	りょく
 T	2	4	ばってん		but	Regional Kyushu word for でも, 'but'.		
@@ -18067,13 +17990,11 @@ S	f6584e6042b353de	14
 T	1	5	かいかえば		if you replace it	Dialectal かいかえ is 買い替え, 'replacement purchase'.		
 T	6	4	するとね		will you do that?	とね is a regional question ending.		
 S	1b060c67c6f7d2ae	8
-T	2	2	はい		yes			
-P	f22a32683d421660	1	1
-L	'But its durability seems to be wearing down... Would you like to replace it?' [Yes! / Never mind.] 'It looks like you don't have enough money...'
+T	2	2	はい		Yes!	Menu option		
 S	f22a32683d421660	7
-T	2	4	やめとく		never mind			
+T	2	4	やめとく		Never mind.	Menu option		
 P	3d5bf89b043adfc5	1	1
-L	'But its durability seems to be wearing down... Would you like to replace it?' [Yes! / Never mind.] 'It looks like you don't have enough money...'
+L	It looks like you don't have enough money...
 S	3d5bf89b043adfc5	18
 R	2	1	かね
 T	1	3	お金が	おかねが	money			
@@ -18124,20 +18045,17 @@ S	53f7bb44738cca42	21
 T	2	4	ふんわり		fluffy			
 T	7	5	スイートな		sweet			
 T	12	7	オランダおかし		Dutch confection	Literally 'Holland sweets'; a reference to castella.		
-P	38d707755eb27519	2	1
-L	Restores 2 points.' [I want that! / Never mind...] 'Thanks for your business! Would you like anything else to eat?' 'Doon! A huge, healthy daikon! Restores 3 points.' 'Delicious noodles loaded with toppings; restores 5 points.' 'Customer... it looks like you don't have enough money...'
+P	38d707755eb27519	3	1
+L	Restores 2 points.
 S	38d707755eb27519	19
 T	2	5	２ポイント		2 points			
 T	8	8	かいふくするばい		it restores	ばい is a regional sentence ending, often emphatic.		
 S	1c3dd16451c3ae70	12
-T	2	2	それ		that			
-T	4	4	たべたい		I want to eat			
-P	a176026d44685b7b	1	1
-L	Restores 2 points.' [I want that! / Never mind...] 'Thanks for your business! Would you like anything else to eat?' 'Doon! A huge, healthy daikon! Restores 3 points.' 'Delicious noodles loaded with toppings; restores 5 points.' 'Customer... it looks like you don't have enough money...'
+T	2	6	それたべたい		I want that!	Menu option		
 S	a176026d44685b7b	9
-T	2	3	やめた		never mind			
+T	2	3	やめた		Never mind...	Menu option		
 P	dee04d59c2d8902d	8	1
-L	Restores 2 points.' [I want that! / Never mind...] 'Thanks for your business! Would you like anything else to eat?' 'Doon! A huge, healthy daikon! Restores 3 points.' 'Delicious noodles loaded with toppings; restores 5 points.' 'Customer... it looks like you don't have enough money...'
+L	Thanks for your business! Would you like anything else to eat? Doon! A huge, healthy daikon! Restores 3 points. Delicious noodles loaded with toppings; restores 5 points. Customer... it looks like you don't have enough money...
 S	dee04d59c2d8902d	10
 T	2	5	まいどあり		thanks for your business	A friendly shopkeeper's thanks to a customer.		
 S	2f92ed2ee0146705	16
@@ -18259,14 +18177,14 @@ T	1	4	いっぱい		full; a lot
 T	5	4	のごたる		it seems like			
 T	9	2	ばい		you know (Kyushu emphasis)			
 P	da4d86575b7c5cf9	1	1
-L	Then, I'll come again! Innkeeper: Welcome! What brings you here today? Stay / Travel Log / Which room would you like?
+L	Then, I'll come again!
 S	da4d86575b7c5cf9	16
 R	8	2	くる
 T	2	3	じゃあ		well then			
 T	6	4	また来る	またくる	come again			
 T	10	3	とたい		I will (Kyushu dialect)			
-P	755f7476cbab26c7	3	1
-L	Then, I'll come again! Innkeeper: Welcome! What brings you here today? Stay / Travel Log / Which room would you like?
+P	755f7476cbab26c7	4	1
+L	Innkeeper: Welcome! What brings you here today?
 S	755f7476cbab26c7	13
 R	2	1	や
 T	0	3	やど屋	やどや	inn; innkeeper			
@@ -18276,18 +18194,16 @@ T	4	3	きょう		today
 T	9	5	なんのよう		what business; what brings you			
 T	14	2	たい		is it? (Kyushu dialect)			
 S	87a1b5c4783b7481	7
-T	2	3	とまり		stay overnight			
-P	c08e03047244e94b	1	1
-L	Then, I'll come again! Innkeeper: Welcome! What brings you here today? Stay / Travel Log / Which room would you like?
+T	2	3	とまり		Stay	Menu option		
 S	c08e03047244e94b	9
-T	2	5	たびにっき		travel log			
+T	2	5	たびにっき		Travel Log	Menu option		
 P	265ec4421803f12c	1	1
-L	Then, I'll come again! Innkeeper: Welcome! What brings you here today? Stay / Travel Log / Which room would you like?
+L	Which room would you like?
 S	265ec4421803f12c	18
 T	1	5	どのおへや		which room			
 T	8	6	するとですか		would you like? (polite dialect)			
-P	3a0a38df3052e4b1	6	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. For now, it's set up so you can sleep... All right, that one! Actually, never mind. Then, allow me to show you to your room.
+P	3a0a38df3052e4b1	7	1
+L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. For now, it's set up so you can sleep...
 S	3a0a38df3052e4b1	14
 R	11	1	りょう
 T	2	2	うめ		plum, the basic room			
@@ -18307,15 +18223,11 @@ S	50ecbbdb401f21f1	15
 T	0	5	ねれるようには　なっとる		it's set up so you can sleep			
 T	5	4	ですたい		it is (Kyushu dialect)			
 S	9e8e534c529f36bf	13
-T	2	3	じゃあ		all right then			
-T	6	3	そこを		that one, please			
-P	0908a924f559bf9a	1	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. For now, it's set up so you can sleep... All right, that one! Actually, never mind. Then, allow me to show you to your room.
+T	2	7	じゃあ、そこを		All right, that one!	Menu option		
 S	0908a924f559bf9a	9
-T	2	3	やっぱ		actually; on second thought			
-T	6	2	やめ		never mind; stop			
+T	2	6	やっぱ、やめ		Actually, never mind.	Menu option		
 P	e49b674f37485f80	2	1
-L	Plum: 60 ryo; Bamboo: 100 ryo; Pine: 200 ryo. For now, it's set up so you can sleep... All right, that one! Actually, never mind. Then, allow me to show you to your room.
+L	Then, allow me to show you to your room.
 S	e49b674f37485f80	13
 R	9	1	ほう
 T	2	2	では		well then			
@@ -18391,14 +18303,14 @@ T	8	1	を		(object marker)
 T	9	3	つけた		updated; recorded			
 T	12	2	たい		(Kyushu dialect emphasis)			
 P	09c57cf3a4f75efd	2	1
-L	Well then, we'll be waiting for your next visit! Your health gauge is already full... Skip / Stay anyway! I see... Then we'll be waiting for you to come again. Now, please press the A Button to save your current state.
+L	Well then, we'll be waiting for your next visit!
 S	09c57cf3a4f75efd	8
 T	1	4	そしたら		well then			
 S	60f4adb21eff01ed	18
 T	1	6	またのおこし		your next visit			
 T	9	6	まっとります		we'll be waiting			
-P	c3b22b5d2e29cea9	6	1
-L	Well then, we'll be waiting for your next visit! Your health gauge is already full... Skip / Stay anyway! I see... Then we'll be waiting for you to come again. Now, please press the A Button to save your current state.
+P	c3b22b5d2e29cea9	4	1
+L	Your health gauge is already full...
 S	c3b22b5d2e29cea9	16
 R	3	1	きゃく
 R	7	2	たいりょく
@@ -18408,10 +18320,11 @@ S	2d2674f576bff763	13
 T	1	4	いっぱい		full			
 T	5	2	たい		(Kyushu dialect emphasis)			
 S	02682d877b70137f	8
-T	2	4	やめとく		skip; leave it			
+T	2	4	やめとく		Skip	Menu option		
 S	d8e042b32131df0b	13
-T	2	4	それでも		even so; anyway			
-T	7	3	とまる		stay overnight			
+T	2	8	それでも、とまる		Stay anyway!	Menu option		
+P	e2519634099a433e	2	1
+L	I see... Then we'll be waiting for you to come again.
 S	e2519634099a433e	10
 T	2	3	そうか		I see			
 S	703019bab5c069ac	18
@@ -18422,7 +18335,7 @@ T	8	2	とば		(that you will; dialect)
 T	10	4	まっとる		be waiting			
 T	14	2	たい		(Kyushu dialect emphasis)			
 P	8710f3fa6772680e	3	1
-L	Well then, we'll be waiting for your next visit! Your health gauge is already full... Skip / Stay anyway! I see... Then we'll be waiting for you to come again. Now, please press the A Button to save your current state.
+L	Now, please press the A Button to save your current state.
 S	8710f3fa6772680e	18
 T	2	2	では		now; well then			
 T	5	9	いまのじょうたい		your current state			
@@ -18477,7 +18390,7 @@ T	11	1	へ		to; toward
 T	13	4	ようこそ		welcome			
 T	17	2	じゃ		it is (old-fashioned speech)			
 P	cd9ee148fd7c7bf3	4	0
-L	I'll solve your troubles for 10 ryo, plasma~! Y-yes, please. N-no... no thanks.
+L	I'll solve your troubles for 10 ryo, plasma~!
 S	cd9ee148fd7c7bf3	18
 R	13	1	りょう
 T	1	3	おぬし		you (old-fashioned)			
@@ -18490,11 +18403,9 @@ S	b1f4e6416b535fd2	16
 T	1	6	かいけつして		solve; take care of			
 T	7	4	プラズマ		plasma, his catchphrase			
 S	e0df7b63ede4c92f	13
-T	2	1	お		uh...			
-T	4	7	おねがいします		please			
+T	2	9	お、おねがいします		Y-yes, please.	Menu option		
 S	39f7bd2c8343d5a3	11
-T	2	1	い		I...			
-T	6	3	いいや		no; never mind			
+T	2	7	い・・・いいや		N-no... no thanks.	Menu option		
 P	9dc70e61f787a9d8	2	0
 L	Hmm, very well. I shall tell your fortune!
 S	9dc70e61f787a9d8	7
@@ -20029,8 +19940,8 @@ R	5	1	やま
 S	84fb9b14fb038872	20
 R	14	1	じょう
 R	16	1	ない
-P	7d5b7c7e5c196e37	3	1
-L	Would you like to record your game progress in the travel journal? Yes / No. Understood! I'll start keeping a travel journal now.
+P	7d5b7c7e5c196e37	4	1
+L	Would you like to record your game progress in the travel journal?
 S	7d5b7c7e5c196e37	17
 T	1	5	ここまでの		up to this point's			
 T	6	8	ゲームしんこうを		game progress			
@@ -20038,13 +19949,11 @@ S	3cc202bef25b3f37	18
 T	2	7	たびにっきに		in the travel journal			
 T	9	5	つけますか		shall I record?			
 S	8885382262177fb2	9
-T	2	2	はい		yes			
-P	dd41ce0c1ea90b85	1	1
-L	Would you like to record your game progress in the travel journal? Yes / No. Understood! I'll start keeping a travel journal now.
+T	2	2	はい		Yes	Menu option		
 S	dd41ce0c1ea90b85	6
-T	2	3	いいえ		no			
+T	2	3	いいえ		No	Menu option		
 P	82a95f302d7ad700	2	1
-L	Would you like to record your game progress in the travel journal? Yes / No. Understood! I'll start keeping a travel journal now.
+L	Understood! I'll start keeping a travel journal now.
 S	82a95f302d7ad700	13
 T	2	8	しょうちしました		understood			
 S	9eff3be590a4169b	21
@@ -20901,15 +20810,11 @@ S	98696109e641f46f	14
 T	1	2	さあ		now / come on	Urges someone to act.		
 T	4	4	どうする		what will you do?	どう asks how; する means do.		
 P	459a394cc26969d2	2	0
-L	I'll take a different path... I don't have any treasure anyway...
+L	
 S	459a394cc26969d2	16
-T	2	3	ちがう		different			
-T	5	6	みちにします		I'll choose the path	にする means choose or make it so.		
+T	2	9	ちがうみちにします		A different path...	Menu option		
 S	4e128212c3f2cc02	20
-T	2	4	おたから		treasure	お is an honorific prefix.		
-T	6	3	なんて		things like	Dismissive emphasis.		
-T	9	5	もってない		don't have	Casual contraction of 持っていない.		
-T	14	1	し		and besides	し gives a reason and implies there may be more.		
+T	2	13	おたからなんてもってないし		I don't have any treasure anyway...	Menu option		
 P	89d92e4cb264eafb	2	0
 L	Gahahahaha! You spineless coward!!
 S	89d92e4cb264eafb	14
@@ -21015,7 +20920,7 @@ T	5	6	Ｂボタンで		with the B button
 T	11	3	コロを		the koro			
 T	14	3	なげる		throw			
 P	720e7be7b02a5fad	3	1
-L	Benkei: Then, start! You fool! Too slow!! Benkei: Come back for another match, have you?! I won't lose this time! N-no, I'll pass... Narrator: Ever since this happened, Benkei's shin, which got hit by the koro...
+L	Benkei: Then, start!
 S	720e7be7b02a5fad	12
 T	1	4	ベンケイ		Benkei (speaker)			
 T	6	3	ならば		then			
@@ -21024,13 +20929,13 @@ T	9	7	ス　タ　ー　ト		start
 S	3dcf53cdc3dd08e7	18
 T	13	2	じゃ		it is	Old-fashioned sentence ending used by Benkei.		
 P	ee7df4daf76b0cc7	1	1
-L	Benkei: Then, start! You fool! Too slow!! Benkei: Come back for another match, have you?! I won't lose this time! N-no, I'll pass... Narrator: Ever since this happened, Benkei's shin, which got hit by the koro...
+L	Benkei: You fool! Too slow!!
 S	ee7df4daf76b0cc7	21
 T	0	4	ベンケイ		Benkei (speaker)			
 T	6	5	バーカめ		you fool			
 T	13	4	あまいわ		too slow			
-P	59906c23917a83d2	7	1
-L	Benkei: Then, start! You fool! Too slow!! Benkei: Come back for another match, have you?! I won't lose this time! N-no, I'll pass... Narrator: Ever since this happened, Benkei's shin, which got hit by the koro...
+P	59906c23917a83d2	4	1
+L	Benkei: Come back for another match, have you?!
 S	59906c23917a83d2	10
 T	0	4	ベンケイ		Benkei (speaker)			
 T	5	2	また		again			
@@ -21039,10 +20944,11 @@ R	13	1	き
 T	6	7	しょうぶしに		to have a match			
 T	13	4	来たのか	きたのか	you came, did you			
 S	f4db489320280440	14
-T	2	4	こんどは		this time			
-T	6	5	まけないぞ		I won't lose			
+T	2	9	こんどはまけないぞ		I won't lose this time!	Menu option		
 S	c8daad4a47eeb86c	15
-T	2	8	や、やめときます		N-no, I'll pass			
+T	2	8	や、やめときます		N-no, I'll pass...	Menu option		
+P	0748ae2166389386	3	1
+L	Narrator: Ever since this happened, Benkei's shin, which got hit by the koro...
 S	0748ae2166389386	18
 T	0	5	ナレーター		Narrator (speaker)			
 T	6	10	このことがあってから		ever since this happened			
